@@ -11,7 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css?v=18">
 </head>
-<body>
+<body class="no-photos">
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -37,7 +37,6 @@
 
     <!-- athletIQ -->
     <article class="card" id="athletiq">
-      <img class="card-img" src="assets/aiq-recruit.jpg" width="1425" height="900" alt="athletIQ's recruit search: filters for season, gender, state and grade, with a plain-English search box">
       <div class="card-body">
         <h2>athletIQ</h2>
         <p>A recruiting platform college track coaches use to find, compare and track recruits. I founded it and built it.</p>
@@ -78,7 +77,6 @@
             <div class="lab-copy">
               <h3>Forecasts from training</h3>
               <p>A Banister fitness-fatigue model fit to each athlete, with 4,000 sampled parameter sets for an honest range.</p>
-              <figure class="shot shot-panel"><img src="assets/aiq-forecast.jpg" width="466" height="780" alt="athletIQ forecast output with projections at 2, 6 and 12 weeks and fitted time constants" loading="lazy"><figcaption>The live forecaster.</figcaption></figure>
             </div>
             <div class="lab" id="ban-lab">
               <div class="lab-head"><strong>Fitness-fatigue model</strong><span>Drag the weekly mileage bars.</span></div>
@@ -105,7 +103,6 @@
               <h3>Pan-Out, for other sports</h3>
               <p>An athletIQ product that prices junior tennis, chess, baseball and hockey prospects with stacked gradient-boosted models. It beat ratings on simulated data (AUC 0.94 vs 0.84); on real ATP careers the edge nearly vanished (0.844 vs 0.841).</p>
             </div>
-            <figure class="shot"><img src="assets/panout-board.jpg" width="1440" height="900" alt="Pan-Out value board on simulated players" loading="lazy"></figure>
           </div>
         </div>
       </details>
@@ -113,7 +110,6 @@
 
     <!-- SECRET -->
     <article class="card" id="secret">
-      <img class="card-img" src="assets/secret-car.jpg" style="object-position:center 60%" width="1600" height="1200" alt="Our electric race car in the garage: white body, roll cage, red harness, with breadboard electronics on the floor" loading="lazy">
       <div class="card-body">
         <h2>SECRET, a 48-volt race car</h2>
         <p>My school's electric car for the one-hour Electric Vehicle Grand Prix. I founded the team and lead the build.</p>
@@ -128,9 +124,6 @@
         <div class="detail">
           <div class="car-intro">
             <p class="lede">Most distance in one hour on one battery wins. We rebuilt the kit car with an aluminum chassis, a new battery pack, 3D-printed wheel covers and an Arduino pacing system. We raised $7K and work alongside UMD's Formula SAE team.</p>
-            <figure class="clip">
-              <video id="secret-clip" src="assets/secret-motor.mp4" poster="assets/secret-motor.jpg" width="720" height="960" muted loop playsinline preload="none" aria-label="Working on the car's hub motor and its orange phase cables"></video>
-            </figure>
           </div>
           <div class="wire-wrap">
             <div class="wire-scroll"><svg id="wire-svg" viewBox="0 0 960 440" role="group" aria-label="Electrical system of the car. Select a part to read what it does."></svg></div>
@@ -160,7 +153,6 @@
 
     <!-- MERIDIAN -->
     <article class="card" id="meridian">
-      <img class="card-img" src="assets/meridian-site.jpg" width="1264" height="800" alt="Meridian's website: The VC market has a matching problem" loading="lazy">
       <div class="card-body">
         <h2>Meridian</h2>
         <p>A model that ranks which investors fit a startup, built in UVA research with Prof. Adam Tashman to help underserved founders.</p>
@@ -182,7 +174,6 @@
 
     <!-- INDUS -->
     <article class="card" id="indus">
-      <img class="card-img card-img-doc" src="assets/proof-ijca.jpg" width="660" height="505" alt="The published paper's page in the International Journal of Computer Applications, by Ruhan Khanna and Louie Merriam" loading="lazy">
       <div class="card-body">
         <h2>Reading the Indus script</h2>
         <p>A computational method that separates signs standing for words from signs standing for sounds in an undeciphered 4,500-year-old script.</p>
@@ -222,9 +213,6 @@
 
     <!-- REACHBOT -->
     <article class="card" id="reachbot">
-      <div class="card-img card-flow" aria-hidden="true">
-        <span>696 sources</span><i></i><span>11,244 passages</span><i></i><span>closest matches</span><i></i><span>cited answer</span>
-      </div>
       <div class="card-body">
         <h2>ReachBot</h2>
         <p>An AI assistant that answers Reach Capital founders' questions from the firm's library, citing the exact page or recording. Built as a summer associate.</p>
@@ -258,7 +246,6 @@
 
     <!-- FUTURE FELLOWS -->
     <article class="card" id="fellows">
-      <img class="card-img card-img-doc" src="assets/ff-apply.jpg" width="680" height="650" alt="Future Fellows application page: Show us something you built" loading="lazy">
       <div class="card-body">
         <h2>Future Fellows</h2>
         <p>The applicant evaluation system for a fellowship placing high schoolers in paid work. AI organizes evidence; a person makes every decision. Employee #2.</p>
@@ -290,7 +277,6 @@
 
     <!-- GMU -->
     <article class="card" id="tdx">
-      <img class="card-img card-img-doc" src="assets/proof-jssr.jpg" width="840" height="490" alt="Published abstract page: Evaluation of Intel's Trust Domain Extensions for Replicating and Validating Research in Management Science, by Ruhan Khanna and Jiasun Li" loading="lazy">
       <div class="card-body">
         <h2>Can hardware prove a paper is real?</h2>
         <p>Re-ran published business and economics papers inside Intel TDX confidential VMs at George Mason, with Prof. Jiasun Li.</p>
