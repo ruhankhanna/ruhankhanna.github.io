@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=7">
+<link rel="stylesheet" href="styles.css?v=9">
 </head>
 <body>
 
@@ -19,10 +19,10 @@
   <div class="wrap nav-inner">
     <a class="brand" href="#top"><span class="tile" aria-hidden="true">RK</span><span class="brand-name">Ruhan Khanna</span></a>
     <nav aria-label="Sections">
-      <a href="#athletiq" data-sec="athletiq">athletIQ</a>
-      <a href="#meridian" data-sec="meridian">Models</a>
-      <a href="#indus" data-sec="indus">Research</a>
-      <a href="#contact" data-sec="contact">Contact</a>
+      <a href="#athletiq">athletIQ</a>
+      <a href="#secret">Car</a>
+      <a href="#meridian">AI</a>
+      <a href="#indus">Research</a>
     </nav>
   </div>
 </header>
@@ -33,7 +33,7 @@
 <section class="hero wrap" id="top">
   <div class="hero-text">
     <h1>I build data products end to end.</h1>
-    <p class="hero-sub">Scrapers, models, and the apps people run their work on. I'm a junior at Sidwell Friends in DC and the founder of athletIQ, a recruiting platform under contract with college track programs including Stanford and UNC.</p>
+    <p class="hero-sub">Scrapers, models, retrieval systems, the apps people run their work on, and a 48-volt race car. I'm a junior at Sidwell Friends in DC and the founder of athletIQ, a recruiting platform under contract with college track programs including Stanford and UNC.</p>
     <div class="hero-cta">
       <a class="btn btn-primary" href="#athletiq">Inside athletIQ</a>
       <a class="btn btn-ghost" href="#contact">Contact</a>
@@ -140,6 +140,15 @@
       <svg id="inj-svg" role="img" aria-label="Injury model AUC: logistic regression 0.619, XGBoost 0.576, workload ratio 0.544, chance 0.5"></svg>
     </div>
 
+    <div class="po">
+      <div>
+        <h3>Pan-Out, the same engine for other sports</h3>
+        <p>An athletIQ product that estimates the odds a junior athlete reaches each level in tennis, chess, baseball and hockey, because ratings ignore age: a 13-year-old and a 17-year-old with the same rating are not the same prospect. Five gradient-boosted models each answer one question (trajectory, dominance, clutch, load, performance against same-age peers), logistic heads stack them per level, and isotonic regression calibrates the odds. Players are split by birth year into train, stack, calibrate and test cohorts.</p>
+        <p>On simulated histories it ranks future pros far better than rating alone (AUC 0.94 against 0.84 in tennis). Backtested on real ATP careers, that edge nearly vanished, 0.844 against 0.841, though it still found about 2.6 times more future pros among players the rankings rated low. The gap measures how much the simulator flattered the model, and it's the most useful thing the project taught me.</p>
+      </div>
+      <figure class="shot"><img src="assets/panout-board.jpg" width="1440" height="900" alt="Pan-Out tennis value board listing simulated players with model odds, market odds and value gap" loading="lazy"><figcaption>The Pan-Out value board, on simulated players.</figcaption></figure>
+    </div>
+
     <div class="timeline-wrap">
       <h3>How it got here</h3>
       <ol class="timeline">
@@ -152,6 +161,42 @@
         <li><span class="t-when num">Summer 2026</span><b>Roster, CRM and modeling.</b> Recruit pipeline, roster and eligibility tracking, the fitness-fatigue forecaster and the injury benchmark.</li>
       </ol>
     </div>
+  </div>
+</section>
+
+<!-- SECRET -->
+<section id="secret" class="car">
+  <div class="wrap">
+    <h2>SECRET, a 48-volt race car</h2>
+    <p class="meta">Founder and co-head, Sidwell Electric Car Race Engineering Team. 2023 to now. Raised $7K; working alongside UMD's Formula SAE team.</p>
+    <p class="lede">The Electric Vehicle Grand Prix is an endurance race: whoever covers the most distance in one hour on a fixed battery wins. Drive too slow and you finish with charge left over; too fast and the pack dies before the flag. We built our car from the competition kit, then rebuilt it: an aluminum chassis, a new battery pack, 3D-printed wheel covers, and an Arduino system that tells the driver how hard to push.</p>
+
+    <div class="wire-wrap">
+      <div class="wire-scroll"><svg id="wire-svg" viewBox="0 0 960 440" role="group" aria-label="Electrical system of the car. Select a part to read what it does."></svg></div>
+      <div class="wire-info" id="wire-info" aria-live="polite"></div>
+    </div>
+    <p class="small wire-legend">Thick lines carry the 48V traction current on 6-gauge cable; thin lines are low-voltage signals. Select any part.</p>
+
+    <div class="lab-row">
+      <div class="lab-copy">
+        <h3>Pacing to an energy budget</h3>
+        <p>Every lap, the Arduino reads the amp-hours used from the Cycle Analyst, spreads what's left of the battery evenly over the laps left in the hour, and tells the driver on the dash display to speed up or back off.</p>
+        <p class="small">It matters because energy per lap climbs steeply with speed. Aerodynamic drag grows with the square of speed, so the power to beat it grows with the cube, and lead-acid batteries also give up usable capacity at high current (the Peukert effect). Going out too fast is punished twice.</p>
+      </div>
+      <div class="lab" id="race-lab">
+        <div class="lab-head"><strong>One-hour race simulator</strong><span>Pick a driver's speed, then race it with and without the pacing system.</span></div>
+        <div class="lab-controls">
+          <label for="race-speed">Driver's speed <output id="race-speed-out" class="num">31</output> mph</label>
+          <input id="race-speed" type="range" min="16" max="34" step="1" value="31">
+        </div>
+        <svg id="race-svg" role="img" aria-label="Battery remaining over the hour for a driver at constant speed and for the same driver with the pacing system."></svg>
+        <dl class="readout" id="race-readout"></dl>
+        <p class="guard" id="race-out" role="status"></p>
+        <div class="lab-actions"><button type="button" class="chip" id="race-run">Run the race</button></div>
+        <p class="small">Modeled car, not measured from ours: 150 kg with driver, drag area 0.30 m², rolling coefficient 0.015, 80% drivetrain efficiency, 48V 26Ah pack, Peukert exponent 1.15, 0.6-mile lap.</p>
+      </div>
+    </div>
+    <p class="small car-foot">Raced the DC Electric Vehicle Grand Prix in 2024, 2025 and 2026, won its top 3D printing prize, and was invited to the 2027 Dubai Grand Prix.</p>
   </div>
 </section>
 
@@ -169,17 +214,31 @@
   </div>
 </section>
 
-<!-- PAN-OUT -->
-<section id="panout" class="case wrap">
-  <h2>Pan-Out</h2>
-  <p class="meta">Solo build, 2026. Python, scikit-learn, a standard-library HTTP server, plain JavaScript.</p>
-  <div class="po">
+<!-- REACHBOT -->
+<section id="reachbot" class="case wrap">
+  <h2>ReachBot</h2>
+  <p class="meta">Summer associate, Reach Capital, 2026. Python, Gemini, NumPy, Streamlit, GitHub Actions.</p>
+  <p class="lede">Reach Capital's portfolio founders get a library of hundreds of guides and decks and 137 recorded expert sessions, but as guests they can't search it with AI. ReachBot lets them ask in plain English and answers with citations to the exact page or recording.</p>
+  <div class="rb">
     <div>
-      <p class="lede">Ratings ignore age: a 13-year-old and a 17-year-old with the same rating are not the same prospect. Pan-Out estimates the odds a junior athlete reaches each level, across tennis, chess, baseball and hockey.</p>
-      <p>Five gradient-boosted models each answer one question (trajectory, dominance, clutch, load, and performance against same-age peers). Logistic heads stack them per outcome level, isotonic regression calibrates the odds, and players are split by birth year into train, stack, calibrate and test cohorts. Because the stack is linear, every dossier shows how much each signal moved a player's odds.</p>
-      <p>On simulated player histories, it ranks future pros far better than rating alone (AUC 0.94 against 0.84 in tennis). Backtested on real ATP careers, the ranking edge nearly vanished: 0.844 against 0.841, though it still found about 2.6 times more future pros among players the rankings rated low. That gap between simulated and real results was the most useful thing the project produced: it measures how much my simulator flattered the model.</p>
+      <p>It's retrieval-augmented generation, not a fine-tuned model. A weekly GitHub Actions job exports the Notion library and Zoom transcripts to markdown with their source links, splits 696 sources into 11,244 overlapping 400-word chunks, and embeds each as a 3,072-dimension vector. At question time, a small model first rewrites follow-ups like "how do I redeem it?" into standalone queries; cosine similarity then runs as a brute-force NumPy scan in milliseconds, since a vector database buys nothing at this size; and Gemini 2.5 Flash answers only from the retrieved passages, citing each one.</p>
+      <p>Why not paste everything into a million-token context window? The library is about 6 million tokens, and even if it fit, that would cost about $1.80 a question against roughly half a cent with retrieval. The weekly refresh costs about a cent.</p>
     </div>
-    <figure class="shot"><img src="assets/panout-board.jpg" width="1440" height="900" alt="Pan-Out tennis value board listing simulated players with model odds, market odds and value gap" loading="lazy"><figcaption>The value board, on simulated players.</figcaption></figure>
+    <div class="lab" id="rag-lab">
+      <div class="lab-head"><strong>The retrieval gate</strong><span>How much ReachBot says depends on how strong the evidence is.</span></div>
+      <div class="q-presets" role="group" aria-label="Example questions">
+        <button type="button" class="chip" data-sim="0.75" aria-pressed="true">On-topic</button>
+        <button type="button" class="chip" data-sim="0.66" aria-pressed="false">Adjacent</button>
+        <button type="button" class="chip" data-sim="0.54" aria-pressed="false">Off-topic</button>
+      </div>
+      <div class="lab-controls">
+        <label for="rag-sim">Best-match similarity <output id="rag-out" class="num">0.75</output></label>
+        <input id="rag-sim" type="range" min="0.40" max="0.90" step="0.01" value="0.75">
+      </div>
+      <svg id="rag-svg" role="img" aria-label="Similarity scale with three zones: not covered below 0.60, cautious from 0.60 to 0.70, full answer above 0.70."></svg>
+      <p class="guard" id="rag-mode" role="status"></p>
+      <p class="small">The 0.70 and 0.60 cutoffs come from measured scores: on-topic questions land near 0.75, adjacent near 0.66, off-topic near 0.54.</p>
+    </div>
   </div>
 </section>
 
@@ -215,6 +274,24 @@
       <a class="link" href="https://www.ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/" target="_blank" rel="noopener">Read the paper<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <span>DOI 10.5120/ijca2025926075</span>
     </p>
+    <div class="gmu">
+      <h2>Can hardware prove a paper is real?</h2>
+      <p class="meta">GMU Aspiring Scientists Summer Internship Program, with Prof. Jiasun Li, Costello College of Business. 2025. Abstract published in the Journal of Student-Scientists' Research.</p>
+      <p class="lede">Journals now require replication packages, but nothing proves the code was actually run as claimed, on the stated inputs, to produce the published tables. Intel TDX runs code inside a hardware-isolated confidential VM whose memory the host can't read, and it can attest cryptographically to exactly what ran.</p>
+      <div class="gmu-grid">
+        <ol class="steps">
+          <li><b>Pull the package.</b> A 2024 Management Science paper's code and data.</li>
+          <li><b>Stand up a TDX VM.</b> A confidential VM on Azure and again on Google Cloud.</li>
+          <li><b>Rebuild the stack.</b> Install the paper's software (Stata, R and others) inside the VM.</li>
+          <li><b>Run and compare.</b> Check outputs against the paper; log runtime, cost and every failure to a shared database.</li>
+        </ol>
+        <div>
+          <svg id="gmu-svg" role="img" aria-label="27 replications attempted, 19 succeeded."></svg>
+          <p class="small">19 of 27 replications succeeded across both clouds. Most failures traced to code missing from the package; others to software we couldn't license on a free-credit budget, like SAS. Runs averaged about 2 hours 10 minutes and $1.33. I was one of 15 interns on the project and presented it at the program's symposium.</p>
+        </div>
+      </div>
+      <p class="research-foot"><a class="link" href="https://journals.gmu.edu/jssr/article/view/5253" target="_blank" rel="noopener">Read the abstract<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+    </div>
   </div>
 </section>
 
@@ -225,18 +302,6 @@
     <article class="more-item">
       <b>Evaluation pipeline, Future Fellows</b>
       <span>Founding intern, 2026. LLM scoring of fellowship applications that must quote the application word for word, three-pass blinding of names and schools, Krippendorff's α for agreement with reviewers, an adverse-impact check, and 150 tests.</span>
-    </article>
-    <article class="more-item">
-      <b>Reach Capital</b>
-      <span>Summer associate, 2026. Technical diligence on live deals; a retrieval-augmented assistant for portfolio founders at companies including Replit, Desmos and GPTZero.</span>
-    </article>
-    <article class="more-item">
-      <b>Reproducibility on secure hardware</b>
-      <span>GMU, with Prof. Jiasun Li, 2025. Re-ran Management Science replication packages inside Intel TDX enclaves on Google Cloud and Azure, for about $1.33 per paper.</span>
-    </article>
-    <article class="more-item">
-      <b>SECRET, an electric race car</b>
-      <span>Founded my school's team, raised $7K, and lead mechanical, electrical and aero design with UMD's Formula SAE team. Three DC Grand Prix, a 3D printing prize, invited to Dubai in 2027.</span>
     </article>
     <article class="more-item">
       <b>Quant pipeline, Exeter22</b>
@@ -261,6 +326,6 @@
   </div>
 </footer>
 
-<script src="main.js?v=7"></script>
+<script src="main.js?v=10"></script>
 </body>
 </html>

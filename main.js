@@ -39,7 +39,7 @@
   /* ---------- Nav: mark the section in view ---------- */
   (() => {
     const links = [...document.querySelectorAll(".nav nav a")];
-    const owner = { athletiq: 0, meridian: 1, panout: 1, indus: 2, contact: 3 };
+    const owner = { athletiq: 0, secret: 1, meridian: 2, reachbot: 2, indus: 3 };
     const seen = new Map();
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => seen.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0));
@@ -395,6 +395,250 @@
       arrow(w / 2, 272, w / 2, 312);
       el("path", { d: `M${w / 2},368 V384`, stroke: acc, "stroke-width": 1.5 }, svg);
       el("text", { x: w / 2, y: 404, class: "acc", "text-anchor": "middle" }, svg).textContent = "ranked investor matches for each founder";
+    });
+  })();
+
+  /* ---------- SECRET wiring diagram (from the competition kit's electrical schematic) ---------- */
+  (() => {
+    const svg = $("#wire-svg");
+    if (!svg) return;
+    const info = $("#wire-info");
+    const parts = {
+      throttle: { x: 20, y: 30, w: 160, h: 58, t: "Thumb throttle", s: "hall sensor, regen 0-20%",
+        d: "A hall-effect thumb throttle wired into a 14-pin connector we built pin by pin. The first 20% of travel is regenerative braking: easing off slows the car and puts energy back in the pack, so the brake pedal is only for emergencies." },
+      ca: { x: 300, y: 30, w: 170, h: 58, t: "Cycle Analyst", s: "amps, amp-hours, speed",
+        d: "Reads the voltage across the shunt to get current, integrates it into amp-hours drawn since the last full charge, and computes speed from the tire circumference we calibrated." },
+      arduino: { x: 540, y: 30, w: 170, h: 58, t: "Arduino", s: "per-lap energy budget", ours: true,
+        d: "Our addition to the kit. Each lap it reads amp-hours used from the Cycle Analyst, divides what's left of the battery by the laps left in the hour, compares that budget to the lap just driven, and decides: speed up, hold, or back off." },
+      lcd: { x: 780, y: 30, w: 160, h: 58, t: "Driver display", s: "lap, use rate, pace call", ours: true,
+        d: "The dash screen the driver actually races by: lap number, battery use rate, and the pacing call from the Arduino." },
+      shunt: { x: 120, y: 190, w: 160, h: 58, t: "Shunt", s: "0.25 mΩ, negative leg",
+        d: "A precision resistor in the battery's negative lead: 75 mV at 300 A, so 0.25 mΩ. The tiny voltage across it is the current, by Ohm's law, and it's how the Cycle Analyst measures every amp the motor pulls." },
+      ctrl: { x: 360, y: 180, w: 230, h: 80, t: "KEB motor controller", s: "48V DC to 3-phase drive", hot: true,
+        d: "Turns 48V DC into three-phase current for the brushless motor, timing each switch from the motor's hall sensors. We program its settings over an RS-232 link, including regen braking on the first 20% of throttle travel." },
+      motor: { cx: 860, cy: 220, r: 50, t: "Hub motor", s: "brushless DC",
+        d: "A brushless DC motor built into the wheel. Its three phases (yellow, green, blue) land on the controller's A, B and C tabs; hall sensors and a temperature sensor report back on a separate connector, with a sealed spare." },
+      batt: { x: 20, y: 350, w: 230, h: 58, t: "Battery pack", s: "4 × 12V lead-acid in series = 48V",
+        d: "Four 12V sealed lead-acid batteries in series on 6-gauge cable. We designed and rebuilt the pack and its mounting. Lead-acid gives up usable capacity at high current, which is why pacing matters so much." },
+      kill: { x: 300, y: 350, w: 140, h: 58, t: "Kill switches", s: "2 keyed, in series",
+        d: "Two main power switches with removable red keys, wired in series. Where they sit in the car is set by the race rules." },
+      fuse: { x: 480, y: 350, w: 110, h: 58, t: "100 A fuse", s: "main fuse",
+        d: "The main fuse on the positive leg. Everything downstream is protected if a cable shorts to the frame." },
+      cont: { x: 630, y: 350, w: 160, h: 58, t: "Contactor", s: "+ precharge resistor",
+        d: "A high-power relay. Before it closes, a precharge resistor fills the controller's capacitors for about three seconds; switching straight onto 48V would slam them with inrush current and can destroy the controller. Startup order matters." },
+    };
+    const power = [
+      "M250,379 H300", "M440,379 H480", "M590,379 H630",
+      "M710,350 V300 H540 V260",           // contactor to controller B+
+      "M80,350 V248",                      // battery minus to shunt
+      "M280,219 H360",                     // shunt to controller B-
+    ];
+    const phases = ["M590,205 H812", "M590,220 H810", "M590,235 H812"];
+    const signals = [
+      ["M100,88 V140 H410 V180", "14-pin"],
+      ["M200,190 V120 H360 V88", "shunt mV"],
+      ["M470,59 H540", "serial"],
+      ["M710,59 H780", ""],
+      ["M860,170 V150 H560 V180", "hall + temp"],
+    ];
+    let sel = "arduino";
+
+    function draw() {
+      svg.innerHTML = "";
+      const ink = css("--ink"), line = css("--line-strong"), bg = css("--panel-2"), muted = css("--muted");
+      const gW = el("g", {}, svg), gN = el("g", {}, svg);
+      power.forEach((d) => { el("path", { d, fill: "none", stroke: line, "stroke-width": 6, "stroke-linecap": "round" }, gW); el("path", { d, class: "flow" }, gW); });
+      phases.forEach((d, i) => {
+        el("path", { d, fill: "none", stroke: ["#c8a400", "#3c8d4f", "#3b6fd1"][i], "stroke-width": 3.5 }, gW);
+        el("path", { d, class: "flow" }, gW);
+      });
+      el("text", { x: 700, y: 196, class: "sub", style: `fill:${muted}` }, gW).textContent = "U  V  W";
+      signals.forEach(([d, lab]) => {
+        el("path", { d, fill: "none", stroke: line, "stroke-width": 1.5, "stroke-dasharray": "4 4" }, gW);
+        el("path", { d, class: "sig-flow" }, gW);
+      });
+      [["14-pin", 250, 134], ["shunt voltage", 240, 114], ["serial", 478, 50], ["hall + temp", 640, 144]].forEach(([t, x, y]) => {
+        el("text", { x, y, class: "sub", style: `fill:${muted}` }, gW).textContent = t;
+      });
+      el("text", { x: 258, y: 372, class: "sub", style: `fill:${muted}` }, gW).textContent = "+";
+      el("text", { x: 86, y: 300, class: "sub", style: `fill:${muted}` }, gW).textContent = "−";
+
+      Object.entries(parts).forEach(([k, p]) => {
+        const g = el("g", { class: `part${k === sel ? " sel" : ""}`, tabindex: 0, role: "button", "aria-pressed": k === sel ? "true" : "false", "aria-label": p.t }, gN);
+        const hot = p.hot, fillBox = hot ? ink : bg;
+        if (p.r) {
+          el("circle", { class: "box", cx: p.cx, cy: p.cy, r: p.r, fill: fillBox, stroke: line, "stroke-width": 1.5 }, g);
+          el("text", { x: p.cx, y: p.cy - 2, "text-anchor": "middle", class: "lbl" }, g).textContent = p.t;
+          el("text", { x: p.cx, y: p.cy + 16, "text-anchor": "middle", class: "sub", style: `fill:${muted}` }, g).textContent = p.s;
+        } else {
+          el("rect", { class: "box", x: p.x + 0.5, y: p.y + 0.5, width: p.w - 1, height: p.h - 1, rx: 8, fill: fillBox, stroke: p.ours ? css("--accent") : line, "stroke-width": p.ours ? 2 : 1.5, "stroke-dasharray": p.ours ? "0" : "0" }, g);
+          el("text", { x: p.x + 12, y: p.y + (p.h > 60 ? 34 : 24), class: "lbl", style: hot ? `fill:${bg}` : "" }, g).textContent = p.t;
+          el("text", { x: p.x + 12, y: p.y + (p.h > 60 ? 54 : 42), class: "sub", style: hot ? `fill:${bg};opacity:.75` : `fill:${muted}` }, g).textContent = p.s;
+        }
+        const pick = () => { sel = k; draw(); svg.querySelector(`[aria-label="${p.t}"]`).focus({ preventScroll: true }); };
+        g.addEventListener("click", pick);
+        g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
+      });
+      const p = parts[sel];
+      info.innerHTML = `<b>${p.t}</b>${p.d}`;
+    }
+    draw();
+    darkMQ.addEventListener("change", draw);
+  })();
+
+  /* ---------- One-hour race simulator: constant speed vs per-lap energy budget ---------- */
+  (() => {
+    const svg = $("#race-svg");
+    if (!svg) return;
+    const P = { rho: 1.2, CdA: 0.30, crr: 0.015, m: 150, g: 9.81, eta: 0.8, V: 48, C: 26, k: 1.15, lap: 0.6 };
+    // Peukert: the faster you draw, the more capacity each amp-hour effectively costs.
+    const ieff = (mph) => {
+      const v = mph * 0.44704;
+      const I = ((0.5 * P.rho * P.CdA * v ** 3 + P.crr * P.m * P.g * v) / P.eta) / P.V;
+      return I * Math.pow(I / (P.C / 20), P.k - 1);
+    };
+    function race(speed, pace) {
+      let s = speed, t = 0, used = 0, laps = 0, dead = null;
+      const pts = [[0, 100]];
+      for (;;) {
+        const lt = P.lap / s, use = ieff(s) * lt;
+        if (t + lt >= 1) {
+          let f = (1 - t) / lt;
+          if (used + use * f > P.C) { f = (P.C - used) / use; dead = t + f * lt; }
+          laps += f; used = Math.min(P.C, used + use * f); t = dead ?? 1;
+          pts.push([t * 60, 100 * (1 - used / P.C)]); break;
+        }
+        if (used + use > P.C) {
+          const f = (P.C - used) / use; laps += f; dead = t + f * lt; used = P.C;
+          pts.push([dead * 60, 0]); break;
+        }
+        t += lt; used += use; laps += 1;
+        pts.push([t * 60, 100 * (1 - used / P.C)]);
+        if (pace) {
+          // The Arduino's rule: spread what's left evenly over the laps left in the hour.
+          const budget = (P.C - used) / ((1 - t) / (P.lap / s));
+          if (use > budget * 1.03) s = Math.max(14, s - 1);
+          else if (use < budget * 0.97) s = Math.min(34, s + 1);
+        }
+      }
+      return { laps, dead: dead && dead < 0.999 ? dead * 60 : null, left: 100 * (1 - used / P.C), pts, finalSpeed: s };
+    }
+
+    const input = $("#race-speed"), out = $("#race-speed-out"), readout = $("#race-readout"), msg = $("#race-out");
+    let W = 560, H = 230, anim = 0;
+    const M = { l: 40, r: 12, t: 12, b: 28 };
+    function render(progress = 1) {
+      const speed = +input.value;
+      const a = race(speed, false), b = race(speed, true);
+      svg.innerHTML = "";
+      const ink = css("--ink"), acc = css("--accent"), line = css("--line"), muted = css("--muted");
+      const sx = (m) => M.l + (m / 60) * (W - M.l - M.r), sy = (p) => M.t + (1 - p / 100) * (H - M.t - M.b);
+      [0, 25, 50, 75, 100].forEach((p) => {
+        el("line", { x1: M.l, x2: W - M.r, y1: sy(p), y2: sy(p), stroke: line }, svg);
+        el("text", { x: M.l - 6, y: sy(p) + 4, "text-anchor": "end" }, svg).textContent = `${p}%`;
+      });
+      (W < 420 ? [0, 30, 60] : [0, 15, 30, 45, 60]).forEach((m) => { el("text", { x: sx(m), y: H - 8, "text-anchor": m === 60 ? "end" : m === 0 ? "start" : "middle" }, svg).textContent = `${m} min`; });
+      const tmax = 60 * progress;
+      const clip = (pts) => {
+        const outp = [];
+        for (let i = 0; i < pts.length; i++) {
+          if (pts[i][0] <= tmax) outp.push(pts[i]);
+          else { const [x0, y0] = pts[i - 1], [x1, y1] = pts[i]; outp.push([tmax, y0 + (y1 - y0) * (tmax - x0) / (x1 - x0)]); break; }
+        }
+        return outp;
+      };
+      const path = (pts) => clip(pts).map(([m, p]) => `${sx(m)},${sy(p)}`).join(" ");
+      el("polyline", { points: path(a.pts), fill: "none", stroke: muted, "stroke-width": 2, "stroke-dasharray": "5 4" }, svg);
+      el("polyline", { points: path(b.pts), fill: "none", stroke: acc, "stroke-width": 2.5 }, svg);
+      if (progress === 1 && a.dead) {
+        el("text", { x: Math.min(sx(a.dead), W - M.r - 60), y: sy(0) - 22, "text-anchor": "middle", class: "halo" }, svg).textContent = `dead at ${a.dead.toFixed(0)} min`;
+      }
+      el("text", { x: W - M.r - 4, y: M.t + 14, "text-anchor": "end", class: "acc halo" }, svg).textContent = "with pacing";
+      el("text", { x: W - M.r - 4, y: M.t + 30, "text-anchor": "end", class: "halo" }, svg).textContent = "driver alone (dashed)";
+
+      readout.innerHTML = [
+        ["Laps, driver alone", a.laps.toFixed(1), !!a.dead],
+        ["Laps, with pacing", b.laps.toFixed(1)],
+        ["Pacing settles at", `${b.finalSpeed} mph`],
+      ].map(([k, v, f]) => `<div><dt>${k}</dt><dd class="${f ? "flag" : ""}">${v}</dd></div>`).join("");
+      const gain = b.laps - a.laps;
+      msg.innerHTML = a.dead
+        ? `<b>At ${speed} mph the pack dies ${(60 - a.dead).toFixed(0)} minutes early.</b> Pacing backs off and finishes ${gain.toFixed(1)} laps ahead.`
+        : a.left > 5
+          ? `<b>At ${speed} mph the driver finishes with ${a.left.toFixed(0)}% of the battery unused.</b> Pacing spends it, for ${gain.toFixed(1)} more laps.`
+          : `<b>${speed} mph is close to the best constant speed for this car.</b> Pacing matches it without the driver having to know that.`;
+    }
+    function play() {
+      cancelAnimationFrame(anim);
+      if (reduceMotion) { render(1); return; }
+      const start = performance.now(), dur = 3200;
+      const tick = (now) => { const k = Math.min(1, (now - start) / dur); render(k); if (k < 1) anim = requestAnimationFrame(tick); };
+      anim = requestAnimationFrame(tick);
+    }
+    input.addEventListener("input", () => { out.textContent = input.value; cancelAnimationFrame(anim); render(1); });
+    $("#race-run").addEventListener("click", play);
+    responsive(svg, 230, (w, h) => { W = w; H = h; render(1); });
+  })();
+
+  /* ---------- ReachBot retrieval gate ---------- */
+  (() => {
+    const svg = $("#rag-svg");
+    if (!svg) return;
+    const input = $("#rag-sim"), out = $("#rag-out"), mode = $("#rag-mode");
+    const chips = [...document.querySelectorAll("#rag-lab [data-sim]")];
+    let W = 520;
+    const lo = 0.4, hi = 0.9;
+    function passages(sim) {
+      if (sim < 0.6) return 0;
+      if (sim < 0.7) return 5;
+      return Math.round(3 + Math.min(1, (sim - 0.7) / 0.15) * 22);
+    }
+    function render() {
+      const sim = +input.value;
+      out.textContent = sim.toFixed(2);
+      svg.innerHTML = "";
+      const ink = css("--ink"), acc = css("--accent"), line = css("--line-strong"), panel = css("--panel"), muted = css("--muted"), soft = css("--accent-soft");
+      const L = 0, R = W, sx = (v) => L + ((v - lo) / (hi - lo)) * (R - L);
+      const zones = [[lo, 0.6, panel, "not covered"], [0.6, 0.7, soft, "cautious"], [0.7, hi, soft, "answer"]];
+      zones.forEach(([a, b, f, t], i) => {
+        el("rect", { x: sx(a), y: 18, width: sx(b) - sx(a), height: 26, fill: f, "fill-opacity": i === 2 ? 1 : 0.9 }, svg);
+        el("text", { x: (sx(a) + sx(b)) / 2, y: 12, "text-anchor": "middle", class: "sub", style: `fill:${muted}` }, svg).textContent = t;
+      });
+      [[0.54, "off-topic"], [0.66, "adjacent"], [0.75, "on-topic"]].forEach(([v, t]) => {
+        el("line", { x1: sx(v), x2: sx(v), y1: 44, y2: 52, stroke: line }, svg);
+        el("text", { x: sx(v), y: 66, "text-anchor": "middle" }, svg).textContent = t;
+      });
+      el("path", { d: `M${sx(sim)},14 V48`, stroke: acc, "stroke-width": 3 }, svg);
+      const n = passages(sim), size = Math.min(16, (W - 24 * 3) / 25);
+      el("text", { x: 0, y: 92, class: "ink" }, svg).textContent = `Passages sent to the model: ${n}`;
+      for (let i = 0; i < 25; i++) {
+        el("rect", { x: i * (size + 3), y: 102, width: size, height: size, rx: 2, fill: i < n ? acc : "none", stroke: i < n ? acc : line }, svg);
+      }
+      chips.forEach((c) => c.setAttribute("aria-pressed", Math.abs(+c.dataset.sim - sim) < 0.005 ? "true" : "false"));
+      mode.innerHTML = sim < 0.6
+        ? "<b>Not covered.</b> The evidence is weak, so ReachBot says the library doesn't cover this instead of improvising. Silence beats confident fiction."
+        : sim < 0.7
+          ? "<b>Cautious.</b> Only 5 passages go to the model, with a note that the evidence is thin, leaving less noise to weave into a made-up answer."
+          : `<b>Answer.</b> Up to ${n} passages, scaled to how strong the evidence is, and every claim carries an inline citation.`;
+    }
+    input.addEventListener("input", render);
+    chips.forEach((c) => c.addEventListener("click", () => { input.value = c.dataset.sim; render(); }));
+    responsive(svg, 126, (w) => { W = w; render(); });
+  })();
+
+  /* ---------- GMU replication results ---------- */
+  (() => {
+    const svg = $("#gmu-svg");
+    if (!svg) return;
+    responsive(svg, 92, (w) => {
+      svg.innerHTML = "";
+      const acc = css("--accent"), line = css("--line-strong");
+      const n = 27, ok = 19, gap = 4, size = Math.min(22, (w - gap * (n - 1)) / n);
+      for (let i = 0; i < n; i++) {
+        el("rect", { x: i * (size + gap), y: 8, width: size, height: size * 1.6, rx: 3, fill: i < ok ? acc : "none", stroke: i < ok ? acc : line, "stroke-width": 1.5 }, svg);
+      }
+      el("text", { x: 0, y: 8 + size * 1.6 + 22, class: "acc" }, svg).textContent = "19 replicated";
+      el("text", { x: (ok) * (size + gap), y: 8 + size * 1.6 + 22 }, svg).textContent = "8 failed";
     });
   })();
 
