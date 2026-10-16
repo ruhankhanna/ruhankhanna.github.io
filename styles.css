@@ -307,3 +307,10 @@ svg .halo { paint-order: stroke; stroke: var(--panel-2); stroke-width: 4px; stro
 .readout dd { margin: 2px 0 0; font: 500 16px var(--mono); font-variant-numeric: tabular-nums; }
 .readout dd.flag { color: var(--accent); }
 @media (max-width: 420px) { .readout { grid-template-columns: 1fr 1fr; } }
+
+.car-intro { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 56px; align-items: start; margin-bottom: 48px; }
+.car-intro .lede { margin-bottom: 0; }
+.clip { margin: 0; }
+.clip video { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--line); background: var(--panel); }
+.clip figcaption { margin-top: 10px; font-size: 14px; color: var(--muted); }
+@media (max-width: 860px) { .car-intro { grid-template-columns: 1fr; gap: 28px; } .clip { max-width: 320px; } }

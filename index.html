@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=9">
+<link rel="stylesheet" href="styles.css?v=10">
 </head>
 <body>
 
@@ -169,7 +169,13 @@
   <div class="wrap">
     <h2>SECRET, a 48-volt race car</h2>
     <p class="meta">Founder and co-head, Sidwell Electric Car Race Engineering Team. 2023 to now. Raised $7K; working alongside UMD's Formula SAE team.</p>
-    <p class="lede">The Electric Vehicle Grand Prix is an endurance race: whoever covers the most distance in one hour on a fixed battery wins. Drive too slow and you finish with charge left over; too fast and the pack dies before the flag. We built our car from the competition kit, then rebuilt it: an aluminum chassis, a new battery pack, 3D-printed wheel covers, and an Arduino system that tells the driver how hard to push.</p>
+    <div class="car-intro">
+  <p class="lede">The Electric Vehicle Grand Prix is an endurance race: whoever covers the most distance in one hour on a fixed battery wins. Drive too slow and you finish with charge left over; too fast and the pack dies before the flag. We built our car from the competition kit, then rebuilt it: an aluminum chassis, a new battery pack, 3D-printed wheel covers, and an Arduino system that tells the driver how hard to push.</p>
+      <figure class="clip">
+        <video id="secret-clip" src="assets/secret-motor.mp4" poster="assets/secret-motor.jpg" width="720" height="960" muted loop playsinline preload="metadata" aria-label="Working on the car's hub motor and its orange phase cables in the shop"></video>
+        <figcaption>In the shop: the hub motor and its three phase cables.</figcaption>
+      </figure>
+    </div>
 
     <div class="wire-wrap">
       <div class="wire-scroll"><svg id="wire-svg" viewBox="0 0 960 440" role="group" aria-label="Electrical system of the car. Select a part to read what it does."></svg></div>
@@ -326,6 +332,6 @@
   </div>
 </footer>
 
-<script src="main.js?v=10"></script>
+<script src="main.js?v=11"></script>
 </body>
 </html>

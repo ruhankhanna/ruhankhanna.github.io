@@ -398,6 +398,14 @@
     });
   })();
 
+  /* ---------- SECRET shop clip: loop only while visible, never under reduced motion ---------- */
+  (() => {
+    const v = $("#secret-clip");
+    if (!v) return;
+    if (reduceMotion) { v.controls = true; return; }
+    onVisible(v, (on) => { if (on) v.play().catch(() => { v.controls = true; }); else v.pause(); });
+  })();
+
   /* ---------- SECRET wiring diagram (from the competition kit's electrical schematic) ---------- */
   (() => {
     const svg = $("#wire-svg");
