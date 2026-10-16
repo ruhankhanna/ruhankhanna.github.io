@@ -5,103 +5,117 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ruhan Khanna</title>
 <meta name="description" content="Ruhan Khanna builds rating models, ML pipelines and research tools that look for who is being underrated.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='6' fill='%23151514'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='600' fill='%23f3f3f1' text-anchor='middle'%3ERK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=2">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-out" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Skip to content</a>
+
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="#top">Ruhan Khanna</a>
+    <a class="brand" href="#top"><span class="tile" aria-hidden="true">RK</span>Ruhan Khanna</a>
     <nav aria-label="Sections">
-      <a href="#athletiq">Work</a>
-      <a href="#indus">Research</a>
-      <a href="#markets">Markets</a>
-      <a href="#contact">Contact</a>
+      <a href="#work" data-sec="work">Work</a>
+      <a href="#indus" data-sec="indus">Research</a>
+      <a href="#markets" data-sec="markets">Econ</a>
+      <a href="#contact" data-sec="contact">Contact</a>
     </nav>
   </div>
 </header>
 
-<main id="top">
+<main id="main">
 
-<!-- HERO -->
-<section class="hero wrap">
-  <p class="hero-meta reveal">Sidwell Friends, class of 2027. Washington, DC.</p>
-  <h1 class="reveal">Most of what I build asks one question: <em>who is being underrated?</em></h1>
-  <p class="hero-sub reveal">Track recruits, junior prospects, overlooked founders, fellowship applicants, and a 4,500 year old script nobody can read.</p>
-  <div class="hero-cta reveal">
-    <a class="btn btn-primary" href="#athletiq">See the work</a>
-    <a class="btn btn-ghost" href="https://github.com/ruhankhanna" target="_blank" rel="noopener">GitHub ↗</a>
+<section class="hero wrap" id="top">
+  <h1>Most of what I build asks one question: <em>who is being underrated?</em></h1>
+  <p class="hero-sub">I'm a junior at Sidwell Friends in DC, building models for recruits, prospects, founders, applicants, and a 4,500 year old script.</p>
+  <div class="hero-cta">
+    <a class="btn btn-primary" href="#work">See the work</a>
+    <a class="btn btn-ghost" href="https://github.com/ruhankhanna" target="_blank" rel="noopener">GitHub<svg class="ico" aria-hidden="true"><use href="#i-out"/></svg></a>
   </div>
 </section>
 
-<!-- PROOF -->
-<section class="proof wrap" aria-label="Highlights">
-  <div class="proof-cell reveal">
-    <span class="num">IJCA 187</span>
-    <span>Peer-reviewed paper on the Indus script, Dec 2025</span>
-  </div>
-  <div class="proof-cell reveal">
-    <span class="num">Stanford, UNC</span>
-    <span>NCAA programs under contract for athletIQ</span>
-  </div>
-  <div class="proof-cell reveal">
-    <span class="num">20k+</span>
-    <span>Underserved founders matched by our VC model</span>
-  </div>
-  <div class="proof-cell reveal">
-    <span class="num">$5K</span>
-    <span>Emergent Ventures grant from Tyler Cowen</span>
-  </div>
-  <div class="proof-cell reveal">
-    <span class="num">3 years</span>
-    <span>Racing our own electric car at the DC Grand Prix</span>
-  </div>
-</section>
+<nav class="index wrap" id="work" aria-label="Projects">
+  <a class="index-row" href="#athletiq">
+    <span class="index-name">athletIQ</span>
+    <span class="index-what">Recruiting analytics for college track, under contract with Stanford and UNC</span>
+    <span class="index-when">2023 to now</span>
+  </a>
+  <a class="index-row" href="#panout">
+    <span class="index-name">Pan-Out</span>
+    <span class="index-what">Calibrated odds on which junior athletes make it</span>
+    <span class="index-when">2026</span>
+  </a>
+  <a class="index-row" href="#indus">
+    <span class="index-name">Indus script</span>
+    <span class="index-what">Peer-reviewed computational analysis of an undeciphered script</span>
+    <span class="index-when">2023 to now</span>
+  </a>
+  <a class="index-row" href="#fellows">
+    <span class="index-name">Future Fellows</span>
+    <span class="index-what">An applicant screen built so it cannot become a résumé filter</span>
+    <span class="index-when">2026</span>
+  </a>
+  <a class="index-row" href="#markets">
+    <span class="index-name">VC frictions</span>
+    <span class="index-what">An ML model of who gets funded, deployed to 20,000+ founders</span>
+    <span class="index-when">2025 to now</span>
+  </a>
+</nav>
 
 <!-- ATHLETIQ -->
 <section id="athletiq" class="case wrap">
   <div class="case-split">
     <div class="case-text">
-      <h2 class="reveal">athletIQ</h2>
-      <p class="meta reveal">Founder and CEO. 2023 to now. Python, Flask, JS.</p>
-      <p class="reveal">College track coaches recruit from spreadsheets and a single personal best. A PR tells you the fastest day a kid ever had. It does not tell you where they are now, or where they will be by signing day.</p>
-      <p class="reveal">athletIQ rates every recruit on a recency-weighted average with a 90-day half-life, fits a trend through their recent marks, and forecasts 3, 6 and 12 months out. The forecast has a guardrail: if the fit is weak (r² under 0.5), projected improvement is capped at 3% per 90 days, so one lucky race cannot turn a kid into a future champion.</p>
-      <p class="reveal">I wrote the rating model, built the product, and sold it. It is under contract with programs including Stanford and UNC, and has been piloted with coaches at Harvard, Georgetown and Texas, with $8K in backing from Microsoft and AWS.</p>
-      <a class="link reveal" href="https://athletiq.run" target="_blank" rel="noopener">athletiq.run ↗</a>
+      <h2>athletIQ</h2>
+      <p class="meta">Founder and CEO, 2023 to now. Python, Flask, JavaScript.</p>
+      <p>College track coaches recruit from spreadsheets and a single personal best. A PR tells you the fastest day a kid ever had. It does not tell you where they are now, or where they will be by signing day.</p>
+      <p>athletIQ rates every recruit on a recency-weighted average with a 90-day half-life, fits a trend through their recent marks, and forecasts 3, 6 and 12 months out. When the fit is weak (r² under 0.5), projected improvement is capped at 3% per 90 days, so a noisy season cannot produce a runaway forecast.</p>
+      <p>I wrote the rating model, built the product, and sold it. It is under contract with programs including Stanford and UNC, has been piloted with coaches at Harvard, Georgetown and Texas, and has $8K in backing from Microsoft and AWS.</p>
+      <a class="link" href="https://athletiq.run" target="_blank" rel="noopener">athletiq.run<svg class="ico" aria-hidden="true"><use href="#i-out"/></svg></a>
     </div>
 
-    <figure class="lab reveal" id="forecast-lab">
+    <figure class="lab" id="forecast-lab">
       <div class="lab-head">
         <strong>Forecast lab</strong>
-        <span>Drag any race up or down. This runs the same math as production.</span>
+        <span>Drag a race, or focus one and use the arrow keys. Same math as production.</span>
       </div>
-      <svg id="fl-svg" viewBox="0 0 560 330" role="img" aria-label="Interactive chart of a sample athlete's 1600m times with a trend line and forecasts"></svg>
+      <svg id="fl-svg" role="group" aria-label="A sample athlete's 1600m times with trend line and forecasts. Each race is an adjustable slider."></svg>
       <div class="lab-controls">
-        <label for="fl-hl">Half-life <output id="fl-hl-out">90</output> days</label>
+        <label for="fl-hl">Half-life <output id="fl-hl-out" class="num">90</output> days</label>
         <input id="fl-hl" type="range" min="20" max="240" step="5" value="90">
       </div>
       <dl class="readout" id="fl-readout"></dl>
-      <figcaption>Sample athlete, 1600m. Faster is higher on the chart.</figcaption>
+      <p class="guard" id="fl-guard" role="status"></p>
+      <div class="lab-actions">
+        <button type="button" class="chip" id="fl-noisy">Load a bad last race</button>
+        <button type="button" class="chip" id="fl-reset">Reset</button>
+      </div>
+      <figcaption>Sample athlete, 1600m. Faster times sit higher on the chart.</figcaption>
     </figure>
   </div>
 
-  <figure class="shot shot-small reveal">
+  <figure class="shot shot-small">
     <img src="assets/athletiq-home.jpg" alt="The athletIQ homepage, headline Recruiting, Simplified" loading="lazy" width="1424" height="900">
-    <figcaption>The public site. The coach app lives behind a login at app.athletiq.run.</figcaption>
+    <figcaption>The public site. The coach app sits behind a login.</figcaption>
   </figure>
 </section>
 
 <!-- PAN-OUT -->
 <section id="panout" class="case wrap">
-  <h2 class="reveal">Pan-Out</h2>
-  <p class="meta reveal">Solo build. 2026. Python, scikit-learn, a stdlib HTTP server, vanilla JS.</p>
-  <p class="lede reveal">athletIQ taught me that ratings are age-blind. A 13-year-old rated 9.0 and a 17-year-old rated 9.0 are not the same prospect. Pan-Out prices that gap across tennis, chess, baseball and hockey, and states every prediction as a calibrated probability: when it says 30%, about 30% of those kids made it.</p>
+  <h2>Pan-Out</h2>
+  <p class="meta">Solo build, 2026. Python, scikit-learn, a standard-library HTTP server, plain JavaScript.</p>
+  <p class="lede">athletIQ taught me that ratings ignore age. A 13-year-old rated 9.0 and a 17-year-old rated 9.0 are not the same prospect. Pan-Out prices that gap across tennis, chess, baseball and hockey, and states every prediction as a calibrated probability: when it says 30%, about 30% of those kids made it.</p>
 
   <div class="panout-grid">
-    <div class="pg-block reveal">
+    <div class="pg-block">
       <h3>Five models, one question each</h3>
       <ol class="models">
         <li><b>Trajectory.</b> 12 and 24 month rating slope and acceleration.</li>
@@ -110,59 +124,61 @@
         <li><b>Load.</b> Match volume, trend, volatility.</li>
         <li><b>Age outperformance.</b> Standard deviations above same-age, same-gender peers. The strongest single signal.</li>
       </ol>
-      <p class="small">A logistic meta-model stacks the five, then isotonic regression calibrates it. Because the stack is linear in the sub-model logits, every player page shows exactly how much each signal moved the odds.</p>
+      <p class="small">A logistic model combines the five, then isotonic regression calibrates the odds. Because the combination is linear, every player page shows exactly how much each signal moved their chances.</p>
     </div>
 
-    <div class="pg-block reveal">
-      <h3>No leakage, by birth year</h3>
-      <svg id="cohort-svg" viewBox="0 0 420 150" role="img" aria-label="Train on players born 1995 or earlier, stack on 1996 to 97, calibrate on 1998 to 99, grade on 2000 to 01"></svg>
-      <p class="small">The model is graded only on cohorts it never touched, the same way it would meet real kids.</p>
+    <div class="pg-block">
+      <h3>Graded only on kids it never saw</h3>
+      <svg id="cohort-svg" role="img" aria-label="Players born 1995 or earlier train the models, 1996 to 97 combine them, 1998 to 99 calibrate them, and 2000 to 01 are held back for grading."></svg>
+      <p class="small">Splitting by birth year means no player, and no player's future, leaks into training. That is how the model would meet real kids.</p>
     </div>
 
-    <div class="pg-block pg-wide reveal">
-      <h3>Model vs. the rating alone, held-out AUC</h3>
-      <svg id="auc-svg" viewBox="0 0 640 232" role="img" aria-label="AUC comparison: tennis 0.942 vs 0.843, chess 0.941 vs 0.841, baseball 0.920 vs 0.846, hockey 0.963 vs 0.908"></svg>
-      <p class="small">The training universes are simulated, because no open bulk API exists for junior ratings. The models only see what a real UTR, USTA or FIDE export would contain. A separate real-data hub runs on about 121,000 FIDE-rated juniors and about 113,000 real pro baseball careers.</p>
+    <div class="pg-block pg-wide">
+      <h3>How well it ranks who makes it</h3>
+      <p class="small gloss">Measured as AUC: 0.5 is a coin flip, 1.0 ranks every future pro above every kid who didn't make it.</p>
+      <svg id="auc-svg" role="img" aria-label="AUC, rating alone versus Pan-Out: tennis 0.843 to 0.942, chess 0.841 to 0.941, baseball 0.846 to 0.920, hockey 0.908 to 0.963."></svg>
+      <p class="small">These scores come from simulated player histories, because no open bulk data exists for junior ratings; the models only see what a real UTR, USTA or FIDE export would contain. On real data, the age signal run over FIDE's list of about 121,000 rated juniors puts actual prodigies like Faustino Oro and Bodhana Sivanandan at the top of the board.</p>
     </div>
   </div>
 
-  <figure class="shot reveal">
+  <figure class="shot shot-panout">
     <img src="assets/panout-report.jpg" alt="Pan-Out model report card, showing AUC by outcome tier and a calibration plot" loading="lazy" width="1424" height="884">
-    <figcaption>The model report card. Player names on these boards come from the simulated cohorts.</figcaption>
+    <figcaption>The model report card. Player names on these boards come from the simulated histories.</figcaption>
   </figure>
 </section>
 
 <!-- INDUS -->
 <section id="indus" class="research">
   <div class="wrap">
-    <h2 class="reveal">Reading a script no one can read</h2>
-    <p class="meta reveal">Independent research with Louie Merriam. 2023 to now. Published in the International Journal of Computer Applications, Vol. 187, No. 64.</p>
-    <p class="lede reveal">The Indus script is around 4,500 years old, has hundreds of signs, and has no bilingual key. It is probably logo-syllabic: some signs stand for whole words, others for sounds, and some do both. Our paper asks which is which, using only the statistics of where signs appear.</p>
+    <h2>Reading a script no one can read</h2>
+    <p class="meta">Independent research with Louie Merriam, 2023 to now. Published in the International Journal of Computer Applications, Vol. 187, No. 64.</p>
+    <p class="lede">The Indus script is around 4,500 years old, has hundreds of signs, and has no bilingual key. It is probably logo-syllabic: some signs stand for whole words, others for sounds, and some do both. Our paper asks which is which, using only the statistics of where signs appear.</p>
 
-    <div class="method reveal" id="indus-lab">
+    <div class="method" id="indus-lab">
       <div class="method-steps" role="tablist" aria-label="Method steps">
-        <button role="tab" aria-selected="true" data-step="0">Corpus</button>
-        <button role="tab" aria-selected="false" data-step="1">Singletons</button>
-        <button role="tab" aria-selected="false" data-step="2">Context expansion</button>
-        <button role="tab" aria-selected="false" data-step="3">Exclusive pairs</button>
+        <button role="tab" id="tab-0" aria-selected="true" aria-controls="indus-panel" tabindex="0" data-step="0">Corpus</button>
+        <button role="tab" id="tab-1" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="1">Singletons</button>
+        <button role="tab" id="tab-2" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="2">Context expansion</button>
+        <button role="tab" id="tab-3" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="3">Exclusive pairs</button>
       </div>
-      <div class="method-body">
-        <div class="corpus" id="corpus" aria-live="polite"></div>
+      <div class="method-body" id="indus-panel" role="tabpanel" aria-labelledby="tab-0">
+        <div class="corpus" id="corpus"></div>
         <div class="method-note">
-          <p id="step-text"></p>
+          <p id="step-text" aria-live="polite"></p>
           <div id="excl-ctl" class="lab-controls" hidden>
-            <label for="excl">Exclusivity threshold <output id="excl-out">0.75</output></label>
-            <input id="excl" type="range" min="0.4" max="1" step="0.05" value="0.75">
+            <label for="excl">Exclusivity threshold <output id="excl-out" class="num">0.75</output></label>
+            <input id="excl" type="range" min="0.45" max="1" step="0.05" value="0.75">
           </div>
-          <p class="small">This is a 14-inscription toy corpus so the method fits on screen. Sign numbers follow the style of the standard concordances. The paper runs on the full corpus and validates associations statistically.</p>
+          <ul class="pair-list" id="pair-list" hidden></ul>
+          <p class="small">An 18-inscription toy corpus, so the method fits on screen. The paper runs on the full corpus and tests each association statistically.</p>
         </div>
       </div>
     </div>
 
-    <div class="research-foot reveal">
-      <a class="link" href="https://www.ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/" target="_blank" rel="noopener">Read the paper ↗</a>
-      <span>DOI 10.5120/ijca2025926075. Funded by an Emergent Ventures grant.</span>
-    </div>
+    <p class="research-foot">
+      <a class="link" href="https://www.ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/" target="_blank" rel="noopener">Read the paper<svg class="ico" aria-hidden="true"><use href="#i-out"/></svg></a>
+      <span>DOI 10.5120/ijca2025926075. Funded by an Emergent Ventures grant from Tyler Cowen.</span>
+    </p>
   </div>
 </section>
 
@@ -170,108 +186,98 @@
 <section id="fellows" class="case wrap">
   <div class="ff">
     <div>
-      <h2 class="reveal">Future Fellows</h2>
-      <p class="meta reveal">Founding intern, employee #2. 2026 to now. Python, FastAPI, Claude API.</p>
-      <p class="reveal">Future Fellows matches high schoolers with paid, serious work. I am building the system that screens applicants, and the hard part is not the model. It is making sure the model cannot quietly become a résumé filter.</p>
-      <p class="reveal">So the constraints live in code, each with a test that fails if someone removes it. Names and schools are scrubbed before scoring. There is no total score and no ranking. Demographics sit in a separate table nobody can read until decisions are made. Every model call is logged with its exact prompt. And no score is accepted unless it comes with a quote that appears word for word in the application.</p>
-      <p class="reveal">The live version asks applicants for a public repo, reads the code and its history, then asks questions only the author could answer.</p>
+      <h2>Future Fellows</h2>
+      <p class="meta">Founding intern, employee #2, 2026 to now. Python, FastAPI, Claude API.</p>
+      <p>Future Fellows matches high schoolers with paid, serious work. I am building the system that screens applicants, and the hard part is not the model. It is making sure the model cannot quietly become a résumé filter.</p>
+      <p>So the constraints live in code, each with a test that fails if someone removes it. Names and schools are scrubbed before scoring. There is no total score and no ranking. Demographics sit in a separate table nobody can read until decisions are made. Every model call is logged with its exact prompt. And no score is accepted unless it comes with a quote that appears word for word in the application.</p>
+      <p>The live version asks applicants for a public repo, reads the code and its history, then asks questions only the author could answer.</p>
     </div>
 
-    <div class="lab reveal" id="quote-lab">
+    <div class="lab" id="quote-lab">
       <div class="lab-head">
         <strong>Try the quote check</strong>
-        <span>A sample application. The model must cite it word for word.</span>
+        <span>A sample application. The model has to cite it word for word.</span>
       </div>
       <blockquote class="essay" id="essay"></blockquote>
-      <label class="q-label" for="quote">Quote the model claims as evidence</label>
-      <textarea id="quote" rows="2" spellcheck="false"></textarea>
-      <div class="q-presets">
-        <button type="button" data-q="0">Real quote</button>
-        <button type="button" data-q="1">Paraphrase</button>
-        <button type="button" data-q="2">Invented</button>
+      <label class="q-label" for="quote">Quote the model gives as evidence</label>
+      <textarea id="quote" rows="2" spellcheck="false" aria-describedby="q-result"></textarea>
+      <div class="q-presets" role="group" aria-label="Example quotes">
+        <button type="button" class="chip" data-q="0" aria-pressed="true">Real quote</button>
+        <button type="button" class="chip" data-q="1" aria-pressed="false">Paraphrase</button>
+        <button type="button" class="chip" data-q="2" aria-pressed="false">Invented</button>
       </div>
       <p class="q-result" id="q-result" role="status"></p>
     </div>
   </div>
 </section>
 
-<!-- MARKETS / ECON -->
+<!-- MARKETS -->
 <section id="markets" class="markets wrap">
-  <h2 class="reveal">Markets, and the people they miss</h2>
-  <p class="lede reveal">The same question runs through my economics work. Venture capital is a market for founders, and it has frictions.</p>
+  <h2>Markets, and the people they miss</h2>
+  <p class="lede">The same question runs through my economics work. Venture capital is a market for founders, and it has frictions.</p>
 
-  <article class="uva reveal">
-    <div>
-      <h3>VC frictions model</h3>
-      <p class="meta">Lead researcher, UVA School of Data Science, with Prof. Tashman. 2025 to now.</p>
-      <p>An ML ranking model of funding outcomes that measures how founder identity, nationality and stage shift who gets funded. We turned it around into a matching tool and deployed it with 434, BEA, StartOut, Astia and BGV, serving investor matches to more than 20,000 underserved founders. Paper in review; presented at the 2026 UVA Undergraduate Research Symposium and ICMBF 2026.</p>
-    </div>
+  <article class="uva">
+    <h3>VC frictions model</h3>
+    <p class="meta">Lead researcher, UVA School of Data Science, with Prof. Tashman. 2025 to now.</p>
+    <p>An ML ranking model of funding outcomes that measures how founder identity, nationality and stage shift who gets funded. We turned it into a matching tool and deployed it with five founder organizations (434, BEA, StartOut, Astia and BGV), serving investor matches to more than 20,000 underserved founders. The paper is in review; I presented it at the 2026 UVA Undergraduate Research Symposium and ICMBF 2026.</p>
   </article>
 
-  <div class="mk-grid">
-    <article class="mk reveal">
-      <h3>Reach Capital</h3>
-      <p class="meta">Summer associate, 2026. One of about 200 selected.</p>
+  <div class="mk-list">
+    <article class="mk">
+      <div class="mk-head">
+        <h3>Reach Capital</h3>
+        <p class="meta">Summer associate, 2026. One of about 200 selected.</p>
+      </div>
       <p>Technical and market diligence on live deals. Built a founder-facing RAG assistant for portfolio companies including Replit, Desmos and GPTZero, and a scraping pipeline that fed a sales CRM for Campus.edu.</p>
     </article>
-    <article class="mk reveal">
-      <h3>Reproducibility on secure hardware</h3>
-      <p class="meta">GMU Aspiring Scientists, with Prof. Jiasun Li. 2025.</p>
-      <p>Ran 2024 Management Science replication packages inside Intel TDX enclaves on Google Cloud and Azure. Most replicated; failures came from missing data and licenses. About $1.33 and two hours per paper.</p>
-      <a class="link" href="https://journals.gmu.edu/jssr/article/view/5253" target="_blank" rel="noopener">Abstract ↗</a>
+    <article class="mk">
+      <div class="mk-head">
+        <h3>Reproducibility on secure hardware</h3>
+        <p class="meta">GMU Aspiring Scientists, with Prof. Jiasun Li. 2025.</p>
+      </div>
+      <div>
+        <p>Ran 2024 Management Science replication packages inside Intel TDX enclaves on Google Cloud and Azure. Most replicated; the failures came from missing data and software licenses. About $1.33 and two hours per paper.</p>
+        <a class="link" href="https://journals.gmu.edu/jssr/article/view/5253" target="_blank" rel="noopener">Abstract<svg class="ico" aria-hidden="true"><use href="#i-out"/></svg></a>
+      </div>
     </article>
-    <article class="mk reveal">
-      <h3>Quant at Exeter22, Harvard iLab</h3>
-      <p class="meta">Trading intern, 2025.</p>
+    <article class="mk">
+      <div class="mk-head">
+        <h3>Quant at Exeter22, Harvard iLab</h3>
+        <p class="meta">Trading intern, 2025.</p>
+      </div>
       <p>Built a pipeline to backtest and deploy strategies, and optimized synthetic ETFs that track private companies using public proxies. Pitched the models to the fund's founder.</p>
     </article>
-    <article class="mk reveal">
-      <h3>Wharton and John Locke</h3>
-      <p class="meta">Team leader. Global finalist.</p>
+    <article class="mk">
+      <div class="mk-head">
+        <h3>Wharton and John Locke</h3>
+        <p class="meta">Team leader. Global finalist.</p>
+      </div>
       <p>I lead our Wharton Global Investment Competition team. My John Locke essay used econometrics to estimate an optimal global population.</p>
     </article>
   </div>
 </section>
 
-<!-- SECRET -->
-<section id="secret" class="secret wrap">
-  <figure class="secret-img reveal" id="secret-photo">
-    <!-- Add a real photo of the car at assets/secret-car.jpg (landscape, about 1600x1000). Section falls back to text-only without it. -->
-    <img src="assets/secret-car.jpg" alt="The SECRET electric race car on track at the DC Grand Prix">
-  </figure>
-  <div class="secret-text">
-    <h2 class="reveal">SECRET, an electric race car</h2>
-    <p class="meta reveal">Founder and co-head. 2023 to now.</p>
-    <p class="reveal">Not everything I build is software. I founded Sidwell's electric race car team, raised $7K, and lead the mechanical, electrical and aero design alongside UMD's Formula SAE team. We have raced the DC Grand Prix three years running, won its top 3D printing prize, and are invited to the 2027 Dubai Grand Prix.</p>
-  </div>
-</section>
-
-<!-- FILM -->
-<section id="film" class="film wrap">
-  <h2 class="reveal">Watch it run</h2>
-  <div class="film-frame reveal">
-    <!-- Drop the edited video at assets/reel.mp4 and a still at assets/reel-poster.jpg. Section hides itself if the video is missing. -->
-    <video id="reel" controls preload="metadata" playsinline poster="assets/reel-poster.jpg">
-      <source src="assets/reel.mp4" type="video/mp4">
-    </video>
-  </div>
-</section>
-
-<!-- MORE -->
-<section class="more wrap">
-  <h2 class="reveal">Smaller builds</h2>
+<!-- OTHER BUILDS -->
+<section class="more wrap" id="more">
+  <h2>Other builds</h2>
   <div class="more-grid">
-    <a class="more-item reveal" href="https://github.com/ruhankhanna/safeground" target="_blank" rel="noopener">
+    <div class="more-item more-lead">
+      <b>SECRET, an electric race car</b>
+      <span>I founded Sidwell's electric race car team, raised $7K, and lead mechanical, electrical and aero design alongside UMD's Formula SAE team. Three years at the DC Grand Prix, its top 3D printing prize, and an invitation to the 2027 Dubai Grand Prix.</span>
+    </div>
+    <div class="more-item">
       <b>Safeground</b>
-      <span>Know-your-rights app for families served by the Immigrant and Refugee Outreach Center, where I also volunteer.</span>
-    </a>
-    <a class="more-item reveal" href="https://github.com/ruhankhanna/ruhan-journey" target="_blank" rel="noopener">
+      <span>A know-your-rights app for families served by the Immigrant and Refugee Outreach Center, where I also volunteer.</span>
+      <a class="link" href="https://github.com/ruhankhanna/safeground" target="_blank" rel="noopener">Code<svg class="ico" aria-hidden="true"><use href="#i-out"/></svg></a>
+    </div>
+    <div class="more-item">
       <b>Around the world in 12 cities</b>
       <span>A scroll-driven 3D globe I built to tell my own story.</span>
-    </a>
-    <div class="more-item reveal">
+      <a class="link" href="https://ruhankhanna.github.io/ruhan-journey/" target="_blank" rel="noopener">Visit<svg class="ico" aria-hidden="true"><use href="#i-out"/></svg></a>
+    </div>
+    <div class="more-item">
       <b>NetrIQ</b>
-      <span>My first rating system, 2023. A UTR-style model for ATP pros, and the start of everything above.</span>
+      <span>My first rating system, in 2023: a UTR-style model for ATP pros, and the start of everything above.</span>
     </div>
   </div>
 </section>
@@ -279,16 +285,16 @@
 </main>
 
 <footer id="contact" class="foot">
-  <div class="wrap foot-inner">
-    <p class="foot-big">Want to see the code behind any of this? Ask.</p>
+  <div class="wrap">
+    <p class="foot-big">Happy to walk through any of this in detail.</p>
     <div class="foot-links">
       <a href="mailto:ruhan.khanna.2009@gmail.com">ruhan.khanna.2009@gmail.com</a>
       <a href="https://github.com/ruhankhanna" target="_blank" rel="noopener">github.com/ruhankhanna</a>
     </div>
-    <p class="foot-small">English, Hindi, Spanish, French. Varsity tennis and cross country. Physics peer tutor.</p>
+    <p class="foot-small">The athletIQ, Pan-Out and Future Fellows codebases are private; public projects are on GitHub. Outside of building: English, Hindi, Spanish and French, varsity tennis and cross country, and physics peer tutoring.</p>
   </div>
 </footer>
 
-<script src="main.js?v=2"></script>
+<script src="main.js?v=4"></script>
 </body>
 </html>
