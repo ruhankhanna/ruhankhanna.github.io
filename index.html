@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ruhan Khanna</title>
-<meta name="description" content="Ruhan Khanna builds data products end to end: scrapers, models, and the apps on top of them. Founder of athletIQ.">
+<meta name="description" content="Some things Ruhan Khanna has built: athletIQ, an electric race car, investor-matching and retrieval models, and published research.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='6' fill='%23151514'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='600' fill='%23f3f3f1' text-anchor='middle'%3ERK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=10">
+<link rel="stylesheet" href="styles.css?v=11">
 </head>
 <body>
 
@@ -32,12 +32,16 @@
 <!-- HERO -->
 <section class="hero wrap" id="top">
   <div class="hero-text">
-    <h1>I build data products end to end.</h1>
-    <p class="hero-sub">Scrapers, models, retrieval systems, the apps people run their work on, and a 48-volt race car. I'm a junior at Sidwell Friends in DC and the founder of athletIQ, a recruiting platform under contract with college track programs including Stanford and UNC.</p>
-    <div class="hero-cta">
-      <a class="btn btn-primary" href="#athletiq">Inside athletIQ</a>
-      <a class="btn btn-ghost" href="#contact">Contact</a>
-    </div>
+    <h1>Here are some things I've built.</h1>
+    <p class="hero-sub">I'm Ruhan Khanna, a junior at Sidwell Friends School in Washington, DC.</p>
+    <nav class="hero-index" aria-label="Projects">
+      <a href="#athletiq"><b>athletIQ</b><span>Recruiting platform for college track</span></a>
+      <a href="#secret"><b>SECRET</b><span>48-volt electric race car</span></a>
+      <a href="#meridian"><b>Meridian</b><span>Model that matches founders to investors</span></a>
+      <a href="#reachbot"><b>ReachBot</b><span>AI assistant with cited answers</span></a>
+      <a href="#fellows"><b>Future Fellows</b><span>Fair applicant evaluation</span></a>
+      <a href="#indus"><b>Research</b><span>The Indus script, and verifying papers</span></a>
+    </nav>
   </div>
 
   <figure class="deck" id="deck" aria-roledescription="carousel" aria-label="Screens from my products">
@@ -47,14 +51,14 @@
         <span class="deck-route num" id="deck-route">/mass-search</span>
       </div>
       <div class="deck-stage">
-        <img class="deck-slide is-on" src="assets/aiq-recruit.jpg" width="1425" height="900" alt="athletIQ Mass Recruitment Search: season, gender, state and grade filters with an AI search box" data-app="athletIQ Coach" data-route="/mass-search" data-cap="Recruit search across every state against a program's own standards.">
-        <img class="deck-slide" src="assets/panout-dossier.jpg" width="1424" height="900" alt="Pan-Out player dossier showing market price versus model price and the signals behind it" data-app="Pan-Out" data-route="/player/tennis/2417" data-cap="Pan-Out dossier: market odds, model odds, and which signals moved them. Simulated player." loading="lazy">
-        <img class="deck-slide" src="assets/aiq-roster.jpg" width="1425" height="900" alt="athletIQ roster view with class-year and scholarship counts and an athlete table" data-app="athletIQ Coach" data-route="/roster" data-cap="Roster tracking from commitment through eligibility. Demo athletes." loading="lazy">
-        <img class="deck-slide" src="assets/panout-report.jpg" width="1424" height="884" alt="Pan-Out model report card with AUC by tier and a calibration plot" data-app="Pan-Out" data-route="/report/tennis" data-cap="Pan-Out report card: graded on birth cohorts the model never trained on." loading="lazy">
+        <img class="deck-slide is-on" src="assets/aiq-recruit.jpg" width="1425" height="900" alt="athletIQ Mass Recruitment Search: season, gender, state and grade filters with an AI search box" data-app="athletIQ Coach" data-route="/mass-search" data-cap="athletIQ: search every state against a program's standards.">
+        <img class="deck-slide" src="assets/panout-dossier.jpg" width="1424" height="900" alt="Pan-Out player dossier showing market price versus model price and the signals behind it" data-app="Pan-Out" data-route="/player/tennis/2417" data-cap="Pan-Out: model odds and the signals behind them. Simulated player." loading="lazy">
+        <img class="deck-slide" src="assets/aiq-roster.jpg" width="1425" height="900" alt="athletIQ roster view with class-year and scholarship counts and an athlete table" data-app="athletIQ Coach" data-route="/roster" data-cap="athletIQ: roster and eligibility tracking. Demo athletes." loading="lazy">
+        <img class="deck-slide" src="assets/panout-report.jpg" width="1424" height="884" alt="Pan-Out model report card with AUC by tier and a calibration plot" data-app="Pan-Out" data-route="/report/tennis" data-cap="Pan-Out: graded on birth cohorts it never trained on." loading="lazy">
       </div>
     </div>
     <figcaption class="deck-foot">
-      <span id="deck-cap" aria-live="polite">Recruit search across every state against a program's own standards.</span>
+      <span id="deck-cap" aria-live="polite">athletIQ: search every state against a program's standards.</span>
       <span class="deck-dots" role="group" aria-label="Choose screen">
         <button type="button" aria-label="Screen 1" aria-current="true"><i></i></button>
         <button type="button" aria-label="Screen 2"><i></i></button>
@@ -69,32 +73,23 @@
 <section id="athletiq" class="aiq">
   <div class="wrap">
     <h2>athletIQ</h2>
-    <p class="meta">Founder. Rebuilt from scratch in November 2025; 314 commits since. Flask, SQLite, Selenium, SciPy, Railway.</p>
-    <p class="lede">College track recruiting still runs on spreadsheets and a single personal best. athletIQ is what a coaching staff uses instead: it finds recruits across every state, puts every event on one scale, forecasts where an athlete is headed, and tracks them from first contact to the roster.</p>
+    <p class="meta">Founder, 2023 to now. Flask, SQLite, Selenium, SciPy.</p>
+    <p class="lede">A recruiting platform college track coaches use to find, compare and track recruits.</p>
+    <dl class="facts">
+      <div><dt>Stanford, UNC</dt><dd>among programs under contract</dd></div>
+      <div><dt>$8K</dt><dd>backing from Microsoft and AWS</dd></div>
+      <div><dt>51</dt><dd>state and DC ranking lists covered</dd></div>
+      <div><dt>314</dt><dd>commits since the 2025 rebuild</dd></div>
+    </dl>
 
     <div class="arch-wrap">
       <svg id="arch" role="img" aria-label="System diagram: Athletic.net pages are fetched by a separate scraper service, passed to the Flask app's background jobs, scored by the analytics layer, stored in SQLite per organization, and shown in the coach app."></svg>
-      <ol class="arch-notes">
-        <li><b>Scraper service.</b> Fetching runs as its own process that the app calls over an authenticated API, so one slow page never stalls a coach's session.</li>
-        <li><b>Every state, every season.</b> Ranking pages are keyed by season IDs; the app discovers them for all 50 states and DC and caches them to disk.</li>
-        <li><b>Background jobs.</b> A national search can touch thousands of athletes, so it runs off the request thread while the page polls for progress.</li>
-        <li><b>Tools on top.</b> Plain-English search that fills in the filters, a recruit pipeline from first contact to commitment, and roster tracking with eligibility and redshirts.</li>
-      </ol>
-    </div>
-
-    <div class="feature">
-      <div class="feature-text">
-        <h3>Search a whole country against your standards</h3>
-        <p>A coach sets a target mark for each event, a tolerance band, states and a graduating class. A background job pages through every matching state ranking, scores each athlete's distance from the standard (within 1% scores 100, falling off past 5%), merges each athlete's events across states by profile, and rewards athletes who fit in more than one event. Results export straight to a mail-merge CSV with school contacts.</p>
-      </div>
-      <figure class="shot"><img src="assets/aiq-recruit.jpg" width="1425" height="900" alt="athletIQ Mass Recruitment Search form" loading="lazy"></figure>
     </div>
 
     <div class="lab-row">
       <div class="lab-copy">
         <h3>One scale for every event</h3>
-        <p>An 800m runner and a 5000m runner can't be compared on time. athletIQ converts every race to VDOT, Jack Daniels' oxygen-cost model, and uses it to compare recruits across events, project high school marks to college, and check how a recruit fits the current roster.</p>
-        <p class="small">VO₂ = −4.60 + 0.182258v + 0.000104v², divided by the fraction of max sustainable for that duration. Going back from VDOT to a time is a bisection search.</p>
+        <p>Every race converts to VDOT, Jack Daniels' oxygen-cost model, so an 800m runner and a miler can be compared, and a high school mark can be projected to college.</p>
       </div>
       <div class="lab" id="vdot-lab">
         <div class="lab-head"><strong>VDOT converter</strong><span>The same formulas the product uses.</span></div>
@@ -114,12 +109,12 @@
 
     <div class="lab-row lab-row-flip">
       <div class="lab-copy">
-        <h3>Forecasting from training, not just results</h3>
-        <p>The forecaster fits a Banister fitness-fatigue model to each athlete: every training load adds fitness that fades slowly and fatigue that fades fast, and performance is the difference. athletIQ fits the gains and time constants to that athlete's own races with regularized least squares, then samples 4,000 parameter sets from the fit's covariance to draw an honest range.</p>
-        <figure class="shot shot-panel"><img src="assets/aiq-forecast.jpg" width="466" height="780" alt="athletIQ forecast output: current level 4:33.5 at VDOT 65.9, projections at 2, 6 and 12 weeks with ranges, and fitted time constants" loading="lazy"><figcaption>The forecaster, run locally on a sample athlete: fitted τ-fitness 45.8 days, τ-fatigue 11.5 days.</figcaption></figure>
+        <h3>Forecasts from training, not just results</h3>
+        <p>A Banister fitness-fatigue model, fit to each athlete's own races, with 4,000 sampled parameter sets for an honest range.</p>
+        <figure class="shot shot-panel"><img src="assets/aiq-forecast.jpg" width="466" height="780" alt="athletIQ forecast output: current level 4:33.5 at VDOT 65.9, projections at 2, 6 and 12 weeks with ranges, and fitted time constants" loading="lazy"><figcaption>The live forecaster on a sample athlete.</figcaption></figure>
       </div>
       <div class="lab" id="ban-lab">
-        <div class="lab-head"><strong>Fitness-fatigue model</strong><span>Drag the weekly mileage bars. The band is 300 sampled athletes.</span></div>
+        <div class="lab-head"><strong>Fitness-fatigue model</strong><span>Drag the weekly mileage bars.</span></div>
         <svg id="ban-svg" role="group" aria-label="Weekly training load bars you can adjust, with the resulting fitness, fatigue and predicted mile time over 16 weeks"></svg>
         <div class="lab-actions" role="group" aria-label="Training plans">
           <button type="button" class="chip" data-plan="steady" aria-pressed="false">Steady</button>
@@ -127,24 +122,25 @@
           <button type="button" class="chip" data-plan="over" aria-pressed="false">Overreach</button>
         </div>
         <p class="guard" id="ban-out" role="status"></p>
-        <p class="small">Here τ-fitness and τ-fatigue sit at the product's priors (45 and 11 days) and the band varies them with a ±15% responder spread; the product fits them per athlete.</p>
       </div>
     </div>
 
     <div class="study">
       <div>
         <h3>Benchmark before you ship</h3>
-        <p>To decide how athletIQ should flag injury risk, I tested three approaches on a public dataset of 42,798 athlete-weeks from 74 runners, splitting folds by athlete so no runner appeared in both training and testing. Plain logistic regression beat XGBoost and the acute-to-chronic workload ratio that coaches commonly use.</p>
-        <p class="small">AUC is how well a model ranks injured weeks above healthy ones; 0.5 is chance. The honest result is modest, which is the point of measuring.</p>
+        <p>Three injury-risk models tested on 42,798 athlete-weeks, split by athlete. The simplest one won.</p>
       </div>
       <svg id="inj-svg" role="img" aria-label="Injury model AUC: logistic regression 0.619, XGBoost 0.576, workload ratio 0.544, chance 0.5"></svg>
     </div>
 
     <div class="po">
       <div>
-        <h3>Pan-Out, the same engine for other sports</h3>
-        <p>An athletIQ product that estimates the odds a junior athlete reaches each level in tennis, chess, baseball and hockey, because ratings ignore age: a 13-year-old and a 17-year-old with the same rating are not the same prospect. Five gradient-boosted models each answer one question (trajectory, dominance, clutch, load, performance against same-age peers), logistic heads stack them per level, and isotonic regression calibrates the odds. Players are split by birth year into train, stack, calibrate and test cohorts.</p>
-        <p>On simulated histories it ranks future pros far better than rating alone (AUC 0.94 against 0.84 in tennis). Backtested on real ATP careers, that edge nearly vanished, 0.844 against 0.841, though it still found about 2.6 times more future pros among players the rankings rated low. The gap measures how much the simulator flattered the model, and it's the most useful thing the project taught me.</p>
+        <h3>Pan-Out, for other sports</h3>
+        <p>An athletIQ product that prices junior tennis, chess, baseball and hockey prospects with five stacked gradient-boosted models and calibrated odds.</p>
+        <dl class="facts facts-sm">
+          <div><dt>0.94 vs 0.84</dt><dd>AUC against ratings, simulated data</dd></div>
+          <div><dt>0.844 vs 0.841</dt><dd>on real ATP careers: the honest result</dd></div>
+        </dl>
       </div>
       <figure class="shot"><img src="assets/panout-board.jpg" width="1440" height="900" alt="Pan-Out tennis value board listing simulated players with model odds, market odds and value gap" loading="lazy"><figcaption>The Pan-Out value board, on simulated players.</figcaption></figure>
     </div>
@@ -152,13 +148,13 @@
     <div class="timeline-wrap">
       <h3>How it got here</h3>
       <ol class="timeline">
-        <li><span class="t-when num">2023</span><b>A tennis rating.</b> My first model: a UTR-style rating for pro players.</li>
-        <li><span class="t-when num">Dec 2023</span><b>A log-scale sprint rating.</b> The first athletIQ math: a fitted curve turning a 100m time into a 0 to 10 score.</li>
-        <li><span class="t-when num">Jun 2025</span><b>An athlete platform.</b> Profiles, 0 to 10 ratings, rankings and nightly data crawls. I shut it down in September.</li>
-        <li><span class="t-when num">Nov 2025</span><b>Rebuilt for coaches.</b> Started over from scratch as a tool for college coaching staffs.</li>
-        <li><span class="t-when num">Jan 2026</span><b>Mass search and accounts.</b> 164 commits in one month: state-by-state search, organizations, field events.</li>
-        <li><span class="t-when num">Spring 2026</span><b>Scraping as its own service.</b> Split fetching out of the web app so it can run, retry and fail on its own.</li>
-        <li><span class="t-when num">Summer 2026</span><b>Roster, CRM and modeling.</b> Recruit pipeline, roster and eligibility tracking, the fitness-fatigue forecaster and the injury benchmark.</li>
+        <li><span class="t-when num">2023</span><b>Tennis rating</b></li>
+        <li><span class="t-when num">Dec 2023</span><b>First sprint rating</b></li>
+        <li><span class="t-when num">Jun 2025</span><b>Athlete platform, shut down</b></li>
+        <li><span class="t-when num">Nov 2025</span><b>Rebuilt for coaches</b></li>
+        <li><span class="t-when num">Jan 2026</span><b>National search, 164 commits</b></li>
+        <li><span class="t-when num">Spring 2026</span><b>Scraper service</b></li>
+        <li><span class="t-when num">Summer 2026</span><b>Forecasting and roster</b></li>
       </ol>
     </div>
   </div>
@@ -168,12 +164,20 @@
 <section id="secret" class="car">
   <div class="wrap">
     <h2>SECRET, a 48-volt race car</h2>
-    <p class="meta">Founder and co-head, Sidwell Electric Car Race Engineering Team. 2023 to now. Raised $7K; working alongside UMD's Formula SAE team.</p>
+    <p class="meta">Founder and co-head, Sidwell Electric Car Race Engineering Team. 2023 to now.</p>
     <div class="car-intro">
-  <p class="lede">The Electric Vehicle Grand Prix is an endurance race: whoever covers the most distance in one hour on a fixed battery wins. Drive too slow and you finish with charge left over; too fast and the pack dies before the flag. We built our car from the competition kit, then rebuilt it: an aluminum chassis, a new battery pack, 3D-printed wheel covers, and an Arduino system that tells the driver how hard to push.</p>
+      <div>
+        <p class="lede">Our school's electric car for the Electric Vehicle Grand Prix, where the most distance in one hour on one battery wins.</p>
+        <dl class="facts facts-2">
+          <div><dt>3</dt><dd>DC Grand Prix raced, 2024 to 2026</dd></div>
+          <div><dt>Top prize</dt><dd>for 3D printing</dd></div>
+          <div><dt>Dubai</dt><dd>invited to the 2027 Grand Prix</dd></div>
+          <div><dt>$7K</dt><dd>raised; built with UMD Formula SAE</dd></div>
+        </dl>
+      </div>
       <figure class="clip">
         <video id="secret-clip" src="assets/secret-motor.mp4" poster="assets/secret-motor.jpg" width="720" height="960" muted loop playsinline preload="metadata" aria-label="Working on the car's hub motor and its orange phase cables in the shop"></video>
-        <figcaption>In the shop: the hub motor and its three phase cables.</figcaption>
+        <figcaption>In the shop with the hub motor.</figcaption>
       </figure>
     </div>
 
@@ -181,16 +185,15 @@
       <div class="wire-scroll"><svg id="wire-svg" viewBox="0 0 960 440" role="group" aria-label="Electrical system of the car. Select a part to read what it does."></svg></div>
       <div class="wire-info" id="wire-info" aria-live="polite"></div>
     </div>
-    <p class="small wire-legend">Thick lines carry the 48V traction current on 6-gauge cable; thin lines are low-voltage signals. Select any part.</p>
+    <p class="small wire-legend">Thick lines carry 48V traction current; thin lines are signals. Select any part.</p>
 
     <div class="lab-row">
       <div class="lab-copy">
         <h3>Pacing to an energy budget</h3>
-        <p>Every lap, the Arduino reads the amp-hours used from the Cycle Analyst, spreads what's left of the battery evenly over the laps left in the hour, and tells the driver on the dash display to speed up or back off.</p>
-        <p class="small">It matters because energy per lap climbs steeply with speed. Aerodynamic drag grows with the square of speed, so the power to beat it grows with the cube, and lead-acid batteries also give up usable capacity at high current (the Peukert effect). Going out too fast is punished twice.</p>
+        <p>Each lap, the Arduino spreads the remaining battery over the laps left and tells the driver to speed up or back off. Drag grows with speed cubed, so going out fast is costly.</p>
       </div>
       <div class="lab" id="race-lab">
-        <div class="lab-head"><strong>One-hour race simulator</strong><span>Pick a driver's speed, then race it with and without the pacing system.</span></div>
+        <div class="lab-head"><strong>One-hour race simulator</strong><span>Race a driver's speed with and without pacing.</span></div>
         <div class="lab-controls">
           <label for="race-speed">Driver's speed <output id="race-speed-out" class="num">31</output> mph</label>
           <input id="race-speed" type="range" min="16" max="34" step="1" value="31">
@@ -199,10 +202,9 @@
         <dl class="readout" id="race-readout"></dl>
         <p class="guard" id="race-out" role="status"></p>
         <div class="lab-actions"><button type="button" class="chip" id="race-run">Run the race</button></div>
-        <p class="small">Modeled car, not measured from ours: 150 kg with driver, drag area 0.30 m², rolling coefficient 0.015, 80% drivetrain efficiency, 48V 26Ah pack, Peukert exponent 1.15, 0.6-mile lap.</p>
+        <p class="small">Modeled car with assumed values (150 kg, 48V 26Ah lead-acid pack, 0.6-mile lap), not measured from ours.</p>
       </div>
     </div>
-    <p class="small car-foot">Raced the DC Electric Vehicle Grand Prix in 2024, 2025 and 2026, won its top 3D printing prize, and was invited to the 2027 Dubai Grand Prix.</p>
   </div>
 </section>
 
@@ -211,10 +213,15 @@
   <div class="mer">
     <div>
       <h2>Meridian</h2>
-      <p class="meta">Lead researcher, UVA School of Data Science, with Prof. Adam Tashman. 2025 to now. LightGBM, sentence-transformers, FastAPI.</p>
-      <p class="lede">Venture capital is a market for founders, and it has frictions: who you are and where you're from shift who funds you. Meridian measures those frictions and turns the model around into a tool that matches underserved founders with investors likely to fund them.</p>
-      <p>It is a learning-to-rank problem, not a classifier. For each startup, a LightGBM LambdaRank model orders 48,046 investors, trained on about 907,000 startup-investor pairs. Each pair gets 16 features, including embedding similarity between the startup's description and the investor's portfolio (MiniLM sentence embeddings), stage and check-size fit, geography, and how concentrated the investor's past deals are. The split is by startup, so no company appears in both training and test, and the candidate pool only includes investors active in that deal's year.</p>
-      <p>We deployed it with founder organizations including 434, BEA, StartOut, Astia and BGV, serving investor matches to more than 20,000 underserved founders. The paper is in review; I presented it at the 2026 UVA Undergraduate Research Symposium and ICMBF 2026.</p>
+      <p class="meta">Lead researcher, UVA School of Data Science, with Prof. Adam Tashman. 2025 to now.</p>
+      <p class="lede">A model that ranks which investors fit a startup, built to study who gets funded and to help underserved founders find the right investors.</p>
+      <dl class="facts facts-2">
+        <div><dt>907K</dt><dd>startup-investor pairs trained on</dd></div>
+        <div><dt>48,046</dt><dd>investors ranked for each startup</dd></div>
+        <div><dt>20,000+</dt><dd>founders served through partner groups</dd></div>
+        <div><dt>2</dt><dd>presentations: UVA symposium, ICMBF 2026</dd></div>
+      </dl>
+      <p class="small">LightGBM LambdaRank over 16 features, including MiniLM text similarity, split by startup so no company leaks into testing. Paper in review.</p>
     </div>
     <svg id="mer-svg" role="img" aria-label="Meridian pipeline: startup description and investor portfolios are embedded, 16 pair features are built, LambdaRank orders 48,046 investors, and the top matches are served to founders."></svg>
   </div>
@@ -223,15 +230,18 @@
 <!-- REACHBOT -->
 <section id="reachbot" class="case wrap">
   <h2>ReachBot</h2>
-  <p class="meta">Summer associate, Reach Capital, 2026. Python, Gemini, NumPy, Streamlit, GitHub Actions.</p>
-  <p class="lede">Reach Capital's portfolio founders get a library of hundreds of guides and decks and 137 recorded expert sessions, but as guests they can't search it with AI. ReachBot lets them ask in plain English and answers with citations to the exact page or recording.</p>
+  <p class="meta">Summer associate, Reach Capital, 2026. Python, Gemini, NumPy.</p>
+  <p class="lede">An assistant that answers Reach Capital founders' questions from the firm's resource library, citing the exact page or recording.</p>
+  <dl class="facts">
+    <div><dt>696</dt><dd>sources indexed</dd></div>
+    <div><dt>11,244</dt><dd>passages searched per question</dd></div>
+    <div><dt>137</dt><dd>recorded sessions transcribed</dd></div>
+    <div><dt>$0.005</dt><dd>per answer, vs about $1.80 pasting the whole library</dd></div>
+  </dl>
   <div class="rb">
-    <div>
-      <p>It's retrieval-augmented generation, not a fine-tuned model. A weekly GitHub Actions job exports the Notion library and Zoom transcripts to markdown with their source links, splits 696 sources into 11,244 overlapping 400-word chunks, and embeds each as a 3,072-dimension vector. At question time, a small model first rewrites follow-ups like "how do I redeem it?" into standalone queries; cosine similarity then runs as a brute-force NumPy scan in milliseconds, since a vector database buys nothing at this size; and Gemini 2.5 Flash answers only from the retrieved passages, citing each one.</p>
-      <p>Why not paste everything into a million-token context window? The library is about 6 million tokens, and even if it fit, that would cost about $1.80 a question against roughly half a cent with retrieval. The weekly refresh costs about a cent.</p>
-    </div>
+    <p>Retrieval-augmented generation: each question pulls the closest passages by vector similarity, and the model answers only from them, with citations. A weekly job keeps the index current for about a cent.</p>
     <div class="lab" id="rag-lab">
-      <div class="lab-head"><strong>The retrieval gate</strong><span>How much ReachBot says depends on how strong the evidence is.</span></div>
+      <div class="lab-head"><strong>The retrieval gate</strong><span>Weak evidence means a shorter answer, or none.</span></div>
       <div class="q-presets" role="group" aria-label="Example questions">
         <button type="button" class="chip" data-sim="0.75" aria-pressed="true">On-topic</button>
         <button type="button" class="chip" data-sim="0.66" aria-pressed="false">Adjacent</button>
@@ -243,17 +253,49 @@
       </div>
       <svg id="rag-svg" role="img" aria-label="Similarity scale with three zones: not covered below 0.60, cautious from 0.60 to 0.70, full answer above 0.70."></svg>
       <p class="guard" id="rag-mode" role="status"></p>
-      <p class="small">The 0.70 and 0.60 cutoffs come from measured scores: on-topic questions land near 0.75, adjacent near 0.66, off-topic near 0.54.</p>
     </div>
   </div>
 </section>
 
-<!-- INDUS -->
+<!-- FUTURE FELLOWS -->
+<section id="fellows" class="case wrap">
+  <h2>Future Fellows</h2>
+  <p class="meta">Founding intern, employee #2, 2026 to now. Python, FastAPI, Claude API.</p>
+  <p class="lede">An evaluation system for a fellowship that places high schoolers in paid work: AI organizes the evidence, a person makes every decision.</p>
+  <dl class="facts">
+    <div><dt>150</dt><dd>automated tests guarding the rules</dd></div>
+    <div><dt>3-pass</dt><dd>blinding of names and schools</dd></div>
+    <div><dt>0</dt><dd>total scores or rankings, by design</dd></div>
+    <div><dt>5</dt><dd>model runs per score, median kept</dd></div>
+  </dl>
+  <div class="ff">
+    <p>Applicants share a code repository; the system reads its commit history and asks questions only the real author could answer. Every score must quote the application word for word.</p>
+    <div class="lab" id="quote-lab">
+      <div class="lab-head"><strong>The quote check</strong><span>A sample application. Paraphrases fail.</span></div>
+      <blockquote class="essay" id="essay"></blockquote>
+      <label class="q-label" for="quote">Quote the model gives as evidence</label>
+      <textarea id="quote" rows="2" spellcheck="false" aria-describedby="q-result"></textarea>
+      <div class="q-presets" role="group" aria-label="Example quotes">
+        <button type="button" class="chip" data-q="0" aria-pressed="true">Real quote</button>
+        <button type="button" class="chip" data-q="1" aria-pressed="false">Paraphrase</button>
+        <button type="button" class="chip" data-q="2" aria-pressed="false">Invented</button>
+      </div>
+      <p class="q-result" id="q-result" role="status"></p>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH -->
 <section id="indus" class="research">
   <div class="wrap">
     <h2>Reading a script no one can read</h2>
-    <p class="meta">Independent research with Louie Merriam, 2023 to now. Published in the International Journal of Computer Applications, Vol. 187, No. 64. Funded by an Emergent Ventures grant.</p>
-    <p class="lede">The Indus script is around 4,500 years old, has hundreds of signs, and has no bilingual key. It is probably logo-syllabic: some signs stand for whole words, others for sounds. Our paper separates the two using only where signs appear.</p>
+    <p class="meta">Independent research with Louie Merriam, 2023 to now.</p>
+    <p class="lede">Our paper separates Indus signs that stand for words from signs that stand for sounds, using only where they appear.</p>
+    <dl class="facts facts-3">
+      <div><dt>Published</dt><dd>peer-reviewed, IJCA Vol. 187, 2025</dd></div>
+      <div><dt>$5K</dt><dd>Emergent Ventures grant</dd></div>
+      <div><dt>4,500</dt><dd>years old, with no bilingual key</dd></div>
+    </dl>
 
     <div class="method" id="indus-lab">
       <div class="method-steps" role="tablist" aria-label="Method steps">
@@ -271,31 +313,25 @@
             <input id="excl" type="range" min="0.45" max="1" step="0.05" value="0.75">
           </div>
           <ul class="pair-list" id="pair-list" hidden></ul>
-          <p class="small">An 18-inscription toy corpus, so the method fits on screen. The paper runs on the full corpus and tests each association statistically.</p>
+          <p class="small">A toy corpus so the method fits on screen.</p>
         </div>
       </div>
     </div>
-
     <p class="research-foot">
       <a class="link" href="https://www.ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/" target="_blank" rel="noopener">Read the paper<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <span>DOI 10.5120/ijca2025926075</span>
     </p>
+
     <div class="gmu">
       <h2>Can hardware prove a paper is real?</h2>
-      <p class="meta">GMU Aspiring Scientists Summer Internship Program, with Prof. Jiasun Li, Costello College of Business. 2025. Abstract published in the Journal of Student-Scientists' Research.</p>
-      <p class="lede">Journals now require replication packages, but nothing proves the code was actually run as claimed, on the stated inputs, to produce the published tables. Intel TDX runs code inside a hardware-isolated confidential VM whose memory the host can't read, and it can attest cryptographically to exactly what ran.</p>
-      <div class="gmu-grid">
-        <ol class="steps">
-          <li><b>Pull the package.</b> A 2024 Management Science paper's code and data.</li>
-          <li><b>Stand up a TDX VM.</b> A confidential VM on Azure and again on Google Cloud.</li>
-          <li><b>Rebuild the stack.</b> Install the paper's software (Stata, R and others) inside the VM.</li>
-          <li><b>Run and compare.</b> Check outputs against the paper; log runtime, cost and every failure to a shared database.</li>
-        </ol>
-        <div>
-          <svg id="gmu-svg" role="img" aria-label="27 replications attempted, 19 succeeded."></svg>
-          <p class="small">19 of 27 replications succeeded across both clouds. Most failures traced to code missing from the package; others to software we couldn't license on a free-credit budget, like SAS. Runs averaged about 2 hours 10 minutes and $1.33. I was one of 15 interns on the project and presented it at the program's symposium.</p>
-        </div>
-      </div>
+      <p class="meta">GMU Aspiring Scientists program, with Prof. Jiasun Li. 2025.</p>
+      <p class="lede">We re-ran published business and economics papers inside Intel TDX confidential VMs, which can cryptographically attest to exactly what code ran.</p>
+      <dl class="facts">
+        <div><dt>19 of 27</dt><dd>replications succeeded</dd></div>
+        <div><dt>$1.33</dt><dd>average cost per paper</dd></div>
+        <div><dt>2h 10m</dt><dd>average run</dd></div>
+        <div><dt>2</dt><dd>clouds: Azure and Google</dd></div>
+      </dl>
+      <svg id="gmu-svg" role="img" aria-label="27 replications attempted, 19 succeeded."></svg>
       <p class="research-foot"><a class="link" href="https://journals.gmu.edu/jssr/article/view/5253" target="_blank" rel="noopener">Read the abstract<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
     </div>
   </div>
@@ -306,16 +342,16 @@
   <h2>Also built</h2>
   <div class="more-grid">
     <article class="more-item">
-      <b>Evaluation pipeline, Future Fellows</b>
-      <span>Founding intern, 2026. LLM scoring of fellowship applications that must quote the application word for word, three-pass blinding of names and schools, Krippendorff's α for agreement with reviewers, an adverse-impact check, and 150 tests.</span>
-    </article>
-    <article class="more-item">
       <b>Quant pipeline, Exeter22</b>
-      <span>Harvard iLab, 2025. A backtest-and-deploy pipeline, and synthetic ETFs that track private companies through public proxies.</span>
+      <span>Harvard iLab, 2025. Backtesting and synthetic ETFs that track private companies.</span>
     </article>
     <article class="more-item">
       <b>Safeground</b>
-      <span>A know-your-rights app for families at the Immigrant and Refugee Outreach Center, where I volunteer.</span>
+      <span>A know-your-rights app for families at a refugee outreach center where I volunteer.</span>
+    </article>
+    <article class="more-item">
+      <b>Wharton and John Locke</b>
+      <span>Investment competition team lead. Global essay finalist in economics.</span>
     </article>
   </div>
 </section>
@@ -324,14 +360,14 @@
 
 <footer id="contact" class="foot">
   <div class="wrap">
-    <p class="foot-big">Happy to walk through any of this in detail.</p>
+    <p class="foot-big">Happy to walk through any of this.</p>
     <div class="foot-links">
       <a href="mailto:ruhan.khanna.2009@gmail.com">ruhan.khanna.2009@gmail.com</a>
     </div>
-    <p class="foot-small">Also: Wharton investment competition team lead, John Locke essay finalist in economics. English, Hindi, Spanish and French. Varsity tennis and cross country.</p>
+    <p class="foot-small">English, Hindi, Spanish and French. Varsity tennis and cross country.</p>
   </div>
 </footer>
 
-<script src="main.js?v=11"></script>
+<script src="main.js?v=12"></script>
 </body>
 </html>

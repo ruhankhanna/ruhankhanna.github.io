@@ -39,7 +39,7 @@
   /* ---------- Nav: mark the section in view ---------- */
   (() => {
     const links = [...document.querySelectorAll(".nav nav a")];
-    const owner = { athletiq: 0, secret: 1, meridian: 2, reachbot: 2, indus: 3 };
+    const owner = { athletiq: 0, secret: 1, meridian: 2, reachbot: 2, fellows: 2, indus: 3 };
     const seen = new Map();
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => seen.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0));
@@ -648,6 +648,41 @@
       el("text", { x: 0, y: 8 + size * 1.6 + 22, class: "acc" }, svg).textContent = "19 replicated";
       el("text", { x: (ok) * (size + gap), y: 8 + size * 1.6 + 22 }, svg).textContent = "8 failed";
     });
+  })();
+
+  /* ---------- Future Fellows quote check ---------- */
+  (() => {
+    const essayEl = $("#essay");
+    if (!essayEl) return;
+    const essay = "Last spring the shuttle tracker at school kept crashing, so I rebuilt it. The old version polled the city feed every minute and fell over at rush hour. I cached responses and cut the polling to when a bus was actually near. It has not crashed since March, and about forty students check it every morning.";
+    const presets = [
+      "cut the polling to when a bus was actually near",
+      "only polled the feed when buses were close by",
+      "led a team of five engineers to rebuild the app",
+    ];
+    const ta = $("#quote"), out = $("#q-result");
+    const chips = [...document.querySelectorAll("#quote-lab .chip")];
+    const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const norm = (t) => t.toLowerCase().replace(/\s+/g, " ");
+    function check() {
+      const q = ta.value.trim();
+      chips.forEach((c) => c.setAttribute("aria-pressed", presets[+c.dataset.q] === ta.value ? "true" : "false"));
+      const idx = q.length ? essay.indexOf(q) : -1;
+      if (idx >= 0 && q.length >= 12) {
+        essayEl.innerHTML = esc(essay.slice(0, idx)) + "<mark>" + esc(q) + "</mark>" + esc(essay.slice(idx + q.length));
+        out.className = "q-result pass"; out.textContent = "Accepted. The quote appears word for word, so the score can stand.";
+        return;
+      }
+      essayEl.textContent = essay;
+      out.className = "q-result fail";
+      if (!q.length) out.textContent = "Rejected. No evidence, no score.";
+      else if (q.length < 12) out.textContent = "Rejected. Too short to count as evidence.";
+      else if (norm(essay).includes(norm(q))) out.textContent = "Rejected. Close, but capitalization or spacing differs. The check is exact.";
+      else out.textContent = "Rejected. These words never appear in the application. Score discarded.";
+    }
+    chips.forEach((b) => b.addEventListener("click", () => { ta.value = presets[+b.dataset.q]; check(); }));
+    ta.addEventListener("input", check);
+    ta.value = presets[0]; check();
   })();
 
   /* ---------- Indus method walkthrough (toy corpus, computed live) ---------- */
