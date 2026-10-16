@@ -428,3 +428,10 @@ textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; 
   .mini dt { font-size: 18px; white-space: nowrap; }
   .mini dd { margin: 0; font-size: 14px; }
 }
+
+/* No-photos version */
+.no-photos .card-body { padding-top: 26px; }
+.no-photos .detail .car-intro, .no-photos .detail .po { grid-template-columns: 1fr; }
+
+#work { padding-bottom: 96px; }
+@media (max-width: 767px) { #work { padding-bottom: 64px; } }
