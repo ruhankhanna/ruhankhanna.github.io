@@ -11,6 +11,11 @@
     return n;
   }
   const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const fmt = (s) => {
+    if (!isFinite(s)) return "--";
+    const m = Math.floor(s / 60), r = s - m * 60;
+    return m ? `${m}:${r.toFixed(1).padStart(4, "0")}` : r.toFixed(1);
+  };
 
   // Charts draw at their real pixel width so labels stay at a true 12px on every screen.
   function responsive(svg, height, draw) {
@@ -24,244 +29,372 @@
       svg.setAttribute("height", h);
       draw(w, h);
     };
-    new ResizeObserver(() => {
-      if (Math.round(svg.getBoundingClientRect().width) !== w) run();
-    }).observe(svg);
+    new ResizeObserver(() => { if (Math.round(svg.getBoundingClientRect().width) !== w) run(); }).observe(svg);
     darkMQ.addEventListener("change", run);
     run();
     return run;
   }
+  const onVisible = (node, cb) => new IntersectionObserver((es) => es.forEach((e) => cb(e.isIntersecting)), { threshold: 0.15 }).observe(node);
 
   /* ---------- Nav: mark the section in view ---------- */
   (() => {
     const links = [...document.querySelectorAll(".nav nav a")];
-    const owner = { athletiq: "work", panout: "work", fellows: "work", work: "work", indus: "research", markets: "markets", more: "markets", contact: "contact" };
-    const linkFor = { work: links[0], research: links[1], markets: links[2], contact: links[3] };
-    const visible = new Map();
+    const owner = { athletiq: 0, meridian: 1, panout: 1, indus: 2, contact: 3 };
+    const seen = new Map();
     const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => visible.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0));
-      let best = null, bestR = 0;
-      visible.forEach((r, id) => { if (r > bestR) { bestR = r; best = id; } });
+      entries.forEach((e) => seen.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0));
+      let best = null, r = 0;
+      seen.forEach((v, id) => { if (v > r) { r = v; best = id; } });
       links.forEach((a) => a.removeAttribute("aria-current"));
-      if (best && owner[best]) linkFor[owner[best]].setAttribute("aria-current", "true");
-    }, { threshold: [0, 0.15, 0.4, 0.7], rootMargin: "-60px 0px -35% 0px" });
+      if (best != null) links[owner[best]].setAttribute("aria-current", "true");
+    }, { threshold: [0, 0.1, 0.3, 0.6], rootMargin: "-60px 0px -35% 0px" });
     Object.keys(owner).forEach((id) => { const n = document.getElementById(id); if (n) io.observe(n); });
   })();
 
-  /* ---------- athletIQ forecast lab ----------
-     Port of athletiq-coach/analytics.py: exp_weight, robust_linear_fit, forecast_times. */
+  /* ---------- Hero screen deck ---------- */
   (() => {
-    const svg = $("#fl-svg");
+    const deck = $("#deck");
+    if (!deck) return;
+    const slides = [...deck.querySelectorAll(".deck-slide")];
+    const dots = [...deck.querySelectorAll(".deck-dots button")];
+    const app = $("#deck-app"), route = $("#deck-route"), cap = $("#deck-cap");
+    const MS = 5200;
+    deck.style.setProperty("--deck-ms", `${MS}ms`);
+    let i = 0, timer = null, hovering = false, visible = true;
+
+    function show(n) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => s.classList.toggle("is-on", k === i));
+      dots.forEach((d, k) => (k === i ? d.setAttribute("aria-current", "true") : d.removeAttribute("aria-current")));
+      const s = slides[i];
+      app.textContent = s.dataset.app; route.textContent = s.dataset.route; cap.textContent = s.dataset.cap;
+      const bar = dots[i].querySelector("i"); bar.style.animation = "none"; void bar.offsetWidth; bar.style.animation = "";
+    }
+    function schedule() {
+      clearTimeout(timer);
+      const play = !reduceMotion && !hovering && visible && !document.hidden;
+      deck.classList.toggle("playing", play);
+      if (play) timer = setTimeout(() => { show(i + 1); schedule(); }, MS);
+    }
+    dots.forEach((d, k) => d.addEventListener("click", () => { show(k); schedule(); }));
+    deck.addEventListener("pointerenter", () => { hovering = true; schedule(); });
+    deck.addEventListener("pointerleave", () => { hovering = false; schedule(); });
+    deck.addEventListener("focusin", () => { hovering = true; schedule(); });
+    deck.addEventListener("focusout", () => { hovering = false; schedule(); });
+    document.addEventListener("visibilitychange", schedule);
+    onVisible(deck, (v) => { visible = v; schedule(); });
+    show(0); schedule();
+  })();
+
+  /* ---------- athletIQ architecture (packets show data moving through the system) ---------- */
+  (() => {
+    const svg = $("#arch");
     if (!svg) return;
-    const SAMPLE = [[0, 281.6], [21, 280.9], [49, 283.2], [77, 279.8], [140, 279.1], [168, 277.6], [203, 278.4], [238, 276.2]];
-    const BAD_LAST = [[0, 287.0], [21, 280.0], [49, 285.5], [77, 277.0], [140, 282.0], [168, 272.0], [203, 277.0], [238, 287.5]];
-    const races = SAMPLE.map((r) => r.slice());
-    const T_MIN = 258, T_MAX = 290, MIN_T = 262, MAX_T = 289;
-    let halfLife = 90;
+    let edges = [], raf = 0, running = false;
+    const nodes = [
+      ["src", "Athletic.net", "rankings, profiles"],
+      ["scr", "Scraper service", "Selenium, retries"],
+      ["app", "Flask app", "routes, jobs"],
+      ["ana", "Analytics", "VDOT, forecasts"],
+      ["db", "SQLite", "orgs, recruits, roster"],
+      ["ui", "Coach app", "search, roster, intel"],
+    ];
+    const order = nodes.map((n) => n[0]);
+    const links = [["src", "scr"], ["scr", "app"], ["app", "ana"], ["ana", "app"], ["app", "db"], ["app", "ui"]];
 
-    const expWeight = (daysAgo, hl) => Math.pow(0.5, daysAgo / hl);
-    function linearFit(pts) {
-      const n = pts.length, xb = pts.reduce((a, p) => a + p[0], 0) / n, yb = pts.reduce((a, p) => a + p[1], 0) / n;
-      let num = 0, den = 0, sst = 0, ssr = 0;
-      for (const [x, y] of pts) { num += (x - xb) * (y - yb); den += (x - xb) ** 2; }
-      den = den || 1e-9;
-      const slope = num / den, icpt = yb - slope * xb;
-      for (const [x, y] of pts) { sst += (y - yb) ** 2; ssr += (y - (slope * x + icpt)) ** 2; }
-      return { slope, icpt, r2: 1 - ssr / (sst || 1e-9) };
-    }
-    function forecast(pts) {
-      const { slope, icpt, r2 } = linearFit(pts);
-      const last = pts[pts.length - 1], current = last[1];
-      return [90, 180, 365].map((d) => {
-        const raw = Math.max(slope * (last[0] + d) + icpt, 0);
-        const cap = current * (1 - 0.03 * (d / 90));
-        const capped = r2 < 0.5 && raw < cap;
-        return { d, t: capped ? cap : raw, raw, capped };
-      });
-    }
-    const mmss = (s) => { const m = Math.floor(s / 60), r = s - m * 60; return `${m}:${r.toFixed(1).padStart(4, "0")}`; };
-    const spoken = (s) => { const m = Math.floor(s / 60), r = s - m * 60; return `${m} minutes ${r.toFixed(1)} seconds`; };
-
-    const xMax = 238 + 365;
-    let W = 560, H = 300, M = { l: 46, r: 16, t: 16, b: 30 };
-    const sx = (d) => M.l + (d / xMax) * (W - M.l - M.r);
-    const sy = (t) => M.t + ((t - T_MIN) / (T_MAX - T_MIN)) * (H - M.t - M.b);
-    const ty = (py) => T_MIN + ((py - M.t) / (H - M.t - M.b)) * (T_MAX - T_MIN);
-
-    const gGrid = el("g", {}, svg), gLines = el("g", {}, svg), gPts = el("g", {}, svg);
-    const readout = $("#fl-readout"), guard = $("#fl-guard");
-
-    function drawGrid() {
-      gGrid.innerHTML = "";
-      const line = css("--line");
-      for (let t = 260; t <= 290; t += 5) {
-        el("line", { x1: M.l, x2: W - M.r, y1: sy(t), y2: sy(t), stroke: line }, gGrid);
-        el("text", { x: M.l - 8, y: sy(t) + 4, "text-anchor": "end" }, gGrid).textContent = mmss(t).replace(".0", "");
+    responsive(svg, (w) => (w < 560 ? 6 * 74 : 236), (w) => {
+      svg.innerHTML = "";
+      const ink = css("--ink"), line = css("--line-strong"), acc = css("--accent"), bg = css("--panel-2"), muted = css("--muted");
+      const pos = {};
+      const vertical = w < 560;
+      const nw = vertical ? Math.min(w - 40, 260) : Math.min(150, (w - 3 * 24) / 4), nh = 52;
+      if (vertical) {
+        nodes.forEach(([id], k) => { pos[id] = { x: 0, y: 4 + k * 74 }; });
+      } else {
+        const gap = (w - 4 * nw) / 3;
+        const col = (c) => c * (nw + gap);
+        pos.src = { x: col(0), y: 20 }; pos.scr = { x: col(1), y: 20 }; pos.app = { x: col(2), y: 20 }; pos.ana = { x: col(3), y: 20 };
+        pos.db = { x: col(1), y: 160 }; pos.ui = { x: col(3), y: 160 };
       }
-      const today = 238;
-      el("line", { x1: sx(today), x2: sx(today), y1: M.t, y2: H - M.b, stroke: css("--line-strong"), "stroke-dasharray": "3 4" }, gGrid);
-      const labels = W < 420 ? [["last", today], ["+6 mo", today + 180], ["+12 mo", today + 365]]
-        : [["last race", today], ["+3 mo", today + 90], ["+6 mo", today + 180], ["+12 mo", today + 365]];
-      labels.forEach(([lab, d]) => {
-        el("text", { x: sx(d), y: H - 8, "text-anchor": d === today + 365 ? "end" : "middle" }, gGrid).textContent = lab;
+      const cx = (id) => pos[id].x + nw / 2, cy = (id) => pos[id].y + nh / 2;
+      const gE = el("g", {}, svg), gP = el("g", {}, svg), gN = el("g", {}, svg);
+      edges = [];
+      links.forEach(([a, b], k) => {
+        let d;
+        if (vertical) {
+          const ia = order.indexOf(a), ib = order.indexOf(b);
+          if (ib < ia) return; // the return path is implied in the stacked layout
+          d = ib - ia > 1
+            ? `M${pos[a].x + nw},${cy(a)} H${pos[a].x + nw + 16 + (ib - ia) * 6} V${cy(b)} H${pos[b].x + nw}`
+            : `M${cx(a)},${pos[a].y + nh} V${pos[b].y}`;
+        } else if (a === "app" && b === "ana") d = `M${pos.app.x + nw},${cy("app") - 9} H${pos.ana.x}`;
+        else if (a === "ana" && b === "app") d = `M${pos.ana.x},${cy("app") + 9} H${pos.app.x + nw}`;
+        else if (a === "app" && b === "db") d = `M${cx("app") - 20},${pos.app.y + nh} V${cy("db")} H${pos.db.x + nw}`;
+        else if (a === "app" && b === "ui") d = `M${cx("app") + 20},${pos.app.y + nh} V${cy("ui")} H${pos.ui.x}`;
+        else d = `M${pos[a].x + nw},${cy(a)} H${pos[b].x}`;
+        const p = el("path", { d, fill: "none", stroke: line, "stroke-width": 1.5 }, gE);
+        edges.push({ p, len: p.getTotalLength(), off: k * 0.37, dots: [0, 1].map(() => el("circle", { r: 3.5, fill: acc, opacity: 0 }, gP)) });
       });
+      nodes.forEach(([id, title, sub]) => {
+        const { x, y } = pos[id];
+        const hot = id === "app";
+        el("rect", { x: x + 0.5, y: y + 0.5, width: nw - 1, height: nh - 1, rx: 8, fill: hot ? ink : bg, stroke: hot ? ink : line }, gN);
+        el("text", { x: x + 12, y: y + 22, class: "lbl", style: hot ? `fill:${bg}` : "" }, gN).textContent = title;
+        el("text", { x: x + 12, y: y + 39, class: "sub", style: hot ? `fill:${bg};opacity:.75` : `fill:${muted}` }, gN).textContent = sub;
+      });
+      if (!reduceMotion) paint(performance.now());
+    });
+
+    function paint(now) {
+      const t = now / 2600;
+      edges.forEach((e) => e.dots.forEach((c, j) => {
+        const f = (t + e.off + j * 0.5) % 1;
+        const pt = e.p.getPointAtLength(f * e.len);
+        c.setAttribute("cx", pt.x); c.setAttribute("cy", pt.y);
+        c.setAttribute("opacity", f < 0.08 ? f / 0.08 : f > 0.9 ? (1 - f) / 0.1 : 1);
+      }));
     }
+    function loop(now) { paint(now); if (running) raf = requestAnimationFrame(loop); }
+    if (!reduceMotion) onVisible(svg, (v) => {
+      if (v && !running) { running = true; raf = requestAnimationFrame(loop); }
+      if (!v) { running = false; cancelAnimationFrame(raf); }
+    });
+  })();
+
+  /* ---------- VDOT (Daniels), as in athletIQ performance_modeling.py ---------- */
+  const VD = (() => {
+    const vo2 = (v) => -4.60 + 0.182258 * v + 0.000104 * v * v;
+    const pct = (tm) => 0.8 + 0.1894393 * Math.exp(-0.012778 * tm) + 0.2989558 * Math.exp(-0.1932605 * tm);
+    const vdot = (dist, sec) => { const tm = sec / 60; return vo2(dist / tm) / pct(tm); };
+    // VDOT falls as time rises, so bisection on time finds the matching mark.
+    const timeFor = (dist, target) => {
+      let lo = 30, hi = 3600;
+      for (let k = 0; k < 60; k++) { const mid = (lo + hi) / 2; if (vdot(dist, mid) > target) lo = mid; else hi = mid; }
+      return (lo + hi) / 2;
+    };
+    return { vdot, timeFor };
+  })();
+
+  (() => {
+    const ev = $("#v-event"), tIn = $("#v-time"), out = $("#v-out"), msg = $("#v-msg"), eq = $("#v-equiv");
+    if (!ev) return;
+    const events = [[800, "800m"], [1500, "1500m"], [1609.34, "Mile"], [3200, "3200m"], [5000, "5000m"]];
+    const parse = (s) => {
+      s = s.trim();
+      if (!/^\d{1,2}:\d{1,2}(\.\d+)?$|^\d+(\.\d+)?$/.test(s)) return NaN;
+      const parts = s.split(":");
+      return parts.length === 2 ? +parts[0] * 60 + +parts[1] : +parts[0];
+    };
+    function run() {
+      const d = +ev.value, sec = parse(tIn.value);
+      if (!isFinite(sec) || sec <= 0) { msg.textContent = "Enter a time like 4:35.0 or 2:01.5."; tIn.setAttribute("aria-invalid", "true"); return; }
+      const v = VD.vdot(d, sec);
+      if (!isFinite(v) || v < 25 || v > 90) { msg.textContent = "That's outside the range the formula is fit for. Try a realistic mark."; tIn.setAttribute("aria-invalid", "true"); return; }
+      tIn.removeAttribute("aria-invalid");
+      out.textContent = v.toFixed(1);
+      msg.textContent = v > 78 ? "World-class territory." : v > 69 ? "College varsity level." : v > 58 ? "A strong high school varsity runner." : "A developing runner.";
+      eq.innerHTML = events.map(([dist, name]) =>
+        `<div class="${Math.abs(dist - d) < 1 ? "self" : ""}"><dt>${name}</dt><dd>${fmt(VD.timeFor(dist, v))}</dd></div>`).join("");
+    }
+    ev.addEventListener("change", run);
+    tIn.addEventListener("input", run);
+    run();
+  })();
+
+  /* ---------- Banister fitness-fatigue lab ---------- */
+  (() => {
+    const svg = $("#ban-svg");
+    if (!svg) return;
+    const WEEKS = 16, DAYS = WEEKS * 7, MAXL = 70, BASE = 25;
+    const PLANS = {
+      steady: Array(WEEKS).fill(35),
+      taper: [30, 32, 34, 36, 38, 40, 42, 44, 46, 46, 48, 48, 38, 30, 24, 20],
+      over: [35, 38, 44, 52, 60, 64, 66, 64, 40, 34, 34, 34, 34, 34, 34, 34],
+    };
+    const load = PLANS.taper.slice();
+    const T1 = 45, T2 = 11, K1 = 0.02, K2 = 0.06, MILE = 1609.34;
+
+    // seeded normals so the band stays still while you drag
+    function rng(seed) { return () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+    const rand = rng(7), gauss = () => Math.sqrt(-2 * Math.log(rand() + 1e-12)) * Math.cos(2 * Math.PI * rand());
+    const SAMPLES = Array.from({ length: 300 }, () => ({ t1: T1 * (1 + 0.12 * gauss()), t2: Math.max(4, T2 * (1 + 0.15 * gauss())), resp: 1 + 0.15 * gauss() }));
+
+    // Impulse response as a recursive filter: each day decays yesterday's state and adds today's load.
+    function simulate(t1, t2, resp) {
+      const d1 = Math.exp(-1 / t1), d2 = Math.exp(-1 / t2);
+      let fit = (BASE / 7) / (1 - d1), fat = (BASE / 7) / (1 - d2);
+      const base = K1 * fit - K2 * fat;
+      const perf = new Float64Array(DAYS), F = new Float64Array(DAYS), G = new Float64Array(DAYS);
+      for (let d = 0; d < DAYS; d++) {
+        const l = load[Math.floor(d / 7)] / 7;
+        fit = fit * d1 + l; fat = fat * d2 + l;
+        F[d] = K1 * fit; G[d] = K2 * fat;
+        perf[d] = 62 + resp * (K1 * fit - K2 * fat - base);
+      }
+      return { perf, F, G };
+    }
+
+    let W = 560, H = 380;
+    const bars = [];
+    const M = { l: 44, r: 12 };
+    const P = { t: 16, b: 168 }, Fz = { t: 190, b: 250 }, B = { t: 272, b: 350 };
+    const sx = (d) => M.l + (d / (DAYS - 1)) * (W - M.l - M.r);
+    const out = $("#ban-out");
+    const gStatic = el("g", {}, svg), gDyn = el("g", {}, svg), gBars = el("g", {}, svg);
 
     function render() {
-      const ink = css("--ink"), acc = css("--accent"), muted = css("--muted"), bg = css("--panel-2");
-      gLines.innerHTML = "";
-      const last = races[races.length - 1][0];
-      let sw = 0, swt = 0;
-      for (const [d, t] of races) { const w = expWeight(last - d, halfLife); sw += w; swt += w * t; }
-      const rating = swt / sw;
-      const fit = linearFit(races);
-      const fc = forecast(races);
-
-      el("line", { x1: sx(0), x2: sx(last), y1: sy(rating), y2: sy(rating), stroke: muted, "stroke-dasharray": "2 3" }, gLines);
-      el("line", { x1: sx(0), y1: sy(fit.icpt), x2: sx(last), y2: sy(fit.slope * last + fit.icpt), stroke: ink, "stroke-width": 1.5 }, gLines);
-      const pathD = [`M${sx(last)},${sy(races[races.length - 1][1])}`].concat(fc.map((f) => `L${sx(last + f.d)},${sy(Math.max(f.t, T_MIN))}`)).join(" ");
-      el("path", { d: pathD, fill: "none", stroke: acc, "stroke-width": 1.5, "stroke-dasharray": "5 4" }, gLines);
-      fc.forEach((f) => {
-        if (f.capped) el("circle", { cx: sx(last + f.d), cy: sy(Math.max(f.raw, T_MIN)), r: 4, fill: "none", stroke: muted, "stroke-dasharray": "2 2" }, gLines);
-        el("circle", { cx: sx(last + f.d), cy: sy(Math.max(f.t, T_MIN)), r: 5.5, fill: bg, stroke: acc, "stroke-width": 2 }, gLines);
-      });
-      // rating label sits in the projection area, away from the race points, with a halo for legibility
-      el("text", { x: sx(last) + 8, y: sy(rating) + 16, class: "halo" }, gLines).textContent = `rating ${mmss(rating)}`;
-
-      gPts.querySelectorAll(".pt").forEach((g, i) => {
-        const [d, t] = races[i];
-        g.setAttribute("transform", `translate(${sx(d)},${sy(t)})`);
-        g.setAttribute("aria-valuenow", t.toFixed(1));
-        g.setAttribute("aria-valuetext", spoken(t));
-        g.querySelector(".dot").setAttribute("fill", ink);
-        g.querySelector(".hit").setAttribute("r", matchMedia("(pointer: coarse)").matches ? 24 : 16);
-      });
-
-      readout.innerHTML = [
-        ["Rating", mmss(rating)],
-        ["Trend", `${(fit.slope * 30).toFixed(2)} s/mo`],
-        ["Fit r²", fit.r2.toFixed(2), fit.r2 < 0.5],
-        ["+3 mo", mmss(fc[0].t), fc[0].capped],
-        ["+6 mo", mmss(fc[1].t), fc[1].capped],
-        ["+12 mo", mmss(fc[2].t), fc[2].capped],
-      ].map(([k, v, f]) => `<div><dt>${k}</dt><dd class="${f ? "flag" : ""}">${v}</dd></div>`).join("");
-
-      const capped = fc.filter((f) => f.capped).map((f) => ["+3 mo", "+6 mo", "+12 mo"][[90, 180, 365].indexOf(f.d)]);
-      if (capped.length) {
-        guard.innerHTML = `<b>Guardrail on at ${capped.join(", ")}.</b> The fit is weak, so ${capped.length > 1 ? "those forecasts are" : "that forecast is"} held to 3% improvement per 90 days. Dashed circles show where the raw trend line pointed.`;
-      } else if (fit.r2 < 0.5) {
-        guard.innerHTML = `<b>Weak fit.</b> The trend already projects less than 3% improvement per 90 days, so the cap doesn't bind.`;
-      } else {
-        guard.textContent = "Guardrail off. The trend is consistent enough (r² of 0.5 or more) to trust the line.";
+      const ink = css("--ink"), acc = css("--accent"), muted = css("--muted"), line = css("--line");
+      gDyn.innerHTML = "";
+      const main = simulate(T1, T2, 1);
+      const mile = Array.from(main.perf, (v) => VD.timeFor(MILE, v));
+      // Monte Carlo band: 10th to 90th percentile of the predicted mile each day
+      const runs = SAMPLES.map((s) => simulate(s.t1, s.t2, s.resp).perf);
+      const lo = [], hi = [];
+      for (let d = 0; d < DAYS; d++) {
+        const col = runs.map((p) => p[d]).sort((a, b) => a - b);
+        lo.push(VD.timeFor(MILE, col[Math.floor(0.9 * col.length)]));
+        hi.push(VD.timeFor(MILE, col[Math.floor(0.1 * col.length)]));
       }
+      const all = lo.concat(hi, mile);
+      let tMin = Math.min(...all), tMax = Math.max(...all);
+      const pad = Math.max(1.5, (tMax - tMin) * 0.12); tMin -= pad; tMax += pad;
+      const sy = (t) => P.t + ((t - tMin) / (tMax - tMin)) * (P.b - P.t);
+
+      const step = (tMax - tMin) > 16 ? 5 : 2;
+      for (let t = Math.ceil(tMin / step) * step; t <= tMax; t += step) {
+        el("line", { x1: M.l, x2: W - M.r, y1: sy(t), y2: sy(t), stroke: line }, gDyn);
+        el("text", { x: M.l - 6, y: sy(t) + 4, "text-anchor": "end" }, gDyn).textContent = fmt(t).replace(".0", "");
+      }
+      const band = lo.map((t, d) => `${sx(d)},${sy(t)}`).concat(hi.map((t, d) => `${sx(d)},${sy(t)}`).reverse()).join(" ");
+      el("polygon", { points: band, fill: acc, "fill-opacity": 0.14 }, gDyn);
+      el("polyline", { points: mile.map((t, d) => `${sx(d)},${sy(t)}`).join(" "), fill: "none", stroke: acc, "stroke-width": 2 }, gDyn);
+      el("text", { x: M.l + 6, y: P.t + 12, class: "acc halo" }, gDyn).textContent = "predicted mile (faster is higher)";
+
+      const fMax = Math.max(...main.F, ...main.G);
+      const fy = (v) => Fz.b - (v / fMax) * (Fz.b - Fz.t);
+      el("polyline", { points: Array.from(main.F, (v, d) => `${sx(d)},${fy(v)}`).join(" "), fill: "none", stroke: ink, "stroke-width": 1.5 }, gDyn);
+      el("polyline", { points: Array.from(main.G, (v, d) => `${sx(d)},${fy(v)}`).join(" "), fill: "none", stroke: muted, "stroke-width": 1.5, "stroke-dasharray": "4 3" }, gDyn);
+      el("text", { x: M.l + 6, y: Fz.t + 2, class: "ink" }, gDyn).textContent = "fitness";
+      el("text", { x: M.l + 72, y: Fz.t + 2 }, gDyn).textContent = "fatigue (dashed)";
+
+      const bw = (W - M.l - M.r) / WEEKS;
+      bars.forEach((g, k) => {
+        const h = (load[k] / MAXL) * (B.b - B.t);
+        const rect = g.querySelector("rect.vis");
+        rect.setAttribute("x", M.l + k * bw + 2); rect.setAttribute("width", Math.max(2, bw - 4));
+        rect.setAttribute("y", B.b - h); rect.setAttribute("height", Math.max(1, h));
+        rect.setAttribute("fill", ink); rect.setAttribute("fill-opacity", 0.8);
+        const hit = g.querySelector("rect.hit");
+        hit.setAttribute("x", M.l + k * bw); hit.setAttribute("width", bw); hit.setAttribute("y", B.t - 10); hit.setAttribute("height", B.b - B.t + 10);
+        g.setAttribute("aria-valuenow", load[k]); g.setAttribute("aria-valuetext", `week ${k + 1}, ${load[k]} miles`);
+      });
+
+      let best = 0; mile.forEach((t, d) => { if (t < mile[best]) best = d; });
+      let fatPeak = 0; main.G.forEach((v, d) => { if (v > main.G[fatPeak]) fatPeak = d; });
+      const wk = (d) => Math.floor(d / 7) + 1;
+      el("circle", { cx: sx(best), cy: sy(mile[best]), r: 4.5, fill: acc }, gDyn);
+      out.innerHTML = `<b>Fastest predicted mile: ${fmt(mile[best])}</b> in week ${wk(best)}, likely range ${fmt(lo[best])} to ${fmt(hi[best])}. Fatigue peaks in week ${wk(fatPeak)}.`;
     }
 
-    races.forEach((r, i) => {
-      const g = el("g", {
-        class: "pt", tabindex: 0, role: "slider", "aria-orientation": "vertical",
-        "aria-label": `Race ${i + 1} time`, "aria-valuemin": MIN_T, "aria-valuemax": MAX_T,
-      }, gPts);
-      el("circle", { class: "hit", r: 16 }, g);
-      el("circle", { class: "dot", r: 6 }, g);
+    function drawStatic() {
+      gStatic.innerHTML = "";
+      const line = css("--line");
+      el("line", { x1: M.l, x2: W - M.r, y1: B.b, y2: B.b, stroke: line }, gStatic);
+      el("text", { x: M.l - 6, y: B.t + 8, "text-anchor": "end" }, gStatic).textContent = MAXL;
+      el("text", { x: M.l - 6, y: B.b, "text-anchor": "end" }, gStatic).textContent = "0";
+      el("text", { x: M.l + 6, y: B.t - 4 }, gStatic).textContent = "weekly miles";
+      const bw = (W - M.l - M.r) / WEEKS;
+      [1, 4, 8, 12, 16].forEach((wk) => {
+        el("text", { x: M.l + (wk - 0.5) * bw, y: H - 6, "text-anchor": "middle" }, gStatic).textContent = `wk ${wk}`;
+      });
+    }
+
+    const chips = [...document.querySelectorAll("#ban-lab [data-plan]")];
+    const clearPlan = () => chips.forEach((c) => c.setAttribute("aria-pressed", "false"));
+    for (let k = 0; k < WEEKS; k++) {
+      const g = el("g", { class: "bar", tabindex: 0, role: "slider", "aria-orientation": "vertical", "aria-label": `Week ${k + 1} mileage`, "aria-valuemin": 0, "aria-valuemax": MAXL }, gBars);
+      el("rect", { class: "hit", fill: "transparent" }, g);
+      el("rect", { class: "vis", rx: 2 }, g);
+      const setFrom = (clientY) => {
+        const pt = svg.createSVGPoint(); pt.x = 0; pt.y = clientY;
+        const y = pt.matrixTransform(svg.getScreenCTM().inverse()).y;
+        load[k] = Math.round(Math.min(MAXL, Math.max(0, ((B.b - y) / (B.b - B.t)) * MAXL)));
+        clearPlan(); render();
+      };
       g.addEventListener("pointerdown", (e) => {
-        e.preventDefault();
-        g.setPointerCapture(e.pointerId);
-        const move = (ev) => {
-          const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
-          const p = pt.matrixTransform(svg.getScreenCTM().inverse());
-          races[i][1] = Math.min(MAX_T, Math.max(MIN_T, ty(p.y)));
-          render();
-        };
-        const end = () => {
-          g.removeEventListener("pointermove", move);
-          ["pointerup", "pointercancel", "lostpointercapture"].forEach((t) => g.removeEventListener(t, end));
-        };
+        e.preventDefault(); g.setPointerCapture(e.pointerId); setFrom(e.clientY);
+        const move = (ev) => setFrom(ev.clientY);
+        const end = () => { g.removeEventListener("pointermove", move); ["pointerup", "pointercancel", "lostpointercapture"].forEach((t) => g.removeEventListener(t, end)); };
         g.addEventListener("pointermove", move);
         ["pointerup", "pointercancel", "lostpointercapture"].forEach((t) => g.addEventListener(t, end));
       });
       g.addEventListener("keydown", (e) => {
-        const step = e.shiftKey ? 2 : 0.5;
-        const v = races[i][1];
-        const next = { ArrowUp: v - step, ArrowRight: v - step, ArrowDown: v + step, ArrowLeft: v + step, PageUp: v - 5, PageDown: v + 5, Home: MIN_T, End: MAX_T }[e.key];
+        const v = load[k];
+        const next = { ArrowUp: v + 2, ArrowRight: v + 2, ArrowDown: v - 2, ArrowLeft: v - 2, PageUp: v + 10, PageDown: v - 10, Home: 0, End: MAXL }[e.key];
         if (next === undefined) return;
-        e.preventDefault();
-        races[i][1] = Math.min(MAX_T, Math.max(MIN_T, next));
-        render();
+        e.preventDefault(); load[k] = Math.min(MAXL, Math.max(0, next)); clearPlan(); render();
       });
-    });
+      bars.push(g);
+    }
+    chips.forEach((c) => c.addEventListener("click", () => {
+      PLANS[c.dataset.plan].forEach((v, k) => { load[k] = v; });
+      chips.forEach((x) => x.setAttribute("aria-pressed", x === c ? "true" : "false"));
+      render();
+    }));
 
-    const hl = $("#fl-hl"), hlOut = $("#fl-hl-out");
-    hl.addEventListener("input", () => { halfLife = +hl.value; hlOut.textContent = hl.value; render(); });
-    const load = (set) => { set.forEach((r, i) => { races[i][1] = r[1]; }); render(); };
-    $("#fl-noisy").addEventListener("click", () => load(BAD_LAST));
-    $("#fl-reset").addEventListener("click", () => { hl.value = 90; halfLife = 90; hlOut.textContent = "90"; load(SAMPLE); });
+    responsive(svg, 380, (w, h) => { W = w; H = h; M.l = w < 420 ? 40 : 44; drawStatic(); render(); });
+  })();
 
-    responsive(svg, (w) => (w < 480 ? 250 : 300), (w, h) => {
-      W = w; H = h; M = { l: 46, r: w < 480 ? 10 : 16, t: 16, b: 30 };
-      drawGrid(); render();
+  /* ---------- Injury benchmark (results from athletIQ's injury/validation.json) ---------- */
+  (() => {
+    const svg = $("#inj-svg");
+    if (!svg) return;
+    const rows = [["Logistic regression", 0.619, true], ["XGBoost", 0.576, false], ["Workload ratio (ACWR)", 0.544, false]];
+    responsive(svg, 196, (w) => {
+      svg.innerHTML = "";
+      const ink = css("--ink"), acc = css("--accent"), line = css("--line-strong");
+      const R = w - 56, lo = 0.5, hi = 0.65;
+      const sx = (v) => ((v - lo) / (hi - lo)) * R;
+      rows.forEach(([name, v, best], k) => {
+        const y = 14 + k * 52;
+        el("text", { x: 0, y, class: "ink" }, svg).textContent = name;
+        el("rect", { x: 0, y: y + 8, width: sx(v), height: 18, rx: 3, fill: best ? acc : ink, "fill-opacity": best ? 1 : 0.55 }, svg);
+        el("text", { x: sx(v) + 8, y: y + 22, class: best ? "acc" : "" }, svg).textContent = v.toFixed(3);
+      });
+      el("line", { x1: 0.5, x2: 0.5, y1: 0, y2: 168, stroke: line, "stroke-dasharray": "3 3" }, svg);
+      el("text", { x: 0, y: 186 }, svg).textContent = "0.5 = chance";
+      el("text", { x: R, y: 186, "text-anchor": "end" }, svg).textContent = "AUC";
     });
   })();
 
-  /* ---------- Pan-Out charts (numbers from the held-out report card) ---------- */
+  /* ---------- Meridian pipeline ---------- */
   (() => {
-    const svg = $("#cohort-svg");
+    const svg = $("#mer-svg");
     if (!svg) return;
-    responsive(svg, 128, (w) => {
+    responsive(svg, 420, (w) => {
       svg.innerHTML = "";
-      const ink = css("--ink"), acc = css("--accent");
-      const x0 = 1, x1 = w - 1, y0 = 1988, y1 = 2002;
-      const sx = (y) => x0 + ((y - y0) / (y1 - y0)) * (x1 - x0);
-      const segs = [
-        ["train", "born 1995 or earlier", 1988, 1996, ink, 0.85],
-        ["combine", "1996-97", 1996, 1998, ink, 0.5],
-        ["calibrate", "1998-99", 1998, 2000, ink, 0.28],
-        ["grade", "2000-01", 2000, 2002, acc, 1],
-      ];
-      el("text", { x: x0, y: 14 }, svg).textContent = "birth year";
-      segs.forEach(([, , a, b, col, op]) => {
-        el("rect", { x: sx(a) + 1, y: 24, width: sx(b) - sx(a) - 2, height: 32, rx: 4, fill: col, "fill-opacity": op }, svg);
-      });
-      el("text", { x: sx(1988), y: 76, class: "ink" }, svg).textContent = segs[0][0];
-      el("text", { x: sx(1988), y: 92 }, svg).textContent = segs[0][1];
-      // the three narrow segments get a stacked key on the right so labels never collide
-      const right = sx(2002) - 1;
-      [["combine 1996-97", 0.5], ["calibrate 1998-99", 0.28], ["grade 2000-01", 1]].forEach(([t, op], i) => {
-        const y = 76 + i * 17;
-        const txt = el("text", { x: right, y, "text-anchor": "end", class: i === 2 ? "acc" : "" }, svg);
-        txt.textContent = t;
-        el("rect", { x: right - txt.getComputedTextLength() - 16, y: y - 9, width: 10, height: 10, rx: 2, fill: i === 2 ? acc : ink, "fill-opacity": op }, svg);
-      });
-    });
-  })();
-
-  (() => {
-    const svg = $("#auc-svg");
-    if (!svg) return;
-    const rows = [["Tennis", 0.843, 0.942], ["Chess", 0.841, 0.941], ["Baseball", 0.846, 0.920], ["Hockey", 0.908, 0.963]];
-    responsive(svg, 222, (w) => {
-      svg.innerHTML = "";
-      const acc = css("--accent"), line = css("--line"), muted = css("--muted"), bg = css("--panel");
-      const L = w < 480 ? 74 : 96, R = w - (w < 480 ? 46 : 60), lo = 0.8, hi = 1.0;
-      const sx = (v) => L + ((v - lo) / (hi - lo)) * (R - L);
-      const ticks = w < 480 ? [0.8, 0.9, 1.0] : [0.8, 0.85, 0.9, 0.95, 1.0];
-      ticks.forEach((v) => {
-        el("line", { x1: sx(v), x2: sx(v), y1: 10, y2: 168, stroke: line }, svg);
-        el("text", { x: sx(v), y: 186, "text-anchor": "middle" }, svg).textContent = v.toFixed(2);
-      });
-      rows.forEach(([name, mkt, model], i) => {
-        const y = 28 + i * 38;
-        el("text", { x: 0, y: y + 4, class: "ink" }, svg).textContent = name;
-        el("line", { x1: sx(mkt), x2: sx(model), y1: y, y2: y, stroke: acc, "stroke-width": 3, "stroke-linecap": "round" }, svg);
-        el("circle", { cx: sx(mkt), cy: y, r: 6, fill: bg, stroke: muted, "stroke-width": 2 }, svg);
-        el("circle", { cx: sx(model), cy: y, r: 7, fill: acc }, svg);
-        el("text", { x: sx(model) + 12, y: y + 4, class: "acc" }, svg).textContent = model.toFixed(3);
-        if (w >= 480) el("text", { x: sx(mkt) - 12, y: y + 4, "text-anchor": "end" }, svg).textContent = mkt.toFixed(3);
-      });
-      const ly = 214;
-      el("circle", { cx: L + 6, cy: ly - 4, r: 5, fill: "none", stroke: muted, "stroke-width": 2 }, svg);
-      el("text", { x: L + 16, y: ly }, svg).textContent = "rating alone";
-      el("circle", { cx: L + 130, cy: ly - 4, r: 5, fill: acc }, svg);
-      el("text", { x: L + 140, y: ly, class: "acc" }, svg).textContent = "Pan-Out";
+      const ink = css("--ink"), line = css("--line-strong"), bg = css("--panel-2"), muted = css("--muted"), acc = css("--accent");
+      const half = (w - 16) / 2;
+      const box = (x, y, bw, title, sub, hot) => {
+        el("rect", { x: x + 0.5, y: y + 0.5, width: bw - 1, height: 56, rx: 8, fill: hot ? ink : bg, stroke: hot ? ink : line }, svg);
+        el("text", { x: x + 12, y: y + 24, class: "lbl", style: hot ? `fill:${bg}` : "" }, svg).textContent = title;
+        el("text", { x: x + 12, y: y + 42, class: "sub", style: hot ? `fill:${bg};opacity:.75` : `fill:${muted}` }, svg).textContent = sub;
+      };
+      const arrow = (x1, y1, x2, y2) => {
+        el("path", { d: `M${x1},${y1} V${(y1 + y2) / 2} H${x2} V${y2 - 3}`, fill: "none", stroke: line, "stroke-width": 1.5 }, svg);
+        el("path", { d: `M${x2 - 5},${y2 - 9} L${x2},${y2 - 3} L${x2 + 5},${y2 - 9}`, fill: "none", stroke: line, "stroke-width": 1.5 }, svg);
+      };
+      const narrow = w < 380;
+      box(0, 0, half, "Startup", narrow ? "description, stage" : "description, stage, place");
+      box(half + 16, 0, half, narrow ? "48,046 VCs" : "48,046 investors", "past portfolios");
+      box(0, 120, w, "MiniLM embeddings", "text similarity, startup vs portfolio");
+      arrow(half / 2, 56, w / 2 - 20, 120); arrow(half + 16 + half / 2, 56, w / 2 + 20, 120);
+      box(0, 216, w, "16 pair features", "stage, check size, geography, focus");
+      arrow(w / 2, 176, w / 2, 216);
+      box(0, 312, w, "LambdaRank (LightGBM)", "about 907K pairs, split by startup", true);
+      arrow(w / 2, 272, w / 2, 312);
+      el("path", { d: `M${w / 2},368 V384`, stroke: acc, "stroke-width": 1.5 }, svg);
+      el("text", { x: w / 2, y: 404, class: "acc", "text-anchor": "middle" }, svg).textContent = "ranked investor matches for each founder";
     });
   })();
 
@@ -279,11 +412,7 @@
       count.set(s, (count.get(s) || 0) + 1);
       if (i < ins.length - 1) { const k = `${s}>${ins[i + 1]}`; bigram.set(k, (bigram.get(k) || 0) + 1); }
     }));
-
-    // Step 1: signs that stand alone
     const singletons = new Set(corpus.filter((i) => i.length === 1).map((i) => i[0]));
-
-    // Step 2: share a left or right neighbour with at least two distinct candidates
     const ctx = new Map();
     corpus.forEach((ins) => ins.forEach((s, i) => {
       const keys = [];
@@ -298,8 +427,6 @@
       for (const members of ctx.values()) if (members.has(s)) members.forEach((m) => singletons.has(m) && shared.add(m));
       if (shared.size >= 2) expanded.set(s, shared.size);
     }
-
-    // Step 3: exclusivity = min(P(b follows a), P(a precedes b)), for every pair worth listing
     const allPairs = [...bigram].map(([k, c]) => {
       const [a, b] = k.split(">").map(Number);
       return { a, b, ex: Math.min(c / count.get(a), c / count.get(b)) };
@@ -310,7 +437,6 @@
     ).join("");
     const rowsEl = [...box.querySelectorAll(".inscr")];
     const signs = [...box.querySelectorAll(".sign")];
-
     const stepText = $("#step-text"), exclCtl = $("#excl-ctl"), excl = $("#excl"), exclOut = $("#excl-out"), pairList = $("#pair-list");
     const panel = $("#indus-panel");
     let step = 0;
@@ -319,15 +445,9 @@
     function paint() {
       signs.forEach((n) => { n.className = "sign"; n.style.transitionDelay = ""; });
       exclCtl.hidden = pairList.hidden = step !== 3;
-      if (step === 0) {
-        stepText.innerHTML = `Each row is one inscription, read as a sequence of signs. This toy set has <b>${corpus.length}</b> inscriptions and <b>${count.size}</b> distinct signs. Nothing is labelled yet.`;
-      }
-      if (step === 1 || step === 2) {
-        signs.forEach((n) => { if (singletons.has(+n.dataset.s)) n.classList.add("logo"); });
-      }
-      if (step === 1) {
-        stepText.innerHTML = `A sign that appears completely alone has to carry a whole meaning by itself. Those <b>singletons</b> become the first logogram candidates: <b>${list([...singletons])}</b>.`;
-      }
+      if (step === 0) stepText.innerHTML = `Each row is one inscription, read as a sequence of signs. This toy set has <b>${corpus.length}</b> inscriptions and <b>${count.size}</b> distinct signs. Nothing is labelled yet.`;
+      if (step === 1 || step === 2) signs.forEach((n) => { if (singletons.has(+n.dataset.s)) n.classList.add("logo"); });
+      if (step === 1) stepText.innerHTML = `A sign that appears completely alone has to carry a whole meaning by itself. Those <b>singletons</b> become the first logogram candidates: <b>${list([...singletons])}</b>.`;
       if (step === 2) {
         signs.forEach((n) => { if (expanded.has(+n.dataset.s)) n.classList.add("expand"); });
         const e = [...expanded].map(([s, k]) => `${s}, which fills the same slots as ${k} of them`);
@@ -348,21 +468,14 @@
           });
         });
         signs.forEach((n) => { if (!n.classList.contains("pair")) n.classList.add("dim"); });
-        stepText.innerHTML = `Some pairs almost never appear apart. If A is nearly always followed by B, and B nearly always preceded by A, they behave like syllables spelling one word. Lower the threshold to admit weaker pairs.`;
-        pairList.innerHTML = allPairs.map((p) =>
-          `<li class="${p.ex >= th - 1e-9 ? "on" : ""}"><span>${p.a} + ${p.b}</span><span class="num">${p.ex.toFixed(2)}</span></li>`
-        ).join("");
+        stepText.innerHTML = "Some pairs almost never appear apart. If A is nearly always followed by B, and B nearly always preceded by A, they behave like syllables spelling one word. Lower the threshold to admit weaker pairs.";
+        pairList.innerHTML = allPairs.map((p) => `<li class="${p.ex >= th - 1e-9 ? "on" : ""}"><span>${p.a} + ${p.b}</span><span class="num">${p.ex.toFixed(2)}</span></li>`).join("");
       }
     }
-
     const tabs = [...document.querySelectorAll(".method-steps [role=tab]")];
     function select(tab, focus) {
       step = +tab.dataset.step;
-      tabs.forEach((t) => {
-        const on = t === tab;
-        t.setAttribute("aria-selected", on ? "true" : "false");
-        t.tabIndex = on ? 0 : -1;
-      });
+      tabs.forEach((t) => { const on = t === tab; t.setAttribute("aria-selected", on ? "true" : "false"); t.tabIndex = on ? 0 : -1; });
       panel.setAttribute("aria-labelledby", tab.id);
       if (focus) tab.focus();
       paint();
@@ -372,46 +485,10 @@
       t.addEventListener("keydown", (e) => {
         const idx = { ArrowRight: i + 1, ArrowDown: i + 1, ArrowLeft: i - 1, ArrowUp: i - 1, Home: 0, End: tabs.length - 1 }[e.key];
         if (idx === undefined) return;
-        e.preventDefault();
-        select(tabs[(idx + tabs.length) % tabs.length], true);
+        e.preventDefault(); select(tabs[(idx + tabs.length) % tabs.length], true);
       });
     });
     excl.addEventListener("input", paint);
     paint();
-  })();
-
-  /* ---------- Future Fellows quote check ---------- */
-  (() => {
-    const essayEl = $("#essay");
-    if (!essayEl) return;
-    const essay = "Last spring the shuttle tracker at school kept crashing, so I rebuilt it. The old version polled the city feed every minute and fell over at rush hour. I cached responses and cut the polling to when a bus was actually near. It has not crashed since March, and about forty students check it every morning.";
-    const presets = [
-      "cut the polling to when a bus was actually near",
-      "only polled the feed when buses were close by",
-      "led a team of five engineers to rebuild the app",
-    ];
-    const ta = $("#quote"), out = $("#q-result");
-    const chips = [...document.querySelectorAll(".q-presets .chip")];
-    const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-    const norm = (s) => s.toLowerCase().replace(/\s+/g, " ");
-    function check() {
-      const q = ta.value.trim();
-      chips.forEach((c) => c.setAttribute("aria-pressed", presets[+c.dataset.q] === ta.value ? "true" : "false"));
-      const idx = q.length ? essay.indexOf(q) : -1;
-      if (idx >= 0 && q.length >= 12) {
-        essayEl.innerHTML = esc(essay.slice(0, idx)) + "<mark>" + esc(q) + "</mark>" + esc(essay.slice(idx + q.length));
-        out.className = "q-result pass"; out.textContent = "Accepted. The quote appears word for word, so the score can stand.";
-        return;
-      }
-      essayEl.textContent = essay;
-      out.className = "q-result fail";
-      if (!q.length) out.textContent = "Rejected. No evidence, no score.";
-      else if (q.length < 12) out.textContent = "Rejected. Too short to count as evidence; quote at least a phrase.";
-      else if (norm(essay).includes(norm(q))) out.textContent = "Rejected. Close, but the capitalization or spacing differs. The check is exact.";
-      else out.textContent = "Rejected. These words never appear in the application. Score discarded.";
-    }
-    chips.forEach((b) => b.addEventListener("click", () => { ta.value = presets[+b.dataset.q]; check(); }));
-    ta.addEventListener("input", check);
-    ta.value = presets[0]; check();
   })();
 })();
