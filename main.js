@@ -39,7 +39,7 @@
   /* ---------- Nav: mark the section in view ---------- */
   (() => {
     const links = [...document.querySelectorAll(".nav nav a")];
-    const owner = { athletiq: 0, secret: 1, meridian: 2, reachbot: 2, fellows: 2, indus: 3 };
+    const owner = { work: 0, contact: 1 };
     const seen = new Map();
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => seen.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0));

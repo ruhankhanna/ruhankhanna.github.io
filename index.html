@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=11">
+<link rel="stylesheet" href="styles.css?v=16">
 </head>
 <body>
 
@@ -19,339 +19,307 @@
   <div class="wrap nav-inner">
     <a class="brand" href="#top"><span class="tile" aria-hidden="true">RK</span><span class="brand-name">Ruhan Khanna</span></a>
     <nav aria-label="Sections">
-      <a href="#athletiq">athletIQ</a>
-      <a href="#secret">Car</a>
-      <a href="#meridian">AI</a>
-      <a href="#indus">Research</a>
+      <a href="#work">Projects</a>
+      <a href="#contact">Contact</a>
     </nav>
   </div>
 </header>
 
 <main id="main">
 
-<!-- HERO -->
-<section class="hero wrap" id="top">
-  <div class="hero-text">
-    <h1>Here are some things I've built.</h1>
-    <p class="hero-sub">I'm Ruhan Khanna, a junior at Sidwell Friends School in Washington, DC.</p>
-    <nav class="hero-index" aria-label="Projects">
-      <a href="#athletiq"><b>athletIQ</b><span>Recruiting platform for college track</span></a>
-      <a href="#secret"><b>SECRET</b><span>48-volt electric race car</span></a>
-      <a href="#meridian"><b>Meridian</b><span>Model that matches founders to investors</span></a>
-      <a href="#reachbot"><b>ReachBot</b><span>AI assistant with cited answers</span></a>
-      <a href="#fellows"><b>Future Fellows</b><span>Fair applicant evaluation</span></a>
-      <a href="#indus"><b>Research</b><span>The Indus script, and verifying papers</span></a>
-    </nav>
-  </div>
-
-  <figure class="deck" id="deck" aria-roledescription="carousel" aria-label="Screens from my products">
-    <div class="deck-frame">
-      <div class="deck-bar">
-        <span class="deck-app" id="deck-app">athletIQ Coach</span>
-        <span class="deck-route num" id="deck-route">/mass-search</span>
-      </div>
-      <div class="deck-stage">
-        <img class="deck-slide is-on" src="assets/aiq-recruit.jpg" width="1425" height="900" alt="athletIQ Mass Recruitment Search: season, gender, state and grade filters with an AI search box" data-app="athletIQ Coach" data-route="/mass-search" data-cap="athletIQ: search every state against a program's standards.">
-        <img class="deck-slide" src="assets/panout-dossier.jpg" width="1424" height="900" alt="Pan-Out player dossier showing market price versus model price and the signals behind it" data-app="Pan-Out" data-route="/player/tennis/2417" data-cap="Pan-Out: model odds and the signals behind them. Simulated player." loading="lazy">
-        <img class="deck-slide" src="assets/aiq-roster.jpg" width="1425" height="900" alt="athletIQ roster view with class-year and scholarship counts and an athlete table" data-app="athletIQ Coach" data-route="/roster" data-cap="athletIQ: roster and eligibility tracking. Demo athletes." loading="lazy">
-        <img class="deck-slide" src="assets/panout-report.jpg" width="1424" height="884" alt="Pan-Out model report card with AUC by tier and a calibration plot" data-app="Pan-Out" data-route="/report/tennis" data-cap="Pan-Out: graded on birth cohorts it never trained on." loading="lazy">
-      </div>
-    </div>
-    <figcaption class="deck-foot">
-      <span id="deck-cap" aria-live="polite">athletIQ: search every state against a program's standards.</span>
-      <span class="deck-dots" role="group" aria-label="Choose screen">
-        <button type="button" aria-label="Screen 1" aria-current="true"><i></i></button>
-        <button type="button" aria-label="Screen 2"><i></i></button>
-        <button type="button" aria-label="Screen 3"><i></i></button>
-        <button type="button" aria-label="Screen 4"><i></i></button>
-      </span>
-    </figcaption>
-  </figure>
+<section class="hero wrap hero-simple" id="top">
+  <h1>Here are some things I've built.</h1>
+  <p class="hero-sub">I'm Ruhan Khanna, a junior at Sidwell Friends School in Washington, DC. Open any project to see how it works.</p>
 </section>
 
-<!-- ATHLETIQ -->
-<section id="athletiq" class="aiq">
-  <div class="wrap">
-    <h2>athletIQ</h2>
-    <p class="meta">Founder, 2023 to now. Flask, SQLite, Selenium, SciPy.</p>
-    <p class="lede">A recruiting platform college track coaches use to find, compare and track recruits.</p>
-    <dl class="facts">
-      <div><dt>Stanford, UNC</dt><dd>among programs under contract</dd></div>
-      <div><dt>$8K</dt><dd>backing from Microsoft and AWS</dd></div>
-      <div><dt>51</dt><dd>state and DC ranking lists covered</dd></div>
-      <div><dt>314</dt><dd>commits since the 2025 rebuild</dd></div>
-    </dl>
+<section class="wrap" id="work" aria-label="Projects">
+  <div class="cards">
 
-    <div class="arch-wrap">
-      <svg id="arch" role="img" aria-label="System diagram: Athletic.net pages are fetched by a separate scraper service, passed to the Flask app's background jobs, scored by the analytics layer, stored in SQLite per organization, and shown in the coach app."></svg>
-    </div>
-
-    <div class="lab-row">
-      <div class="lab-copy">
-        <h3>One scale for every event</h3>
-        <p>Every race converts to VDOT, Jack Daniels' oxygen-cost model, so an 800m runner and a miler can be compared, and a high school mark can be projected to college.</p>
-      </div>
-      <div class="lab" id="vdot-lab">
-        <div class="lab-head"><strong>VDOT converter</strong><span>The same formulas the product uses.</span></div>
-        <div class="vdot-in">
-          <label for="v-event">Event</label>
-          <select id="v-event">
-            <option value="800">800m</option><option value="1500">1500m</option><option value="1609.34" selected>Mile</option><option value="3200">3200m</option><option value="5000">5000m</option>
-          </select>
-          <label for="v-time">Time</label>
-          <input id="v-time" type="text" value="4:35.0" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="v-msg">
-        </div>
-        <p class="vdot-big"><span class="num" id="v-out">65.5</span><span>VDOT</span></p>
-        <p class="v-msg" id="v-msg" role="status"></p>
-        <dl class="equiv" id="v-equiv"></dl>
-      </div>
-    </div>
-
-    <div class="lab-row lab-row-flip">
-      <div class="lab-copy">
-        <h3>Forecasts from training, not just results</h3>
-        <p>A Banister fitness-fatigue model, fit to each athlete's own races, with 4,000 sampled parameter sets for an honest range.</p>
-        <figure class="shot shot-panel"><img src="assets/aiq-forecast.jpg" width="466" height="780" alt="athletIQ forecast output: current level 4:33.5 at VDOT 65.9, projections at 2, 6 and 12 weeks with ranges, and fitted time constants" loading="lazy"><figcaption>The live forecaster on a sample athlete.</figcaption></figure>
-      </div>
-      <div class="lab" id="ban-lab">
-        <div class="lab-head"><strong>Fitness-fatigue model</strong><span>Drag the weekly mileage bars.</span></div>
-        <svg id="ban-svg" role="group" aria-label="Weekly training load bars you can adjust, with the resulting fitness, fatigue and predicted mile time over 16 weeks"></svg>
-        <div class="lab-actions" role="group" aria-label="Training plans">
-          <button type="button" class="chip" data-plan="steady" aria-pressed="false">Steady</button>
-          <button type="button" class="chip" data-plan="taper" aria-pressed="true">Build, then taper</button>
-          <button type="button" class="chip" data-plan="over" aria-pressed="false">Overreach</button>
-        </div>
-        <p class="guard" id="ban-out" role="status"></p>
-      </div>
-    </div>
-
-    <div class="study">
-      <div>
-        <h3>Benchmark before you ship</h3>
-        <p>Three injury-risk models tested on 42,798 athlete-weeks, split by athlete. The simplest one won.</p>
-      </div>
-      <svg id="inj-svg" role="img" aria-label="Injury model AUC: logistic regression 0.619, XGBoost 0.576, workload ratio 0.544, chance 0.5"></svg>
-    </div>
-
-    <div class="po">
-      <div>
-        <h3>Pan-Out, for other sports</h3>
-        <p>An athletIQ product that prices junior tennis, chess, baseball and hockey prospects with five stacked gradient-boosted models and calibrated odds.</p>
-        <dl class="facts facts-sm">
-          <div><dt>0.94 vs 0.84</dt><dd>AUC against ratings, simulated data</dd></div>
-          <div><dt>0.844 vs 0.841</dt><dd>on real ATP careers: the honest result</dd></div>
+    <!-- athletIQ -->
+    <article class="card" id="athletiq">
+      <img class="card-img" src="assets/aiq-recruit.jpg" width="1425" height="900" alt="athletIQ's recruit search: filters for season, gender, state and grade, with a plain-English search box">
+      <div class="card-body">
+        <h2>athletIQ</h2>
+        <p>A recruiting platform college track coaches use to find, compare and track recruits. I founded it and built it.</p>
+        <dl class="mini">
+          <div><dt>Stanford, UNC</dt><dd>among programs under contract</dd></div>
+          <div><dt>$8K</dt><dd>backing from Microsoft and AWS</dd></div>
+          <div><dt>314</dt><dd>commits since the 2025 rebuild</dd></div>
         </dl>
+        <p class="card-links"><a class="link" href="https://athletiq.run" target="_blank" rel="noopener">athletiq.run<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
       </div>
-      <figure class="shot"><img src="assets/panout-board.jpg" width="1440" height="900" alt="Pan-Out tennis value board listing simulated players with model odds, market odds and value gap" loading="lazy"><figcaption>The Pan-Out value board, on simulated players.</figcaption></figure>
-    </div>
+      <details class="more-info">
+        <summary>How it works</summary>
+        <div class="detail">
+          <div class="arch-wrap"><svg id="arch" role="img" aria-label="System diagram: Athletic.net pages are fetched by a separate scraper service, passed to the Flask app's background jobs, scored by the analytics layer, stored in SQLite, and shown in the coach app."></svg></div>
 
-    <div class="timeline-wrap">
-      <h3>How it got here</h3>
-      <ol class="timeline">
-        <li><span class="t-when num">2023</span><b>Tennis rating</b></li>
-        <li><span class="t-when num">Dec 2023</span><b>First sprint rating</b></li>
-        <li><span class="t-when num">Jun 2025</span><b>Athlete platform, shut down</b></li>
-        <li><span class="t-when num">Nov 2025</span><b>Rebuilt for coaches</b></li>
-        <li><span class="t-when num">Jan 2026</span><b>National search, 164 commits</b></li>
-        <li><span class="t-when num">Spring 2026</span><b>Scraper service</b></li>
-        <li><span class="t-when num">Summer 2026</span><b>Forecasting and roster</b></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- SECRET -->
-<section id="secret" class="car">
-  <div class="wrap">
-    <h2>SECRET, a 48-volt race car</h2>
-    <p class="meta">Founder and co-head, Sidwell Electric Car Race Engineering Team. 2023 to now.</p>
-    <div class="car-intro">
-      <div>
-        <p class="lede">Our school's electric car for the Electric Vehicle Grand Prix, where the most distance in one hour on one battery wins.</p>
-        <dl class="facts facts-2">
-          <div><dt>3</dt><dd>DC Grand Prix raced, 2024 to 2026</dd></div>
-          <div><dt>Top prize</dt><dd>for 3D printing</dd></div>
-          <div><dt>Dubai</dt><dd>invited to the 2027 Grand Prix</dd></div>
-          <div><dt>$7K</dt><dd>raised; built with UMD Formula SAE</dd></div>
-        </dl>
-      </div>
-      <figure class="clip">
-        <video id="secret-clip" src="assets/secret-motor.mp4" poster="assets/secret-motor.jpg" width="720" height="960" muted loop playsinline preload="metadata" aria-label="Working on the car's hub motor and its orange phase cables in the shop"></video>
-        <figcaption>In the shop with the hub motor.</figcaption>
-      </figure>
-    </div>
-
-    <div class="wire-wrap">
-      <div class="wire-scroll"><svg id="wire-svg" viewBox="0 0 960 440" role="group" aria-label="Electrical system of the car. Select a part to read what it does."></svg></div>
-      <div class="wire-info" id="wire-info" aria-live="polite"></div>
-    </div>
-    <p class="small wire-legend">Thick lines carry 48V traction current; thin lines are signals. Select any part.</p>
-
-    <div class="lab-row">
-      <div class="lab-copy">
-        <h3>Pacing to an energy budget</h3>
-        <p>Each lap, the Arduino spreads the remaining battery over the laps left and tells the driver to speed up or back off. Drag grows with speed cubed, so going out fast is costly.</p>
-      </div>
-      <div class="lab" id="race-lab">
-        <div class="lab-head"><strong>One-hour race simulator</strong><span>Race a driver's speed with and without pacing.</span></div>
-        <div class="lab-controls">
-          <label for="race-speed">Driver's speed <output id="race-speed-out" class="num">31</output> mph</label>
-          <input id="race-speed" type="range" min="16" max="34" step="1" value="31">
-        </div>
-        <svg id="race-svg" role="img" aria-label="Battery remaining over the hour for a driver at constant speed and for the same driver with the pacing system."></svg>
-        <dl class="readout" id="race-readout"></dl>
-        <p class="guard" id="race-out" role="status"></p>
-        <div class="lab-actions"><button type="button" class="chip" id="race-run">Run the race</button></div>
-        <p class="small">Modeled car with assumed values (150 kg, 48V 26Ah lead-acid pack, 0.6-mile lap), not measured from ours.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MERIDIAN -->
-<section id="meridian" class="case wrap">
-  <div class="mer">
-    <div>
-      <h2>Meridian</h2>
-      <p class="meta">Lead researcher, UVA School of Data Science, with Prof. Adam Tashman. 2025 to now.</p>
-      <p class="lede">A model that ranks which investors fit a startup, built to study who gets funded and to help underserved founders find the right investors.</p>
-      <dl class="facts facts-2">
-        <div><dt>907K</dt><dd>startup-investor pairs trained on</dd></div>
-        <div><dt>48,046</dt><dd>investors ranked for each startup</dd></div>
-        <div><dt>20,000+</dt><dd>founders served through partner groups</dd></div>
-        <div><dt>2</dt><dd>presentations: UVA symposium, ICMBF 2026</dd></div>
-      </dl>
-      <p class="small">LightGBM LambdaRank over 16 features, including MiniLM text similarity, split by startup so no company leaks into testing. Paper in review.</p>
-    </div>
-    <svg id="mer-svg" role="img" aria-label="Meridian pipeline: startup description and investor portfolios are embedded, 16 pair features are built, LambdaRank orders 48,046 investors, and the top matches are served to founders."></svg>
-  </div>
-</section>
-
-<!-- REACHBOT -->
-<section id="reachbot" class="case wrap">
-  <h2>ReachBot</h2>
-  <p class="meta">Summer associate, Reach Capital, 2026. Python, Gemini, NumPy.</p>
-  <p class="lede">An assistant that answers Reach Capital founders' questions from the firm's resource library, citing the exact page or recording.</p>
-  <dl class="facts">
-    <div><dt>696</dt><dd>sources indexed</dd></div>
-    <div><dt>11,244</dt><dd>passages searched per question</dd></div>
-    <div><dt>137</dt><dd>recorded sessions transcribed</dd></div>
-    <div><dt>$0.005</dt><dd>per answer, vs about $1.80 pasting the whole library</dd></div>
-  </dl>
-  <div class="rb">
-    <p>Retrieval-augmented generation: each question pulls the closest passages by vector similarity, and the model answers only from them, with citations. A weekly job keeps the index current for about a cent.</p>
-    <div class="lab" id="rag-lab">
-      <div class="lab-head"><strong>The retrieval gate</strong><span>Weak evidence means a shorter answer, or none.</span></div>
-      <div class="q-presets" role="group" aria-label="Example questions">
-        <button type="button" class="chip" data-sim="0.75" aria-pressed="true">On-topic</button>
-        <button type="button" class="chip" data-sim="0.66" aria-pressed="false">Adjacent</button>
-        <button type="button" class="chip" data-sim="0.54" aria-pressed="false">Off-topic</button>
-      </div>
-      <div class="lab-controls">
-        <label for="rag-sim">Best-match similarity <output id="rag-out" class="num">0.75</output></label>
-        <input id="rag-sim" type="range" min="0.40" max="0.90" step="0.01" value="0.75">
-      </div>
-      <svg id="rag-svg" role="img" aria-label="Similarity scale with three zones: not covered below 0.60, cautious from 0.60 to 0.70, full answer above 0.70."></svg>
-      <p class="guard" id="rag-mode" role="status"></p>
-    </div>
-  </div>
-</section>
-
-<!-- FUTURE FELLOWS -->
-<section id="fellows" class="case wrap">
-  <h2>Future Fellows</h2>
-  <p class="meta">Founding intern, employee #2, 2026 to now. Python, FastAPI, Claude API.</p>
-  <p class="lede">An evaluation system for a fellowship that places high schoolers in paid work: AI organizes the evidence, a person makes every decision.</p>
-  <dl class="facts">
-    <div><dt>150</dt><dd>automated tests guarding the rules</dd></div>
-    <div><dt>3-pass</dt><dd>blinding of names and schools</dd></div>
-    <div><dt>0</dt><dd>total scores or rankings, by design</dd></div>
-    <div><dt>5</dt><dd>model runs per score, median kept</dd></div>
-  </dl>
-  <div class="ff">
-    <p>Applicants share a code repository; the system reads its commit history and asks questions only the real author could answer. Every score must quote the application word for word.</p>
-    <div class="lab" id="quote-lab">
-      <div class="lab-head"><strong>The quote check</strong><span>A sample application. Paraphrases fail.</span></div>
-      <blockquote class="essay" id="essay"></blockquote>
-      <label class="q-label" for="quote">Quote the model gives as evidence</label>
-      <textarea id="quote" rows="2" spellcheck="false" aria-describedby="q-result"></textarea>
-      <div class="q-presets" role="group" aria-label="Example quotes">
-        <button type="button" class="chip" data-q="0" aria-pressed="true">Real quote</button>
-        <button type="button" class="chip" data-q="1" aria-pressed="false">Paraphrase</button>
-        <button type="button" class="chip" data-q="2" aria-pressed="false">Invented</button>
-      </div>
-      <p class="q-result" id="q-result" role="status"></p>
-    </div>
-  </div>
-</section>
-
-<!-- RESEARCH -->
-<section id="indus" class="research">
-  <div class="wrap">
-    <h2>Reading a script no one can read</h2>
-    <p class="meta">Independent research with Louie Merriam, 2023 to now.</p>
-    <p class="lede">Our paper separates Indus signs that stand for words from signs that stand for sounds, using only where they appear.</p>
-    <dl class="facts facts-3">
-      <div><dt>Published</dt><dd>peer-reviewed, IJCA Vol. 187, 2025</dd></div>
-      <div><dt>$5K</dt><dd>Emergent Ventures grant</dd></div>
-      <div><dt>4,500</dt><dd>years old, with no bilingual key</dd></div>
-    </dl>
-
-    <div class="method" id="indus-lab">
-      <div class="method-steps" role="tablist" aria-label="Method steps">
-        <button role="tab" id="tab-0" aria-selected="true" aria-controls="indus-panel" tabindex="0" data-step="0">Corpus</button>
-        <button role="tab" id="tab-1" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="1">Singletons</button>
-        <button role="tab" id="tab-2" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="2">Context expansion</button>
-        <button role="tab" id="tab-3" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="3">Exclusive pairs</button>
-      </div>
-      <div class="method-body" id="indus-panel" role="tabpanel" aria-labelledby="tab-0">
-        <div class="corpus" id="corpus"></div>
-        <div class="method-note">
-          <p id="step-text" aria-live="polite"></p>
-          <div id="excl-ctl" class="lab-controls" hidden>
-            <label for="excl">Exclusivity threshold <output id="excl-out" class="num">0.75</output></label>
-            <input id="excl" type="range" min="0.45" max="1" step="0.05" value="0.75">
+          <div class="lab-row">
+            <div class="lab-copy">
+              <h3>One scale for every event</h3>
+              <p>Every race converts to VDOT, Jack Daniels' oxygen-cost model, so an 800m runner and a miler can be compared.</p>
+            </div>
+            <div class="lab" id="vdot-lab">
+              <div class="lab-head"><strong>VDOT converter</strong><span>The same formulas the product uses.</span></div>
+              <div class="vdot-in">
+                <label for="v-event">Event</label>
+                <select id="v-event">
+                  <option value="800">800m</option><option value="1500">1500m</option><option value="1609.34" selected>Mile</option><option value="3200">3200m</option><option value="5000">5000m</option>
+                </select>
+                <label for="v-time">Time</label>
+                <input id="v-time" type="text" value="4:35.0" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="v-msg">
+              </div>
+              <p class="vdot-big"><span class="num" id="v-out">65.5</span><span>VDOT</span></p>
+              <p class="v-msg" id="v-msg" role="status"></p>
+              <dl class="equiv" id="v-equiv"></dl>
+            </div>
           </div>
-          <ul class="pair-list" id="pair-list" hidden></ul>
-          <p class="small">A toy corpus so the method fits on screen.</p>
+
+          <div class="lab-row lab-row-flip">
+            <div class="lab-copy">
+              <h3>Forecasts from training</h3>
+              <p>A Banister fitness-fatigue model fit to each athlete, with 4,000 sampled parameter sets for an honest range.</p>
+              <figure class="shot shot-panel"><img src="assets/aiq-forecast.jpg" width="466" height="780" alt="athletIQ forecast output with projections at 2, 6 and 12 weeks and fitted time constants" loading="lazy"><figcaption>The live forecaster.</figcaption></figure>
+            </div>
+            <div class="lab" id="ban-lab">
+              <div class="lab-head"><strong>Fitness-fatigue model</strong><span>Drag the weekly mileage bars.</span></div>
+              <svg id="ban-svg" role="group" aria-label="Weekly training load bars you can adjust, with the resulting fitness, fatigue and predicted mile time over 16 weeks"></svg>
+              <div class="lab-actions" role="group" aria-label="Training plans">
+                <button type="button" class="chip" data-plan="steady" aria-pressed="false">Steady</button>
+                <button type="button" class="chip" data-plan="taper" aria-pressed="true">Build, then taper</button>
+                <button type="button" class="chip" data-plan="over" aria-pressed="false">Overreach</button>
+              </div>
+              <p class="guard" id="ban-out" role="status"></p>
+            </div>
+          </div>
+
+          <div class="study">
+            <div>
+              <h3>Benchmark before you ship</h3>
+              <p>Three injury-risk models on 42,798 athlete-weeks, split by athlete. The simplest one won.</p>
+            </div>
+            <svg id="inj-svg" role="img" aria-label="Injury model AUC: logistic regression 0.619, XGBoost 0.576, workload ratio 0.544, chance 0.5"></svg>
+          </div>
+
+          <div class="po">
+            <div>
+              <h3>Pan-Out, for other sports</h3>
+              <p>An athletIQ product that prices junior tennis, chess, baseball and hockey prospects with stacked gradient-boosted models. It beat ratings on simulated data (AUC 0.94 vs 0.84); on real ATP careers the edge nearly vanished (0.844 vs 0.841).</p>
+            </div>
+            <figure class="shot"><img src="assets/panout-board.jpg" width="1440" height="900" alt="Pan-Out value board on simulated players" loading="lazy"></figure>
+          </div>
         </div>
+      </details>
+    </article>
+
+    <!-- SECRET -->
+    <article class="card" id="secret">
+      <img class="card-img" src="assets/secret-car.jpg" style="object-position:center 60%" width="1600" height="1200" alt="Our electric race car in the garage: white body, roll cage, red harness, with breadboard electronics on the floor" loading="lazy">
+      <div class="card-body">
+        <h2>SECRET, a 48-volt race car</h2>
+        <p>My school's electric car for the one-hour Electric Vehicle Grand Prix. I founded the team and lead the build.</p>
+        <dl class="mini">
+          <div><dt>3</dt><dd>DC Grand Prix raced</dd></div>
+          <div><dt>Top prize</dt><dd>for 3D printing</dd></div>
+          <div><dt>Dubai</dt><dd>invited, 2027</dd></div>
+        </dl>
       </div>
-    </div>
-    <p class="research-foot">
-      <a class="link" href="https://www.ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/" target="_blank" rel="noopener">Read the paper<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </p>
-
-    <div class="gmu">
-      <h2>Can hardware prove a paper is real?</h2>
-      <p class="meta">GMU Aspiring Scientists program, with Prof. Jiasun Li. 2025.</p>
-      <p class="lede">We re-ran published business and economics papers inside Intel TDX confidential VMs, which can cryptographically attest to exactly what code ran.</p>
-      <dl class="facts">
-        <div><dt>19 of 27</dt><dd>replications succeeded</dd></div>
-        <div><dt>$1.33</dt><dd>average cost per paper</dd></div>
-        <div><dt>2h 10m</dt><dd>average run</dd></div>
-        <div><dt>2</dt><dd>clouds: Azure and Google</dd></div>
-      </dl>
-      <svg id="gmu-svg" role="img" aria-label="27 replications attempted, 19 succeeded."></svg>
-      <p class="research-foot"><a class="link" href="https://journals.gmu.edu/jssr/article/view/5253" target="_blank" rel="noopener">Read the abstract<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
-    </div>
-  </div>
-</section>
-
-<!-- MORE -->
-<section class="more wrap" id="more">
-  <h2>Also built</h2>
-  <div class="more-grid">
-    <article class="more-item">
-      <b>Quant pipeline, Exeter22</b>
-      <span>Harvard iLab, 2025. Backtesting and synthetic ETFs that track private companies.</span>
+      <details class="more-info">
+        <summary>How it works</summary>
+        <div class="detail">
+          <div class="car-intro">
+            <p class="lede">Most distance in one hour on one battery wins. We rebuilt the kit car with an aluminum chassis, a new battery pack, 3D-printed wheel covers and an Arduino pacing system. We raised $7K and work alongside UMD's Formula SAE team.</p>
+            <figure class="clip">
+              <video id="secret-clip" src="assets/secret-motor.mp4" poster="assets/secret-motor.jpg" width="720" height="960" muted loop playsinline preload="none" aria-label="Working on the car's hub motor and its orange phase cables"></video>
+            </figure>
+          </div>
+          <div class="wire-wrap">
+            <div class="wire-scroll"><svg id="wire-svg" viewBox="0 0 960 440" role="group" aria-label="Electrical system of the car. Select a part to read what it does."></svg></div>
+            <div class="wire-info" id="wire-info" aria-live="polite"></div>
+          </div>
+          <div class="lab-row">
+            <div class="lab-copy">
+              <h3>Pacing to an energy budget</h3>
+              <p>Each lap, the Arduino spreads the remaining battery over the laps left and tells the driver to speed up or back off.</p>
+            </div>
+            <div class="lab" id="race-lab">
+              <div class="lab-head"><strong>One-hour race simulator</strong><span>A driver's speed, with and without pacing.</span></div>
+              <div class="lab-controls">
+                <label for="race-speed">Driver's speed <output id="race-speed-out" class="num">31</output> mph</label>
+                <input id="race-speed" type="range" min="16" max="34" step="1" value="31">
+              </div>
+              <svg id="race-svg" role="img" aria-label="Battery remaining over the hour for a driver at constant speed and with the pacing system."></svg>
+              <dl class="readout" id="race-readout"></dl>
+              <p class="guard" id="race-out" role="status"></p>
+              <div class="lab-actions"><button type="button" class="chip" id="race-run">Run the race</button></div>
+              <p class="small">Modeled car with assumed values, not measured from ours.</p>
+            </div>
+          </div>
+        </div>
+      </details>
     </article>
-    <article class="more-item">
-      <b>Safeground</b>
-      <span>A know-your-rights app for families at a refugee outreach center where I volunteer.</span>
+
+    <!-- MERIDIAN -->
+    <article class="card" id="meridian">
+      <img class="card-img" src="assets/meridian-site.jpg" width="1264" height="800" alt="Meridian's website: The VC market has a matching problem" loading="lazy">
+      <div class="card-body">
+        <h2>Meridian</h2>
+        <p>A model that ranks which investors fit a startup, built in UVA research with Prof. Adam Tashman to help underserved founders.</p>
+        <dl class="mini">
+          <div><dt>907K</dt><dd>startup-investor pairs</dd></div>
+          <div><dt>48,046</dt><dd>investors ranked</dd></div>
+          <div><dt>20,000+</dt><dd>founders served</dd></div>
+        </dl>
+        <p class="card-links"><a class="link" href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler" target="_blank" rel="noopener">Featured in Technical.ly<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+      </div>
+      <details class="more-info">
+        <summary>How it works</summary>
+        <div class="detail mer">
+          <p>A LightGBM LambdaRank model scores 16 features for every startup-investor pair, including text similarity between the startup and the investor's past portfolio. The split is by startup so no company leaks into testing. Presented at the UVA research symposium and ICMBF 2026; paper in review.</p>
+          <svg id="mer-svg" role="img" aria-label="Meridian pipeline: startup and investor portfolios are embedded, 16 pair features are built, LambdaRank orders 48,046 investors."></svg>
+        </div>
+      </details>
     </article>
-    <article class="more-item">
-      <b>Wharton and John Locke</b>
-      <span>Investment competition team lead. Global essay finalist in economics.</span>
+
+    <!-- INDUS -->
+    <article class="card" id="indus">
+      <img class="card-img card-img-doc" src="assets/proof-ijca.jpg" width="660" height="505" alt="The published paper's page in the International Journal of Computer Applications, by Ruhan Khanna and Louie Merriam" loading="lazy">
+      <div class="card-body">
+        <h2>Reading the Indus script</h2>
+        <p>A computational method that separates signs standing for words from signs standing for sounds in an undeciphered 4,500-year-old script.</p>
+        <dl class="mini">
+          <div><dt>Published</dt><dd>peer-reviewed, IJCA 2025</dd></div>
+          <div><dt>$5K</dt><dd>Emergent Ventures grant</dd></div>
+          <div><dt>2023</dt><dd>to now, with Louie Merriam</dd></div>
+        </dl>
+        <p class="card-links"><a class="link" href="https://www.ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/" target="_blank" rel="noopener">Read the paper<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+      </div>
+      <details class="more-info">
+        <summary>How it works</summary>
+        <div class="detail">
+          <div class="method" id="indus-lab">
+            <div class="method-steps" role="tablist" aria-label="Method steps">
+              <button role="tab" id="tab-0" aria-selected="true" aria-controls="indus-panel" tabindex="0" data-step="0">Corpus</button>
+              <button role="tab" id="tab-1" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="1">Singletons</button>
+              <button role="tab" id="tab-2" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="2">Context expansion</button>
+              <button role="tab" id="tab-3" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="3">Exclusive pairs</button>
+            </div>
+            <div class="method-body" id="indus-panel" role="tabpanel" aria-labelledby="tab-0">
+              <div class="corpus" id="corpus"></div>
+              <div class="method-note">
+                <p id="step-text" aria-live="polite"></p>
+                <div id="excl-ctl" class="lab-controls" hidden>
+                  <label for="excl">Exclusivity threshold <output id="excl-out" class="num">0.75</output></label>
+                  <input id="excl" type="range" min="0.45" max="1" step="0.05" value="0.75">
+                </div>
+                <ul class="pair-list" id="pair-list" hidden></ul>
+                <p class="small">A toy corpus so the method fits on screen.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </details>
+    </article>
+
+    <!-- REACHBOT -->
+    <article class="card" id="reachbot">
+      <div class="card-img card-flow" aria-hidden="true">
+        <span>696 sources</span><i></i><span>11,244 passages</span><i></i><span>closest matches</span><i></i><span>cited answer</span>
+      </div>
+      <div class="card-body">
+        <h2>ReachBot</h2>
+        <p>An AI assistant that answers Reach Capital founders' questions from the firm's library, citing the exact page or recording. Built as a summer associate.</p>
+        <dl class="mini">
+          <div><dt>696</dt><dd>sources indexed</dd></div>
+          <div><dt>137</dt><dd>sessions transcribed</dd></div>
+          <div><dt>$0.005</dt><dd>per answer</dd></div>
+        </dl>
+      </div>
+      <details class="more-info">
+        <summary>How it works</summary>
+        <div class="detail rb">
+          <p>Retrieval-augmented generation: each question pulls the closest passages by vector similarity, and the model answers only from them. When the evidence is weak, it says so instead of guessing.</p>
+          <div class="lab" id="rag-lab">
+            <div class="lab-head"><strong>The retrieval gate</strong><span>Weak evidence means a shorter answer, or none.</span></div>
+            <div class="q-presets" role="group" aria-label="Example questions">
+              <button type="button" class="chip" data-sim="0.75" aria-pressed="true">On-topic</button>
+              <button type="button" class="chip" data-sim="0.66" aria-pressed="false">Adjacent</button>
+              <button type="button" class="chip" data-sim="0.54" aria-pressed="false">Off-topic</button>
+            </div>
+            <div class="lab-controls">
+              <label for="rag-sim">Best-match similarity <output id="rag-out" class="num">0.75</output></label>
+              <input id="rag-sim" type="range" min="0.40" max="0.90" step="0.01" value="0.75">
+            </div>
+            <svg id="rag-svg" role="img" aria-label="Similarity scale with three zones: not covered below 0.60, cautious from 0.60 to 0.70, full answer above 0.70."></svg>
+            <p class="guard" id="rag-mode" role="status"></p>
+          </div>
+        </div>
+      </details>
+    </article>
+
+    <!-- FUTURE FELLOWS -->
+    <article class="card" id="fellows">
+      <img class="card-img card-img-doc" src="assets/ff-apply.jpg" width="680" height="650" alt="Future Fellows application page: Show us something you built" loading="lazy">
+      <div class="card-body">
+        <h2>Future Fellows</h2>
+        <p>The applicant evaluation system for a fellowship placing high schoolers in paid work. AI organizes evidence; a person makes every decision. Employee #2.</p>
+        <dl class="mini">
+          <div><dt>150</dt><dd>tests guarding the rules</dd></div>
+          <div><dt>0</dt><dd>rankings or total scores</dd></div>
+          <div><dt>3-pass</dt><dd>blinding of names and schools</dd></div>
+        </dl>
+      </div>
+      <details class="more-info">
+        <summary>How it works</summary>
+        <div class="detail ff">
+          <p>Applicants share a code repository and get questions only the real author could answer. Every score must quote the application word for word.</p>
+          <div class="lab" id="quote-lab">
+            <div class="lab-head"><strong>The quote check</strong><span>A sample application. Paraphrases fail.</span></div>
+            <blockquote class="essay" id="essay"></blockquote>
+            <label class="q-label" for="quote">Quote the model gives as evidence</label>
+            <textarea id="quote" rows="2" spellcheck="false" aria-describedby="q-result"></textarea>
+            <div class="q-presets" role="group" aria-label="Example quotes">
+              <button type="button" class="chip" data-q="0" aria-pressed="true">Real quote</button>
+              <button type="button" class="chip" data-q="1" aria-pressed="false">Paraphrase</button>
+              <button type="button" class="chip" data-q="2" aria-pressed="false">Invented</button>
+            </div>
+            <p class="q-result" id="q-result" role="status"></p>
+          </div>
+        </div>
+      </details>
+    </article>
+
+    <!-- GMU -->
+    <article class="card" id="tdx">
+      <img class="card-img card-img-doc" src="assets/proof-jssr.jpg" width="840" height="490" alt="Published abstract page: Evaluation of Intel's Trust Domain Extensions for Replicating and Validating Research in Management Science, by Ruhan Khanna and Jiasun Li" loading="lazy">
+      <div class="card-body">
+        <h2>Can hardware prove a paper is real?</h2>
+        <p>Re-ran published business and economics papers inside Intel TDX confidential VMs at George Mason, with Prof. Jiasun Li.</p>
+        <dl class="mini">
+          <div><dt>19 of 27</dt><dd>replications succeeded</dd></div>
+          <div><dt>$1.33</dt><dd>per paper</dd></div>
+          <div><dt>2</dt><dd>clouds tested</dd></div>
+        </dl>
+        <p class="card-links"><a class="link" href="https://journals.gmu.edu/jssr/article/view/5253" target="_blank" rel="noopener">Read the abstract<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+      </div>
+      <details class="more-info">
+        <summary>How it works</summary>
+        <div class="detail">
+          <p>Journals require replication packages, but nothing proves the code ran as claimed. TDX VMs isolate memory from the host and can attest to exactly what ran. We ran each paper on Azure and Google Cloud; most failures came from code missing from the package.</p>
+          <svg id="gmu-svg" role="img" aria-label="27 replications attempted, 19 succeeded."></svg>
+        </div>
+      </details>
+    </article>
+
+    <article class="card also-card">
+      <div class="card-body">
+        <h2>Also</h2>
+        <ul class="also-list">
+          <li><b>Quant pipeline</b> and synthetic ETFs tracking private companies, Exeter22 at Harvard iLab</li>
+          <li><b>Safeground</b>, a know-your-rights app for a refugee outreach center where I volunteer</li>
+          <li><b>Wharton</b> investment competition team lead</li>
+          <li><b>John Locke</b> essay prize finalist in economics</li>
+        </ul>
+      </div>
     </article>
   </div>
 </section>
@@ -364,10 +332,9 @@
     <div class="foot-links">
       <a href="mailto:ruhan.khanna.2009@gmail.com">ruhan.khanna.2009@gmail.com</a>
     </div>
-    <p class="foot-small">English, Hindi, Spanish and French. Varsity tennis and cross country.</p>
   </div>
 </footer>
 
-<script src="main.js?v=12"></script>
+<script src="main.js?v=13"></script>
 </body>
 </html>
