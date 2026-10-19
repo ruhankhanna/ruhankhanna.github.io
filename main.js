@@ -39,7 +39,8 @@
   /* ---------- Nav: mark the section in view ---------- */
   (() => {
     const links = [...document.querySelectorAll(".nav nav a")];
-    const owner = { work: 0, contact: 1 };
+    const owner = {};
+    links.forEach((a, i) => { owner[a.getAttribute("href").slice(1)] = i; });
     const seen = new Map();
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e) => seen.set(e.target.id, e.isIntersecting ? e.intersectionRatio : 0));
@@ -49,6 +50,17 @@
       if (best != null) links[owner[best]].setAttribute("aria-current", "true");
     }, { threshold: [0, 0.1, 0.3, 0.6], rootMargin: "-60px 0px -35% 0px" });
     Object.keys(owner).forEach((id) => { const n = document.getElementById(id); if (n) io.observe(n); });
+  })();
+
+  /* ---------- Drawing sheets: draft the leaders in as each sheet arrives ---------- */
+  (() => {
+    const sheets = document.querySelectorAll(".sheet");
+    if (!sheets.length || matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) return;
+    document.documentElement.classList.add("draw");
+    const io = new IntersectionObserver((es) => es.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    }), { threshold: 0.2 });
+    sheets.forEach((s) => io.observe(s));
   })();
 
   /* ---------- Hero screen deck ---------- */

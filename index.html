@@ -8,47 +8,54 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='6' fill='%23151514'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='600' fill='%23f3f3f1' text-anchor='middle'%3ERK%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=18">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=20">
 </head>
-<body class="no-photos">
+<body class="drawing">
 
 <a class="skip" href="#main">Skip to content</a>
 
 <header class="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#top"><span class="tile" aria-hidden="true">RK</span><span class="brand-name">Ruhan Khanna</span></a>
-    <nav aria-label="Sections">
-      <a href="#work">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <nav class="sheet-nav" aria-label="Sheets"><a href="#athletiq" aria-label="Sheet 1: athletIQ">1</a><a href="#secret" aria-label="Sheet 2: SECRET">2</a><a href="#meridian" aria-label="Sheet 3: Meridian">3</a><a href="#indus" aria-label="Sheet 4: The Indus script">4</a><a href="#reachbot" aria-label="Sheet 5: ReachBot">5</a><a href="#fellows" aria-label="Sheet 6: Future Fellows">6</a><a href="#tdx" aria-label="Sheet 7: Verifying papers on TDX">7</a><a href="#top" class="nav-index">Index</a><a href="#contact" class="nav-contact">Contact</a></nav>
   </div>
 </header>
 
-<main id="main">
+<main id="main" class="wrap">
 
-<section class="hero wrap hero-simple" id="top">
-  <h1>Here are some things I've built.</h1>
-  <p class="hero-sub">I'm Ruhan Khanna, a junior at Sidwell Friends School in Washington, DC. Open any project to see how it works.</p>
-</section>
+  <section class="sheet cover" id="top" aria-labelledby="cover-t">
+    <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+    <div class="cover-main">
+      <h1 id="cover-t">Here are some things I've built.</h1>
+      <p class="cover-sub">I'm Ruhan Khanna, a junior at Sidwell Friends School in Washington, DC. Each sheet opens to show how the thing works.</p>
+    </div>
+    <table class="bom">
+      <caption>Bill of materials</caption>
+      <thead><tr><th scope="col">Item</th><th scope="col">Part</th><th scope="col">Description</th><th scope="col">Year</th></tr></thead>
+      <tbody><tr><td class="num">1</td><th scope="row"><a href="#athletiq">athletIQ</a></th><td>Recruiting platform for college track coaches</td><td class="num">2023</td></tr><tr><td class="num">2</td><th scope="row"><a href="#secret">SECRET</a></th><td>48-volt electric race car, wiring and pacing system</td><td class="num">2023</td></tr><tr><td class="num">3</td><th scope="row"><a href="#meridian">Meridian</a></th><td>Model ranking which investors fit a startup</td><td class="num">2025</td></tr><tr><td class="num">4</td><th scope="row"><a href="#indus">The Indus script</a></th><td>Sign-function analysis of an undeciphered script</td><td class="num">2023</td></tr><tr><td class="num">5</td><th scope="row"><a href="#reachbot">ReachBot</a></th><td>Cited answers from a venture firm library</td><td class="num">2026</td></tr><tr><td class="num">6</td><th scope="row"><a href="#fellows">Future Fellows</a></th><td>Evidence-first applicant review for a fellowship</td><td class="num">2026</td></tr><tr><td class="num">7</td><th scope="row"><a href="#tdx">Verifying papers on TDX</a></th><td>Re-running economics papers in confidential VMs</td><td class="num">2025</td></tr></tbody>
+    </table>
+    <dl class="title-block">
+      <div><dt>Title</dt><dd>Things I've built</dd></div>
+      <div><dt>School</dt><dd>Sidwell Friends</dd></div>
+      <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
+      <div><dt>Sheets</dt><dd class="num">7</dd></div>
+    </dl>
+  </section>
 
-<section class="wrap" id="work" aria-label="Projects">
-  <div class="cards">
-
-    <!-- athletIQ -->
-    <article class="card" id="athletiq">
-      <div class="card-body">
-        <h2>athletIQ</h2>
-        <p>A recruiting platform college track coaches use to find, compare and track recruits. I founded it and built it.</p>
-        <dl class="mini">
-          <div><dt>Stanford, UNC</dt><dd>among programs under contract</dd></div>
-          <div><dt>$8K</dt><dd>backing from Microsoft and AWS</dd></div>
-          <div><dt>314</dt><dd>commits since the 2025 rebuild</dd></div>
-        </dl>
-        <p class="card-links"><a class="link" href="https://athletiq.run" target="_blank" rel="noopener">athletiq.run<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+    <article class="sheet" id="athletiq" aria-labelledby="athletiq-t">
+      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      <div class="sheet-main">
+        <div class="sheet-head">
+          <h2 id="athletiq-t">athletIQ</h2>
+          <p class="sheet-line">A recruiting platform college track coaches use to find, compare and track recruits.</p>
+          <div class="dim" aria-label="2023 to now"><span>2023</span><i></i><span>NOW</span></div>
+          <p class="sheet-link"><a class="link" href="https://athletiq.run" target="_blank" rel="noopener">athletiq.run<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+        </div>
+        <ul class="callouts"><li><b>Stanford, UNC</b><span>among programs under contract</span></li><li><b>$8K</b><span>backing from Microsoft and AWS</span></li><li><b>314</b><span>commits since the 2025 rebuild</span></li></ul>
       </div>
-      <details class="more-info">
-        <summary>How it works</summary>
+      <details class="detail-a">
+        <summary><span class="tag">Detail A</span>How it works</summary>
         <div class="detail">
           <div class="arch-wrap"><svg id="arch" role="img" aria-label="System diagram: Athletic.net pages are fetched by a separate scraper service, passed to the Flask app's background jobs, scored by the analytics layer, stored in SQLite, and shown in the coach app."></svg></div>
 
@@ -106,21 +113,26 @@
           </div>
         </div>
       </details>
+      <dl class="title-block">
+        <div><dt>Title</dt><dd>athletIQ</dd></div>
+        <div><dt>Role</dt><dd>Founder</dd></div>
+        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
+        <div><dt>Sheet</dt><dd class="num">1 of 7</dd></div>
+      </dl>
     </article>
-
-    <!-- SECRET -->
-    <article class="card" id="secret">
-      <div class="card-body">
-        <h2>SECRET, a 48-volt race car</h2>
-        <p>My school's electric car for the one-hour Electric Vehicle Grand Prix. I founded the team and lead the build.</p>
-        <dl class="mini">
-          <div><dt>3</dt><dd>DC Grand Prix raced</dd></div>
-          <div><dt>Top prize</dt><dd>for 3D printing</dd></div>
-          <div><dt>Dubai</dt><dd>invited, 2027</dd></div>
-        </dl>
+    <article class="sheet" id="secret" aria-labelledby="secret-t">
+      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      <div class="sheet-main">
+        <div class="sheet-head">
+          <h2 id="secret-t">SECRET</h2>
+          <p class="sheet-line">My school's 48-volt electric car for the one-hour Electric Vehicle Grand Prix. I founded the team and lead the build.</p>
+          <div class="dim" aria-label="2023 to now"><span>2023</span><i></i><span>NOW</span></div>
+          
+        </div>
+        <ul class="callouts"><li><b>3</b><span>DC Grand Prix raced</span></li><li><b>Top prize</b><span>for 3D printing</span></li><li><b>Dubai</b><span>invited, 2027</span></li></ul>
       </div>
-      <details class="more-info">
-        <summary>How it works</summary>
+      <details class="detail-a">
+        <summary><span class="tag">Detail B</span>How it works</summary>
         <div class="detail">
           <div class="car-intro">
             <p class="lede">Most distance in one hour on one battery wins. We rebuilt the kit car with an aluminum chassis, a new battery pack, 3D-printed wheel covers and an Arduino pacing system. We raised $7K and work alongside UMD's Formula SAE team.</p>
@@ -149,43 +161,51 @@
           </div>
         </div>
       </details>
+      <dl class="title-block">
+        <div><dt>Title</dt><dd>SECRET</dd></div>
+        <div><dt>Role</dt><dd>Founder, build lead</dd></div>
+        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
+        <div><dt>Sheet</dt><dd class="num">2 of 7</dd></div>
+      </dl>
     </article>
-
-    <!-- MERIDIAN -->
-    <article class="card" id="meridian">
-      <div class="card-body">
-        <h2>Meridian</h2>
-        <p>A model that ranks which investors fit a startup, built in UVA research with Prof. Adam Tashman to help underserved founders.</p>
-        <dl class="mini">
-          <div><dt>907K</dt><dd>startup-investor pairs</dd></div>
-          <div><dt>48,046</dt><dd>investors ranked</dd></div>
-          <div><dt>20,000+</dt><dd>founders served</dd></div>
-        </dl>
-        <p class="card-links"><a class="link" href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler" target="_blank" rel="noopener">Featured in Technical.ly<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+    <article class="sheet" id="meridian" aria-labelledby="meridian-t">
+      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      <div class="sheet-main">
+        <div class="sheet-head">
+          <h2 id="meridian-t">Meridian</h2>
+          <p class="sheet-line">A model that ranks which investors fit a startup, built in UVA research with Prof. Adam Tashman to help underserved founders.</p>
+          <div class="dim" aria-label="2025 to now"><span>2025</span><i></i><span>NOW</span></div>
+          <p class="sheet-link"><a class="link" href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler" target="_blank" rel="noopener">Featured in Technical.ly<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+        </div>
+        <ul class="callouts"><li><b>907K</b><span>startup-investor pairs</span></li><li><b>48,046</b><span>investors ranked</span></li><li><b>20,000+</b><span>founders served</span></li></ul>
       </div>
-      <details class="more-info">
-        <summary>How it works</summary>
+      <details class="detail-a">
+        <summary><span class="tag">Detail C</span>How it works</summary>
         <div class="detail mer">
           <p>A LightGBM LambdaRank model scores 16 features for every startup-investor pair, including text similarity between the startup and the investor's past portfolio. The split is by startup so no company leaks into testing. Presented at the UVA research symposium and ICMBF 2026; paper in review.</p>
           <svg id="mer-svg" role="img" aria-label="Meridian pipeline: startup and investor portfolios are embedded, 16 pair features are built, LambdaRank orders 48,046 investors."></svg>
         </div>
       </details>
+      <dl class="title-block">
+        <div><dt>Title</dt><dd>Meridian</dd></div>
+        <div><dt>Role</dt><dd>Researcher, UVA</dd></div>
+        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
+        <div><dt>Sheet</dt><dd class="num">3 of 7</dd></div>
+      </dl>
     </article>
-
-    <!-- INDUS -->
-    <article class="card" id="indus">
-      <div class="card-body">
-        <h2>Reading the Indus script</h2>
-        <p>A computational method that separates signs standing for words from signs standing for sounds in an undeciphered 4,500-year-old script.</p>
-        <dl class="mini">
-          <div><dt>Published</dt><dd>peer-reviewed, IJCA 2025</dd></div>
-          <div><dt>$5K</dt><dd>Emergent Ventures grant</dd></div>
-          <div><dt>2023</dt><dd>to now, with Louie Merriam</dd></div>
-        </dl>
-        <p class="card-links"><a class="link" href="https://www.ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/" target="_blank" rel="noopener">Read the paper<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+    <article class="sheet" id="indus" aria-labelledby="indus-t">
+      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      <div class="sheet-main">
+        <div class="sheet-head">
+          <h2 id="indus-t">The Indus script</h2>
+          <p class="sheet-line">A computational method that separates signs standing for words from signs standing for sounds in an undeciphered 4,500-year-old script.</p>
+          <div class="dim" aria-label="2023 to now"><span>2023</span><i></i><span>NOW</span></div>
+          <p class="sheet-link"><a class="link" href="https://www.ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/" target="_blank" rel="noopener">Read the paper<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+        </div>
+        <ul class="callouts"><li><b>Published</b><span>peer-reviewed, IJCA 2025</span></li><li><b>$5K</b><span>Emergent Ventures grant</span></li><li><b>2023</b><span>to now, with Louie Merriam</span></li></ul>
       </div>
-      <details class="more-info">
-        <summary>How it works</summary>
+      <details class="detail-a">
+        <summary><span class="tag">Detail D</span>How it works</summary>
         <div class="detail">
           <div class="method" id="indus-lab">
             <div class="method-steps" role="tablist" aria-label="Method steps">
@@ -209,21 +229,26 @@
           </div>
         </div>
       </details>
+      <dl class="title-block">
+        <div><dt>Title</dt><dd>The Indus script</dd></div>
+        <div><dt>Role</dt><dd>Researcher</dd></div>
+        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
+        <div><dt>Sheet</dt><dd class="num">4 of 7</dd></div>
+      </dl>
     </article>
-
-    <!-- REACHBOT -->
-    <article class="card" id="reachbot">
-      <div class="card-body">
-        <h2>ReachBot</h2>
-        <p>An AI assistant that answers Reach Capital founders' questions from the firm's library, citing the exact page or recording. Built as a summer associate.</p>
-        <dl class="mini">
-          <div><dt>696</dt><dd>sources indexed</dd></div>
-          <div><dt>137</dt><dd>sessions transcribed</dd></div>
-          <div><dt>$0.005</dt><dd>per answer</dd></div>
-        </dl>
+    <article class="sheet" id="reachbot" aria-labelledby="reachbot-t">
+      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      <div class="sheet-main">
+        <div class="sheet-head">
+          <h2 id="reachbot-t">ReachBot</h2>
+          <p class="sheet-line">An AI assistant that answers Reach Capital founders' questions from the firm's library, citing the exact page or recording.</p>
+          <div class="dim" aria-label="2026"><span>2026</span><i></i><span>2026</span></div>
+          
+        </div>
+        <ul class="callouts"><li><b>696</b><span>sources indexed</span></li><li><b>137</b><span>sessions transcribed</span></li><li><b>$0.005</b><span>per answer</span></li></ul>
       </div>
-      <details class="more-info">
-        <summary>How it works</summary>
+      <details class="detail-a">
+        <summary><span class="tag">Detail E</span>How it works</summary>
         <div class="detail rb">
           <p>Retrieval-augmented generation: each question pulls the closest passages by vector similarity, and the model answers only from them. When the evidence is weak, it says so instead of guessing.</p>
           <div class="lab" id="rag-lab">
@@ -242,21 +267,26 @@
           </div>
         </div>
       </details>
+      <dl class="title-block">
+        <div><dt>Title</dt><dd>ReachBot</dd></div>
+        <div><dt>Role</dt><dd>Summer associate, Reach Capital</dd></div>
+        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
+        <div><dt>Sheet</dt><dd class="num">5 of 7</dd></div>
+      </dl>
     </article>
-
-    <!-- FUTURE FELLOWS -->
-    <article class="card" id="fellows">
-      <div class="card-body">
-        <h2>Future Fellows</h2>
-        <p>The applicant evaluation system for a fellowship placing high schoolers in paid work. AI organizes evidence; a person makes every decision. Employee #2.</p>
-        <dl class="mini">
-          <div><dt>150</dt><dd>tests guarding the rules</dd></div>
-          <div><dt>0</dt><dd>rankings or total scores</dd></div>
-          <div><dt>3-pass</dt><dd>blinding of names and schools</dd></div>
-        </dl>
+    <article class="sheet" id="fellows" aria-labelledby="fellows-t">
+      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      <div class="sheet-main">
+        <div class="sheet-head">
+          <h2 id="fellows-t">Future Fellows</h2>
+          <p class="sheet-line">The applicant evaluation system for a fellowship placing high schoolers in paid work. AI organizes evidence; a person makes every decision.</p>
+          <div class="dim" aria-label="2026 to now"><span>2026</span><i></i><span>NOW</span></div>
+          
+        </div>
+        <ul class="callouts"><li><b>150</b><span>tests guarding the rules</span></li><li><b>0</b><span>rankings or total scores</span></li><li><b>3-pass</b><span>blinding of names and schools</span></li></ul>
       </div>
-      <details class="more-info">
-        <summary>How it works</summary>
+      <details class="detail-a">
+        <summary><span class="tag">Detail F</span>How it works</summary>
         <div class="detail ff">
           <p>Applicants share a code repository and get questions only the real author could answer. Every score must quote the application word for word.</p>
           <div class="lab" id="quote-lab">
@@ -273,42 +303,48 @@
           </div>
         </div>
       </details>
+      <dl class="title-block">
+        <div><dt>Title</dt><dd>Future Fellows</dd></div>
+        <div><dt>Role</dt><dd>Employee #2</dd></div>
+        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
+        <div><dt>Sheet</dt><dd class="num">6 of 7</dd></div>
+      </dl>
     </article>
-
-    <!-- GMU -->
-    <article class="card" id="tdx">
-      <div class="card-body">
-        <h2>Can hardware prove a paper is real?</h2>
-        <p>Re-ran published business and economics papers inside Intel TDX confidential VMs at George Mason, with Prof. Jiasun Li.</p>
-        <dl class="mini">
-          <div><dt>19 of 27</dt><dd>replications succeeded</dd></div>
-          <div><dt>$1.33</dt><dd>per paper</dd></div>
-          <div><dt>2</dt><dd>clouds tested</dd></div>
-        </dl>
-        <p class="card-links"><a class="link" href="https://journals.gmu.edu/jssr/article/view/5253" target="_blank" rel="noopener">Read the abstract<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+    <article class="sheet" id="tdx" aria-labelledby="tdx-t">
+      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
+      <div class="sheet-main">
+        <div class="sheet-head">
+          <h2 id="tdx-t">Verifying papers on TDX</h2>
+          <p class="sheet-line">Re-ran published business and economics papers inside Intel TDX confidential VMs, with Prof. Jiasun Li.</p>
+          <div class="dim" aria-label="2025"><span>2025</span><i></i><span>2025</span></div>
+          <p class="sheet-link"><a class="link" href="https://journals.gmu.edu/jssr/article/view/5253" target="_blank" rel="noopener">Read the abstract<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+        </div>
+        <ul class="callouts"><li><b>19 of 27</b><span>replications succeeded</span></li><li><b>$1.33</b><span>per paper</span></li><li><b>2</b><span>clouds tested</span></li></ul>
       </div>
-      <details class="more-info">
-        <summary>How it works</summary>
+      <details class="detail-a">
+        <summary><span class="tag">Detail G</span>How it works</summary>
         <div class="detail">
           <p>Journals require replication packages, but nothing proves the code ran as claimed. TDX VMs isolate memory from the host and can attest to exactly what ran. We ran each paper on Azure and Google Cloud; most failures came from code missing from the package.</p>
           <svg id="gmu-svg" role="img" aria-label="27 replications attempted, 19 succeeded."></svg>
         </div>
       </details>
+      <dl class="title-block">
+        <div><dt>Title</dt><dd>Verifying papers on TDX</dd></div>
+        <div><dt>Role</dt><dd>Researcher, GMU ASSIP</dd></div>
+        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
+        <div><dt>Sheet</dt><dd class="num">7 of 7</dd></div>
+      </dl>
     </article>
 
-    <article class="card also-card">
-      <div class="card-body">
-        <h2>Also</h2>
-        <ul class="also-list">
-          <li><b>Quant pipeline</b> and synthetic ETFs tracking private companies, Exeter22 at Harvard iLab</li>
-          <li><b>Safeground</b>, a know-your-rights app for a refugee outreach center where I volunteer</li>
-          <li><b>Wharton</b> investment competition team lead</li>
-          <li><b>John Locke</b> essay prize finalist in economics</li>
-        </ul>
-      </div>
-    </article>
-  </div>
-</section>
+  <section class="notes" aria-labelledby="notes-t">
+    <h2 id="notes-t">General notes</h2>
+    <ol>
+      <li><b>Quant pipeline</b> and synthetic ETFs tracking private companies, Exeter22 at Harvard iLab.</li>
+      <li><b>Safeground</b>, a know-your-rights app for a refugee outreach center where I volunteer.</li>
+      <li><b>Wharton</b> investment competition team lead.</li>
+      <li><b>John Locke</b> essay prize finalist in economics.</li>
+    </ol>
+  </section>
 
 </main>
 
@@ -321,6 +357,6 @@
   </div>
 </footer>
 
-<script src="main.js?v=13"></script>
+<script src="main.js?v=20"></script>
 </body>
 </html>
