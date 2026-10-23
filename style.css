@@ -63,13 +63,20 @@ a:hover { text-decoration-color: currentColor; }
 .creds a { text-decoration-color: var(--rule-2); }
 
 /* who i've worked with: small, quiet, in colour on hover */
-.orgs { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px; }
+.orgs-wrap { margin: 20px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 18px; align-items: center; }
+.orgs-wrap .meta { margin: 0; font-size: 11px; white-space: nowrap; }
+.orgs { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px 22px; }
 .orgs li { display: flex; align-items: center; gap: 6px; font: 11px var(--mono); color: var(--muted); }
-.orgs img { height: 22px; width: auto; filter: grayscale(1); opacity: .7; transition: filter .2s, opacity .2s; }
-.orgs img.thin { height: 13px; }
-.orgs img[src*="gmu"], .orgs img[src*="iroc"] { height: 28px; }
-.orgs li:hover img { filter: none; opacity: 1; }
-.orgs .ev { font: 500 13px var(--serif); color: var(--ink); opacity: .7; letter-spacing: .01em; }
+.orgs img { height: 22px; width: auto; display: block; }
+.orgs .o-reach img { height: 12px; }
+.orgs .o-microsoft img { height: 19px; }
+.orgs .o-gmu img, .orgs .o-iroc img { height: 28px; }
+.orgs .o-wharton img { height: 21px; }
+.orgs .o-sidwell img { height: 19px; }
+.orgs .ev { font: 500 13px var(--serif); color: var(--ink); letter-spacing: .01em; }
+.orgs.colleges { gap: 8px 18px; }
+.orgs.colleges img { height: 26px; max-width: 46px; object-fit: contain; }
+.orgs.colleges .o-texas img { max-width: 52px; }
 .e-role.has-org { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 .e-role .org { height: 22px; width: auto; max-width: 150px; }
 .e-role .org[src*="reach"] { height: 12px; }
@@ -79,7 +86,7 @@ a:hover { text-decoration-color: currentColor; }
 /* contact-sheet strip */
 .strip { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin: 26px 0 0; }
 .strip a { display: block; text-decoration: none; color: var(--muted); }
-.strip .ph { height: 168px; overflow: hidden; background: var(--faint); }
+.strip .ph { height: 150px; overflow: hidden; background: var(--faint); }
 .strip img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.85); transition: filter .3s, transform .5s cubic-bezier(.2,.7,.2,1); }
 .strip a:hover img { filter: saturate(1); transform: scale(1.02); }
 .strip figcaption { display: block; padding-top: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; }
@@ -380,7 +387,11 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 .section-h { font: 12px var(--mono); color: var(--muted); margin: 0 0 14px; font-weight: 400; }
 .press { margin-top: 120px; padding-top: 28px; border-top: 1px solid var(--rule); }
 .press ul { list-style: none; margin: 0; padding: 0; }
-.press li { display: grid; grid-template-columns: 7.4em minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--rule); }
+.press li { display: grid; grid-template-columns: 7.4em 18px minmax(0, 1fr) auto; gap: 12px; align-items: baseline; padding: 8px 0; border-bottom: 1px solid var(--rule); }
+.pi { width: 16px; height: 16px; object-fit: contain; vertical-align: -3px; border-radius: 3px; display: inline-block; }
+.press .pi { align-self: center; }
+.also .k .pi { margin-right: 6px; }
+.e-role .org.icon { height: 20px; border-radius: 4px; }
 .press .k { font: 12px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
 .press a { color: var(--ink); }
 .press .w { font: 12px var(--mono); color: var(--muted); text-align: right; }
@@ -434,10 +445,15 @@ details.more > .fig:last-child { margin-bottom: 20px; }
   .rank li { grid-template-columns: 3ch minmax(0, 1fr) 28% 4ch; gap: 8px; }
   .elsewhere .photos { --n: 2; }
   .also li { grid-template-columns: 1fr; gap: 0; }
-  .press li { grid-template-columns: 1fr; gap: 2px; }
+  .press li { grid-template-columns: 18px 1fr; gap: 2px 10px; }
+  .press li .k, .press li .w { grid-column: 2; }
+  .press li .pi { grid-row: 1 / span 3; align-self: start; margin-top: 4px; }
+  .orgs-wrap { grid-template-columns: 1fr; gap: 6px; }
+  .orgs-wrap .orgs { margin-bottom: 8px; }
   .press .w { text-align: left; }
   .entries { margin-top: 72px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
+.pi[src*="fellows"] { transform: scale(1.5); }

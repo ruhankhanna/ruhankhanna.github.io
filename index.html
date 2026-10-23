@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=12">
+<link rel="stylesheet" href="style.css?v=15">
 </head>
 <body>
 
@@ -35,17 +35,12 @@
     <li>first-author research with <a href="#meridian">uva</a></li>
     <li>in <a href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler/">technical.ly</a></li>
   </ul>
-  <ul class="orgs" aria-label="Organizations I've worked with or been backed by">
-    <li><img src="img/logos/uva.svg" alt=""><span>uva</span></li>
-    <li><img class="w" src="img/logos/gmu.svg" alt="George Mason University"></li>
-    <li><img class="w thin" src="img/logos/reach.svg" alt="Reach Capital"></li>
-    <li><img class="w" src="img/logos/microsoft.svg?v=2" alt="Microsoft"></li>
-    <li><img src="img/logos/aws.svg" alt="Amazon Web Services"></li>
-    <li><img class="w" src="img/logos/stanford.svg" alt=""><span>stanford</span></li>
-    <li><img class="w" src="img/logos/harvard.png" alt=""><span>harvard</span></li>
-    <li><span class="ev">emergent ventures</span></li>
-    <li><img class="w" src="img/logos/iroc.png" alt="Immigrant and Refugee Outreach Center"></li>
-  </ul>
+  <div class="orgs-wrap">
+    <p class="mono meta">worked with and backed by</p>
+    <ul class="orgs" aria-label="Organizations I've worked with or been backed by"><li class="o-uva"><img src="img/logos/uva.svg" alt="University of Virginia"><span>uva</span></li><li class="o-gmu"><img src="img/logos/gmu.svg" alt="George Mason University"></li><li class="o-reach"><img src="img/logos/reach.svg" alt="Reach Capital"></li><li class="o-microsoft"><img src="img/logos/microsoft.svg?v=15" alt="Microsoft"></li><li class="o-aws"><img src="img/logos/aws.svg?v=15" alt="Amazon Web Services"></li><li class="o-wharton"><img src="img/logos/wharton.png" alt="Wharton"></li><li class="o-iroc"><img src="img/logos/iroc.png" alt="Immigrant and Refugee Outreach Center"></li><li><span class="ev">emergent ventures</span></li></ul>
+    <p class="mono meta">athletiq piloted at</p>
+    <ul class="orgs colleges" aria-label="Colleges whose coaches piloted athletIQ"><li class="o-stanford"><img src="img/logos/stanford.svg" alt="stanford" title="stanford"></li><li class="o-harvard"><img src="img/logos/harvard.png" alt="harvard" title="harvard"></li><li class="o-unc"><img src="img/logos/unc.png" alt="unc" title="unc"></li><li class="o-georgetown"><img src="img/logos/georgetown.png" alt="georgetown" title="georgetown"></li><li class="o-texas"><img src="img/logos/texas.png" alt="texas" title="texas"></li><li class="o-haverford"><img src="img/logos/haverford.png" alt="haverford" title="haverford"></li><li class="o-conncollege"><img src="img/logos/conncollege.png" alt="conn college" title="conn college"></li><li class="o-berry"><img src="img/logos/berry.png" alt="berry" title="berry"></li><li class="o-lakeland"><img src="img/logos/lakeland.png" alt="lakeland" title="lakeland"></li></ul>
+  </div>
 
   <div class="strip" aria-label="Photos">
     <a href="img/secret-team.jpg" data-full="img/secret-team.jpg" data-cap="race day with secret, sidwell's electric car">
@@ -100,7 +95,7 @@
       <p class="mono meta">piloted by coaches at</p>
       <ul class="logo-row"><li class="big"><img src="img/logos/stanford.svg" alt="" loading="lazy"><span>stanford</span></li><li class="big"><img src="img/logos/harvard.png" alt="" loading="lazy"><span>harvard</span></li><li class="big"><img src="img/logos/unc.png" alt="" loading="lazy"><span>unc</span></li><li><img src="img/logos/georgetown.png" alt="" loading="lazy"><span>georgetown</span></li><li><img src="img/logos/texas.png" alt="" loading="lazy"><span>texas</span></li><li><img src="img/logos/haverford.png" alt="" loading="lazy"><span>haverford</span></li><li><img src="img/logos/conncollege.png" alt="" loading="lazy"><span>conn college</span></li><li><img src="img/logos/berry.png" alt="" loading="lazy"><span>berry</span></li><li><img src="img/logos/lakeland.png" alt="" loading="lazy"><span>lakeland</span></li></ul>
       <p class="mono meta">backed by</p>
-      <ul class="logo-row sponsors"><li><img src="img/logos/microsoft.svg?v=2" alt="Microsoft" loading="lazy"></li><li><img src="img/logos/aws.svg" alt="Amazon Web Services" loading="lazy"></li><li class="txt">and angel investors</li></ul>
+      <ul class="logo-row sponsors"><li><img src="img/logos/microsoft.svg?v=15" alt="Microsoft" loading="lazy"></li><li><img src="img/logos/aws.svg?v=15" alt="Amazon Web Services" loading="lazy"></li><li class="txt">and angel investors</li></ul>
     </div>
     <dl class="facts">
       <div><dt>9</dt><dd>college programs have piloted it</dd></div>
@@ -357,7 +352,7 @@
       <h2><span class="n">07</span>stackup</h2>
       <span class="meta">2026 – now</span>
     </div>
-    <p class="e-role meta">built it · employee #2 at <a href="https://www.joinfellows.org/">future fellows</a></p>
+    <p class="e-role meta has-org"><img class="org icon" src="img/icons/fellows.png" alt="Future Fellows"><span>built it · employee #2 at <a href="https://www.joinfellows.org/">future fellows</a></span></p>
     <p class="dek">a free ten-minute assessment that reads a student's code and git history, then asks questions only the author could answer.</p>
     <dl class="facts">
       <div><dt>10 min</dt><dd>start to finish, free</dd></div>
@@ -454,24 +449,24 @@
   <section class="press col" id="writing" aria-labelledby="press-h">
     <h2 class="section-h" id="press-h">writing, press, papers</h2>
     <ul>
-      <li><span class="k">aug 2026</span><a href="https://www.joinfellows.org/blog/stackup">introducing stackup</a><span class="w">future fellows blog · by me</span></li>
-      <li><span class="k">apr 2026</span><a href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler/">dc teen builds startup-investor matching software</a><span class="w">technical.ly</span></li>
-      <li><span class="k">jan 2026</span><a href="https://www.researchgate.net/publication/400630982_Matching_Frictions_and_Equilibrium_Dispersion_in_Venture_Capital_Markets_Evidence_from_Large-Scale_Compatibility_Rankings">matching frictions and equilibrium dispersion in venture capital markets</a><span class="w">paper, with adam tashman</span></li>
-      <li><span class="k">dec 2025</span><a href="https://ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/">a computational analysis of the indus script</a><span class="w">ijca, with louie merriam</span></li>
-      <li><span class="k">sep 2025</span><a href="https://journals.gmu.edu/jssr/article/view/5253">evaluation of intel's tdx for replicating research in management science</a><span class="w">jssr, with jiasun li</span></li>
-      <li><span class="k">mar 2025</span><a href="https://marginalrevolution.com/marginalrevolution/2025/03/emergent-ventures-winners-41st-cohort.html">emergent ventures winners, 41st cohort</a><span class="w">marginal revolution</span></li>
-      <li><span class="k">aug 2024</span><a href="https://sidwellhorizon.org/2898/past-editions-of-news/secret-wins-award-at-dc-electric-vehicle-grand-prix/">secret wins award at dc electric vehicle grand prix</a><span class="w">the horizon</span></li>
-      <li><span class="k">jun 2024</span><a href="https://www.sidwell.edu/about/news/news-detail/~board/homepage-news-panel/post/how-to-build-an-e-car-from-scratch">how to build an e-car from scratch</a><span class="w">sidwell friends</span></li>
-      <li><span class="k">jun 2023</span><a href="https://medium.com/@ruhan.khanna.2009/a-future-aerodynamic-plan-for-the-ferrari-sf-24-a1a889252a35">a future aerodynamic plan for the ferrari sf-24</a><span class="w">medium · by me, 8th grade</span></li>
+      <li><span class="k">aug 2026</span><img class="pi" src="img/icons/fellows.png" alt=""><a href="https://www.joinfellows.org/blog/stackup">introducing stackup</a><span class="w">future fellows blog · by me</span></li>
+      <li><span class="k">apr 2026</span><img class="pi" src="img/icons/technically.png" alt=""><a href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler/">dc teen builds startup-investor matching software</a><span class="w">technical.ly</span></li>
+      <li><span class="k">jan 2026</span><img class="pi" src="img/icons/rg.png" alt=""><a href="https://www.researchgate.net/publication/400630982_Matching_Frictions_and_Equilibrium_Dispersion_in_Venture_Capital_Markets_Evidence_from_Large-Scale_Compatibility_Rankings">matching frictions and equilibrium dispersion in venture capital markets</a><span class="w">paper, with adam tashman</span></li>
+      <li><span class="k">dec 2025</span><span class="pi"></span><a href="https://ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/">a computational analysis of the indus script</a><span class="w">ijca, with louie merriam</span></li>
+      <li><span class="k">sep 2025</span><span class="pi"></span><a href="https://journals.gmu.edu/jssr/article/view/5253">evaluation of intel's tdx for replicating research in management science</a><span class="w">jssr, with jiasun li</span></li>
+      <li><span class="k">mar 2025</span><img class="pi" src="img/icons/mr.png" alt=""><a href="https://marginalrevolution.com/marginalrevolution/2025/03/emergent-ventures-winners-41st-cohort.html">emergent ventures winners, 41st cohort</a><span class="w">marginal revolution</span></li>
+      <li><span class="k">aug 2024</span><img class="pi" src="img/icons/horizon.png" alt=""><a href="https://sidwellhorizon.org/2898/past-editions-of-news/secret-wins-award-at-dc-electric-vehicle-grand-prix/">secret wins award at dc electric vehicle grand prix</a><span class="w">the horizon</span></li>
+      <li><span class="k">jun 2024</span><img class="pi" src="img/icons/sidwell.png" alt=""><a href="https://www.sidwell.edu/about/news/news-detail/~board/homepage-news-panel/post/how-to-build-an-e-car-from-scratch">how to build an e-car from scratch</a><span class="w">sidwell friends</span></li>
+      <li><span class="k">jun 2023</span><img class="pi" src="img/icons/medium.png" alt=""><a href="https://medium.com/@ruhan.khanna.2009/a-future-aerodynamic-plan-for-the-ferrari-sf-24-a1a889252a35">a future aerodynamic plan for the ferrari sf-24</a><span class="w">medium · by me, 8th grade</span></li>
     </ul>
   </section>
 
   <section class="also col" aria-labelledby="also-h">
     <h2 class="section-h" id="also-h">also</h2>
     <ul>
-      <li><span class="k">wharton</span><span>led our team in the wharton global high school investment competition</span></li>
-      <li><span class="k">john locke</span><span>essay prize finalist, economics</span></li>
-      <li><span class="k">harvard ilab</span><span>a quant pipeline and synthetic etfs tracking private companies, with exeter22</span></li>
+      <li><span class="k"><img class="pi" src="img/logos/wharton.png" alt="Wharton" style="width:auto;height:16px"></span><span>led our team in the wharton global high school investment competition</span></li>
+      <li><span class="k"><img class="pi" src="img/icons/locke.png" alt="">john locke</span><span>essay prize finalist, economics</span></li>
+      <li><span class="k"><img class="pi" src="img/icons/ilab.png" alt="">harvard ilab</span><span>a quant pipeline and synthetic etfs tracking private companies, with exeter22</span></li>
       <li><span class="k">track</span><span>on sidwell's track team, which is where athletiq started</span></li>
     </ul>
   </section>
@@ -493,7 +488,7 @@
   });
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<script src="figures.js?v=12"></script>
-<script type="module" src="car3d.js?v=12"></script>
+<script src="figures.js?v=15"></script>
+<script type="module" src="car3d.js?v=15"></script>
 </body>
 </html>
