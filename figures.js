@@ -59,37 +59,18 @@
     };
     function run() {
       const d = +ev.value, sec = parse(tIn.value);
-      if (!isFinite(sec) || sec <= 0) { msg.textContent = "try a time like 4:35 or 2:01.5"; tIn.setAttribute("aria-invalid", "true"); return; }
+      if (!isFinite(sec) || sec <= 0) { msg.textContent = "try something like 4:35 or 2:01.5"; tIn.setAttribute("aria-invalid", "true"); return; }
       const v = VD.vdot(d, sec);
-      if (!isFinite(v) || v < 25 || v > 90) { msg.textContent = "outside the range the formula is fit for"; tIn.setAttribute("aria-invalid", "true"); return; }
+      if (!isFinite(v) || v < 25 || v > 90) { msg.textContent = "that's outside what the formula handles"; tIn.setAttribute("aria-invalid", "true"); return; }
       tIn.removeAttribute("aria-invalid");
       out.textContent = v.toFixed(1);
-      msg.textContent = v > 78 ? "world-class" : v > 69 ? "college varsity" : v > 58 ? "strong high school varsity" : "developing runner";
+      msg.textContent = v > 78 ? "that's world-class" : v > 69 ? "college varsity level" : v > 58 ? "a strong high school runner" : "still developing";
       eq.innerHTML = events.map(([dist, name]) =>
         `<div class="${Math.abs(dist - d) < 1 ? "self" : ""}"><dt>${name}</dt><dd>${fmt(VD.timeFor(dist, v))}</dd></div>`).join("");
     }
     ev.addEventListener("change", run);
     tIn.addEventListener("input", run);
     run();
-  })();
-
-  /* ---------- injury benchmark (athletIQ injury/validation.json) ---------- */
-  (() => {
-    const svg = $("#inj-svg");
-    if (!svg) return;
-    const rows = [["logistic regression", 0.619, true], ["xgboost, engineered features", 0.576], ["workload-ratio rule (acwr)", 0.544]];
-    responsive(svg, 150, (w) => {
-      svg.innerHTML = "";
-      const lo = 0.5, hi = 0.64, R = w - 44;
-      const sx = (v) => ((v - lo) / (hi - lo)) * R;
-      rows.forEach(([name, v, best], k) => {
-        const y = 12 + k * 42;
-        el("text", { x: 0, y, class: best ? "ink" : "" }, svg).textContent = name;
-        el("rect", { x: 0, y: y + 7, width: sx(v), height: 12, fill: best ? css("--accent") : css("--ink"), "fill-opacity": best ? 1 : 0.18 }, svg);
-        el("text", { x: sx(v) + 6, y: y + 17, class: best ? "acc" : "" }, svg).textContent = v.toFixed(3);
-      });
-      el("text", { x: 0, y: 144 }, svg).textContent = "auc, split by athlete · 0.5 = coin flip";
-    });
   })();
 
   /* ---------- Meridian: rank investors for a startup (illustrative) ---------- */
@@ -129,73 +110,6 @@
     chips.forEach((c) => c.addEventListener("click", () => show(c.dataset.s)));
     show("k12");
     requestAnimationFrame(() => requestAnimationFrame(() => list.classList.add("ready")));
-  })();
-
-  /* ---------- SECRET wiring diagram (from the competition kit's schematic) ---------- */
-  (() => {
-    const svg = $("#wire-svg");
-    if (!svg) return;
-    const info = $("#wire-info");
-    const parts = {
-      throttle: { x: 20, y: 30, w: 160, h: 58, t: "thumb throttle", s: "hall sensor, regen 0–20%",
-        d: "A hall-effect thumb throttle wired into a 14-pin connector we built pin by pin. The first 20% of travel is regenerative braking: easing off slows the car and puts energy back in the pack." },
-      ca: { x: 300, y: 30, w: 170, h: 58, t: "cycle analyst", s: "amps, amp-hours, speed",
-        d: "Reads the voltage across the shunt to get current, integrates it into amp-hours drawn since the last full charge, and computes speed from the tire circumference we calibrated." },
-      arduino: { x: 540, y: 30, w: 170, h: 58, t: "arduino", s: "per-lap energy budget", ours: true,
-        d: "Our addition to the kit. Each lap it reads amp-hours used, divides what's left of the battery by the laps left in the hour, compares that budget to the lap just driven, and decides: speed up, hold, or back off." },
-      lcd: { x: 760, y: 30, w: 190, h: 58, t: "driver display", s: "lap, use rate, pace call", ours: true,
-        d: "The dash screen the driver races by: lap number, battery use rate, and the pacing call from the Arduino." },
-      shunt: { x: 120, y: 190, w: 160, h: 58, t: "shunt", s: "0.25 mΩ, negative leg",
-        d: "A precision resistor in the battery's negative lead: 75 mV at 300 A. The tiny voltage across it is the current, by Ohm's law." },
-      ctrl: { x: 360, y: 180, w: 230, h: 80, t: "motor controller", s: "48V DC → 3-phase", hot: true,
-        d: "Turns 48V DC into three-phase current for the brushless motor, timing each switch from the motor's hall sensors. We program it over RS-232, including regen on the first 20% of throttle." },
-      motor: { cx: 860, cy: 220, r: 50, t: "hub motor", s: "brushless DC",
-        d: "A brushless DC motor built into the wheel. Its three phases land on the controller's A, B and C tabs; hall and temperature sensors report back on a separate connector." },
-      batt: { x: 20, y: 350, w: 230, h: 58, t: "battery pack", s: "4 × 12V in series = 48V",
-        d: "Four 12V sealed lead-acid batteries in series on 6-gauge cable. Lead-acid gives up usable capacity at high current, which is why pacing matters so much." },
-      kill: { x: 300, y: 350, w: 140, h: 58, t: "kill switches", s: "2 keyed, in series",
-        d: "Two main power switches with removable keys, wired in series. Where they sit is set by the race rules." },
-      fuse: { x: 480, y: 350, w: 110, h: 58, t: "100 A fuse", s: "main fuse",
-        d: "The main fuse on the positive leg. Everything downstream is protected if a cable shorts to the frame." },
-      cont: { x: 630, y: 350, w: 160, h: 58, t: "contactor", s: "+ precharge resistor",
-        d: "A high-power relay. Before it closes, a precharge resistor fills the controller's capacitors for about three seconds; switching straight onto 48V would slam them with inrush current." },
-    };
-    const power = ["M250,379 H300", "M440,379 H480", "M590,379 H630", "M710,350 V300 H540 V260", "M80,350 V248", "M280,219 H360"];
-    const phases = ["M590,205 H812", "M590,220 H810", "M590,235 H812"];
-    const signals = ["M100,88 V140 H410 V180", "M200,190 V120 H360 V88", "M470,59 H540", "M710,59 H760", "M860,170 V150 H560 V180"];
-    let sel = "arduino";
-    function draw() {
-      svg.innerHTML = "";
-      const ink = css("--ink"), rule = css("--rule-2"), paper = css("--paper"), muted = css("--muted"), acc = css("--accent");
-      const gW = el("g", {}, svg), gN = el("g", {}, svg);
-      power.forEach((d) => { el("path", { d, fill: "none", stroke: rule, "stroke-width": 5, "stroke-linecap": "round" }, gW); el("path", { d, class: "flow" }, gW); });
-      phases.forEach((d, i) => { el("path", { d, fill: "none", stroke: ["#b8962e", "#4f8a5b", "#4a6fb5"][i], "stroke-width": 2.5 }, gW); });
-      el("text", { x: 700, y: 196 }, gW).textContent = "u  v  w";
-      signals.forEach((d) => el("path", { d, fill: "none", stroke: muted, "stroke-width": 1, "stroke-dasharray": "3 4" }, gW));
-      [["14-pin", 250, 134], ["shunt voltage", 240, 114], ["serial", 478, 50], ["hall + temp", 640, 144]].forEach(([t, x, y]) => {
-        el("text", { x, y }, gW).textContent = t;
-      });
-      Object.entries(parts).forEach(([k, p]) => {
-        const on = k === sel;
-        const g = el("g", { class: `part${on ? " sel" : ""}`, tabindex: 0, role: "button", "aria-pressed": on, "aria-label": p.t }, gN);
-        const stroke = on ? ink : p.ours ? acc : rule;
-        if (p.r) {
-          el("circle", { cx: p.cx, cy: p.cy, r: p.r, fill: paper, stroke, "stroke-width": on ? 1.5 : 1 }, g);
-          el("text", { x: p.cx, y: p.cy - 2, "text-anchor": "middle", class: "ink" }, g).textContent = p.t;
-          el("text", { x: p.cx, y: p.cy + 15, "text-anchor": "middle" }, g).textContent = p.s;
-        } else {
-          el("rect", { x: p.x + 0.5, y: p.y + 0.5, width: p.w - 1, height: p.h - 1, rx: 3, fill: paper, stroke, "stroke-width": on ? 1.5 : 1, "stroke-dasharray": p.ours && !on ? "4 3" : "0" }, g);
-          el("text", { x: p.x + 12, y: p.y + (p.h > 60 ? 35 : 25), class: "ink" }, g).textContent = p.t;
-          el("text", { x: p.x + 12, y: p.y + (p.h > 60 ? 54 : 43) }, g).textContent = p.s;
-        }
-        const pick = () => { sel = k; draw(); svg.querySelector(`[aria-label="${p.t}"]`).focus({ preventScroll: true }); };
-        g.addEventListener("click", pick);
-        g.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } });
-      });
-      const p = parts[sel];
-      info.innerHTML = `<b>${p.t}${p.ours ? " <span class='tag'>we added this</span>" : ""}</b>${p.d}`;
-    }
-    draw();
   })();
 
   /* ---------- one-hour race: constant speed vs per-lap energy budget ---------- */
@@ -266,10 +180,10 @@
       el("text", { x: W - M.r, y: M.t + 31, "text-anchor": "end", class: "halo" }, svg).textContent = "driver alone";
       const gain = b.laps - a.laps;
       msg.innerHTML = a.dead
-        ? `at ${speed} mph the pack dies <b>${(60 - a.dead).toFixed(0)} min early</b>. pacing backs off and finishes <b>${gain.toFixed(1)} laps ahead</b>.`
+        ? `at ${speed} mph the battery dies <b>${(60 - a.dead).toFixed(0)} minutes early</b>. with pacing the driver backs off and ends up <b>${gain.toFixed(1)} laps ahead</b>.`
         : a.left > 5
-          ? `at ${speed} mph the driver leaves <b>${a.left.toFixed(0)}% of the battery unused</b>. pacing spends it: <b>+${gain.toFixed(1)} laps</b>.`
-          : `${speed} mph is close to the best constant speed for this car. pacing finds it without the driver knowing.`;
+          ? `at ${speed} mph the driver finishes with <b>${a.left.toFixed(0)}% of the battery left over</b>. pacing uses it up and gets <b>${gain.toFixed(1)} more laps</b>.`
+          : `${speed} mph is about the best steady speed for this car. pacing gets there without the driver having to know that.`;
     }
     function play() {
       cancelAnimationFrame(anim);
@@ -393,28 +307,14 @@
       for (let i = 0; i < 25; i++) el("rect", { x: i * (size + 3), y: 76, width: size, height: size, rx: 1.5, fill: i < n ? acc : "none", stroke: i < n ? acc : rule }, svg);
       chips.forEach((c) => c.setAttribute("aria-pressed", Math.abs(+c.dataset.sim - sim) < 0.005 ? "true" : "false"));
       mode.innerHTML = sim < 0.6
-        ? "<b>not covered.</b> the evidence is weak, so it says the library doesn't cover this instead of improvising."
+        ? "<b>not covered.</b> nothing in the library is close enough, so it says so instead of making something up."
         : sim < 0.7
-          ? "<b>cautious.</b> only 5 passages go to the model, with a note that the evidence is thin."
-          : `<b>answer.</b> up to ${n} passages, scaled to how strong the evidence is. every claim carries a citation.`;
+          ? "<b>careful.</b> it only gets 5 passages, plus a note that the evidence is thin."
+          : `<b>answer.</b> it gets ${n} passages, more when the match is stronger, and cites every claim.`;
     }
     input.addEventListener("input", render);
     chips.forEach((c) => c.addEventListener("click", () => { input.value = c.dataset.sim; render(); }));
     responsive(svg, 96, (w) => { W = w; render(); });
-  })();
-
-  /* ---------- TDX replication results ---------- */
-  (() => {
-    const svg = $("#tdx-svg");
-    if (!svg) return;
-    responsive(svg, 64, (w) => {
-      svg.innerHTML = "";
-      const acc = css("--accent"), rule = css("--rule-2");
-      const n = 27, ok = 19, gap = 3, size = Math.min(18, (w - gap * (n - 1)) / n);
-      for (let i = 0; i < n; i++) el("rect", { x: i * (size + gap), y: 4, width: size, height: size * 1.5, rx: 1.5, fill: i < ok ? acc : "none", stroke: i < ok ? acc : rule }, svg);
-      el("text", { x: 0, y: 4 + size * 1.5 + 18, class: "acc" }, svg).textContent = "19 re-ran and matched";
-      el("text", { x: ok * (size + gap), y: 4 + size * 1.5 + 18 }, svg).textContent = "8 failed";
-    });
   })();
 
   /* ---------- fig. 0: each project's track from question to use ---------- */
@@ -498,8 +398,8 @@
       list.innerHTML = steps().map(([t, d, v], i) =>
         `<li class="${i < shown ? "on" : ""}"><span class="n mono">${i + 1}</span><div><b>${t}</b><p>${d}</p><p class="mono v">${v}</p></div></li>`).join("");
       out.innerHTML = shown < 5 ? "" : tamper
-        ? "<b>caught.</b> one changed line changes the measurement, so the signed receipt no longer matches the paper anyone can download."
-        : "<b>verified.</b> the receipt proves this exact published code produced these results, without trusting the author or the cloud.";
+        ? "<b>caught.</b> one edited line changes the measurement, so the signed record no longer matches the code anyone can download."
+        : "<b>verified.</b> the record shows this exact published code made these results, and you don't have to take the author's or the cloud's word for it.";
     }
     function run() {
       clearInterval(timer); shown = 0; render();
@@ -572,12 +472,12 @@
             <p class="mono q">evidence: "${esc(quote)}" ${found ? `<span class="ok">✓ found in ${sc.file}</span>` : `<span class="bad">✗ not in the repo</span>`}</p>
             <pre class="mono"><span class="fn">${sc.file}</span>\n${code}</pre></div>`;
         }).join("") + `<div class="chips" style="margin-top:12px"><button type="button" class="chip" id="su-fake" aria-pressed="${faked}">let the model invent evidence</button></div>
-          <p class="mono meta" style="margin-top:8px">two scores, side by side. stackup never adds them into one number.</p>`;
+          <p class="mono meta" style="margin-top:8px">two scores side by side. stackup never adds them up into one number.</p>`;
         $("#su-fake").addEventListener("click", () => { faked = !faked; render(); });
       }
       if (step === 2) {
         body.innerHTML = `<ol class="su-qs">${r.qs.map((q) => `<li>${esc(q)}</li>`).join("")}</ol>
-          <p class="mono meta">one at a time, no going back. easy if you wrote it; hard to fake if you didn't.</p>`;
+          <p class="mono meta">they come one at a time and you can't go back. easy if you wrote it, hard to fake if you didn't.</p>`;
       }
     }
     repoChips.forEach((c) => c.addEventListener("click", () => {
@@ -606,9 +506,9 @@
       es: { emg: "Estoy siendo detenido ahora mismo", pol: ["La policía te detuvo", "Estoy ejerciendo mi derecho a guardar silencio. Quiero un abogado."], door: ["Alguien está en tu puerta", "NO tienes que abrir tu puerta. ICE no puede entrar sin una orden firmada por un juez."], det: ["Estás siendo detenido", "Quiero hablar con un abogado inmediatamente."] },
     };
     const NOTE = {
-      pol: "in many countries, staying silent implies guilt. here it's a constitutional right, and the app says so in the family's own language.",
-      door: "you don't have to open the door. ask them to slide the warrant underneath.",
-      det: "stay calm, don't run, don't resist. say only these words.",
+      pol: "back home, staying quiet can look like guilt. the app explains that here it's a right.",
+      door: "you don't have to open the door. ask them to slide the warrant under it.",
+      det: "stay calm, don't run, don't resist, and only say these words.",
     };
     let sit = "pol", lang = "en";
     function render() {

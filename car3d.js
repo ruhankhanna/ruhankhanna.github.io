@@ -270,7 +270,7 @@ function init(root) {
   /* 01 body shell */
   {
     const g = part("shell", "body shell", "the white fairing", [0, 0.8, 0],
-      "The fairing over the chassis. At race speed most of the battery goes into pushing air, so the shell's shape does more for range than almost anything else on the car.");
+      "the white shell over everything. at race speed most of the battery goes into pushing air out of the way, so the shape matters more for range than almost anything else.");
     add(g, shellGeometry(), M.shell);
     // black rubber trim around the cockpit opening
     const rim = [];
@@ -311,7 +311,7 @@ function init(root) {
   /* 02 chassis + floor */
   {
     const g = part("chassis", "aluminum chassis", "rebuilt by us", [0, 0, 0],
-      "We rebuilt the chassis in aluminum: lighter than the original, with mounting points where we wanted the battery and electronics to sit. The plywood floor you can see at the shell's edge is bolted to it.");
+      "we rebuilt the frame in aluminum. it's lighter than the old one and has mounting points right where we wanted the battery and electronics. the plywood floor is bolted on top.");
     [-0.15, 0.15].forEach((z) => add(g, rbox(1.46, 0.035, 0.035, 0.006), M.alu, [0.04, 0.135, z]));
     [-0.62, -0.3, 0.05, 0.42, 0.74].forEach((x) => add(g, rbox(0.035, 0.03, 0.3, 0.006), M.alu, [x, 0.135, 0]));
     add(g, rbox(1.15, 0.014, 0.36, 0.004), M.wood, [0.0, 0.158, 0]);
@@ -322,7 +322,7 @@ function init(root) {
   /* 03 cockpit: seat, roll hoop, harness, mirrors, helmet */
   {
     const g = part("cockpit", "roll hoop, seat, harness", "driver safety cell", [-0.05, 0.42, 0],
-      "The roll hoop has to clear the driver's helmet if the car goes over, and carries padded head supports. The seat sits low and reclined to keep the frontal area, and so the drag, small. A red harness holds the driver in.");
+      "the roll hoop has to clear the driver's helmet if the car flips. the seat is low and laid back so less of the driver sticks up into the wind, and the red harness keeps them in place.");
     // seat: base, reclined back, side bolsters
     add(g, rbox(0.46, 0.06, 0.36, 0.025), M.seat, [-0.04, 0.17, 0], [0, 0, -0.07]);
     const back = new THREE.Group();
@@ -370,7 +370,7 @@ function init(root) {
   /* 04 steering + throttle */
   {
     const g = part("steer", "steering yoke + thumb throttle", "regen on 0–20%", [0.22, 0.3, 0],
-      "A small yoke rather than a round wheel, to fit the narrow cockpit. The thumb throttle is a hall-effect sensor on the right grip; the first 20% of its travel is regenerative braking, so easing off puts energy back in the pack.");
+      "a small yoke instead of a round wheel, because the cockpit is narrow. the throttle is under the driver's right thumb, and the first 20% of it is regenerative braking, so easing off puts a little energy back in the battery.");
     add(g, tubeAlong([[0.6, 0.2, 0], [0.4, 0.34, 0], [0.22, 0.45, 0]], 0.012, 20), M.steel);
     const yoke = new THREE.Group();
     yoke.position.set(0.19, 0.47, 0);
@@ -386,7 +386,7 @@ function init(root) {
   /* 05 dash electronics */
   {
     const g = part("dash", "cycle analyst, arduino, display", "the pacing brain", [0.32, 0.55, 0],
-      "The cycle analyst counts every amp-hour through the shunt. Our Arduino reads it each lap, divides what is left by the laps left in the hour, and tells the driver on the display: speed up, hold, or back off.");
+      "the cycle analyst counts every amp-hour the motor pulls. our arduino reads that each lap, splits what's left over the laps left, and tells the driver on the screen whether to push, hold or ease off.");
     const lcd = (lines, fg, bg) => canvasTex(256, 128, (c, w, h) => {
       c.fillStyle = bg; c.fillRect(0, 0, w, h);
       c.fillStyle = fg; c.font = "bold 30px ui-monospace, Menlo, monospace";
@@ -411,7 +411,7 @@ function init(root) {
   const FX = 0.82, FR = 0.22, FZ = 0.53;
   {
     const g = part("front", "front wheels", "steered, outboard", [0, 0, 0],
-      "Steered wheels on wishbones, mounted outboard of the body. Alignment is free range: a wheel that is toed in even slightly scrubs energy every metre of the hour.");
+      "the two steered wheels sit outside the body on wishbone arms. getting the alignment right is free range, since a wheel that's even slightly off scrubs energy the whole hour.");
     [-1, 1].forEach((s) => {
       const side = new THREE.Group();
       side.userData.side = s;
@@ -434,7 +434,7 @@ function init(root) {
   /* 07 hub motor (rear) */
   {
     const g = part("motor", "rear hub motor", "brushless dc, in the wheel", [-0.55, 0, 0],
-      "A brushless DC motor built into the rear wheel, so there is no chain or gearbox to lose energy in. Its three phases come from the controller; hall sensors tell the controller where the rotor is so it can time each switch.");
+      "the motor is built into the rear wheel, so there's no chain or gearbox wasting energy. the three colored wires carry power from the controller, which uses sensors in the motor to know when to switch.");
     const w = wheel({ r: 0.23, tw: 0.06, motor: true, spokes: 0 });
     w.position.set(REAR.x, 0.23, 0);
     g.add(w);
@@ -446,7 +446,7 @@ function init(root) {
   /* 08 battery pack */
   {
     const g = part("batt", "battery pack", "4 × 12 V lead-acid = 48 V", [-0.05, 0.62, 0],
-      "Four 12 V sealed lead-acid batteries in series. Lead-acid loses usable capacity when you pull hard (Peukert's law), so a driver who goes out fast doesn't just run out sooner, they get less total energy. That is the whole case for pacing.");
+      "four 12 v lead-acid batteries in a row, 48 v total. lead-acid gives you less total energy when you pull hard, so a driver who starts too fast doesn't just run out sooner, they get less out of the pack overall. that's the whole reason pacing matters.");
     const label = canvasTex(128, 64, (c) => { c.fillStyle = "#2b2d30"; c.fillRect(0, 0, 128, 64); c.fillStyle = "#e9e9e9"; c.font = "bold 22px Arial"; c.fillText("12V SLA", 14, 40); });
     [[-0.5, -0.095], [-0.5, 0.095], [-0.69, -0.095], [-0.69, 0.095]].forEach(([x, z]) => {
       add(g, rbox(0.17, 0.165, 0.175, 0.01), M.batt, [x, 0.23, z]);
@@ -464,7 +464,7 @@ function init(root) {
   /* 09 controller + power path + kill switches */
   {
     const g = part("power", "controller, contactor, fuse, kill switches", "48 V dc → 3-phase", [-0.3, 0.95, 0],
-      "Power runs battery → two keyed kill switches → 100 A fuse → contactor → controller. A precharge resistor fills the controller's capacitors before the contactor closes; switching straight onto 48 V would hit them with an inrush spike.");
+      "power goes from the battery through two keyed kill switches, a 100 a fuse and a big relay to the controller. a small resistor charges the controller up gently first, because hitting it with 48 v all at once can fry it.");
     add(g, rbox(0.18, 0.05, 0.13, 0.008), M.alu, [-0.6, 0.345, 0]);
     for (let k = 0; k < 7; k++) add(g, new THREE.BoxGeometry(0.16, 0.022, 0.003), M.alu, [-0.6, 0.38, -0.054 + k * 0.018]);
     add(g, cyl(0.022, 0.05, 20), M.black, [-0.48, 0.345, -0.05]);
@@ -519,7 +519,7 @@ function init(root) {
     const g = parts.find((p) => p.userData.id === selected);
     info.innerHTML = g
       ? `<b>${g.userData.name}</b>${g.userData.desc}`
-      : "<b>drag to turn it, slide to take it apart.</b>pick a part to see what it does. the whole car is built around one constraint: the most distance in an hour on one charge.";
+      : "<b>drag to turn it, slide to take it apart.</b>pick a part to see what it does. everything on the car comes back to one goal, which is going as far as possible in an hour on one charge.";
     callout.hidden = !g;
     if (g) callout.textContent = g.userData.name;
     needsRender = true;
