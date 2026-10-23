@@ -87,8 +87,6 @@
       { n: "midwest pre-seed fund",         f: { k12: [.3,.5,.9,.1], pay: [.35,.3,.6,.4], clim: [.55,.95,.95,1] } },
       { n: "growth-stage megafund",         f: { k12: [.4,.05,.05,.5], pay: [.5,.3,.1,.8], clim: [.4,.05,.05,.5] } },
     ];
-    const rowH = 34;
-    list.style.height = `${investors.length * rowH}px`;
     const rows = investors.map((inv) => {
       const li = document.createElement("li");
       li.innerHTML = `<span class="rk num"></span><span class="nm">${inv.n}</span><span class="segs">${F.map((f) => `<i class="s-${f}"></i>`).join("")}</span><span class="sc num"></span>`;
@@ -96,20 +94,27 @@
       return { inv, li };
     });
     const chips = $$("#rank-lab [data-s]");
-    function show(key) {
+    // rows sit in normal flow; a reorder slides each row from its old spot to its new one
+    function show(key, animate) {
       chips.forEach((c) => c.setAttribute("aria-pressed", c.dataset.s === key ? "true" : "false"));
+      const before = new Map(rows.map((r) => [r.li, r.li.getBoundingClientRect().top]));
       const scored = rows.map((r) => ({ ...r, s: r.inv.f[key].reduce((a, v, i) => a + v * W[i], 0) })).sort((a, b) => b.s - a.s);
       scored.forEach((r, i) => {
-        r.li.style.transform = `translateY(${i * rowH}px)`;
+        list.appendChild(r.li);
         r.li.querySelector(".rk").textContent = String(i + 1).padStart(2, "0");
         r.li.querySelector(".sc").textContent = r.s.toFixed(2);
-        r.li.classList.toggle("top", i < 2);
+        r.li.classList.toggle("lead", i < 2);
         r.li.querySelectorAll(".segs i").forEach((seg, k) => { seg.style.width = `${r.inv.f[key][k] * W[k] * 100}%`; });
       });
+      if (!animate || reduceMotion) return;
+      rows.forEach(({ li }) => {
+        const dy = before.get(li) - li.getBoundingClientRect().top;
+        if (!dy) return;
+        li.animate([{ transform: `translateY(${dy}px)` }, { transform: "none" }], { duration: 550, easing: "cubic-bezier(.2,.7,.2,1)" });
+      });
     }
-    chips.forEach((c) => c.addEventListener("click", () => show(c.dataset.s)));
-    show("k12");
-    requestAnimationFrame(() => requestAnimationFrame(() => list.classList.add("ready")));
+    chips.forEach((c) => c.addEventListener("click", () => show(c.dataset.s, true)));
+    show("k12", false);
   })();
 
   /* ---------- one-hour race: constant speed vs per-lap energy budget ---------- */

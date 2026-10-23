@@ -178,6 +178,17 @@ a:hover { text-decoration-color: currentColor; }
 .e-role { margin: 4px 0 0; color: var(--muted); }
 .dek { font-size: 20px; line-height: 1.45; color: var(--ink); margin: 20px 0 0; }
 
+.logos { margin: 24px 0 0; }
+.logos .meta { margin: 0 0 10px !important; }
+.logo-row { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 14px 15px; }
+.logo-row li { display: flex; flex-direction: column; align-items: center; gap: 6px; font: 10px var(--mono); color: var(--muted); }
+.logo-row img { height: 30px; width: auto; max-width: 56px; object-fit: contain; }
+.logo-row li.big img { height: 44px; max-width: 80px; }
+.logo-row li.big span { color: var(--ink); font-size: 11px; }
+.logo-row.sponsors { align-items: center; gap: 12px 28px; }
+.logo-row.sponsors img { height: 24px; max-width: 130px; }
+.logo-row.sponsors img[src*="aws"] { height: 30px; }
+.logo-row.sponsors li.txt { font: 12px var(--mono); color: var(--muted); }
 .schools { margin: 22px 0 0; }
 .schools .meta { margin: 0 0 6px !important; }
 .schools ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 18px; }
@@ -258,14 +269,13 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 .equiv .self dd, .equiv .self dt { color: var(--accent); }
 
 /* meridian ranker */
-.rank { position: relative; list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.rank { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
 .rank li {
-  position: absolute; left: 0; right: 0; top: 0; height: 34px;
+  height: 34px; background: var(--paper);
   display: grid; grid-template-columns: 3ch minmax(0, 1fr) 34% 4ch; gap: 12px; align-items: center;
   border-bottom: 1px solid var(--rule); font: 12px var(--mono); color: var(--muted);
 }
-.rank.ready li { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
-.rank li.top .nm, .rank li.top .sc { color: var(--ink); }
+.rank li.lead .nm, .rank li.lead .sc { color: var(--ink); }
 .rank .nm { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .rank .sc { text-align: right; }
 .segs { display: flex; height: 8px; background: var(--faint); }
