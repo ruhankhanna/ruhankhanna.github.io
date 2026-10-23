@@ -57,7 +57,7 @@ a:hover { text-decoration-color: currentColor; }
 .masthead nav a:hover { color: var(--ink); }
 
 .bio { max-width: 600px; margin: 14px 0 0; font-size: 19px; line-height: 1.5; color: var(--ink); }
-.bio em { font-style: italic; }
+
 .creds { margin: 12px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; color: var(--muted); }
 .creds li::before { content: "↳ "; color: var(--rule-2); }
 .creds a { text-decoration-color: var(--rule-2); }
@@ -161,7 +161,7 @@ a:hover { text-decoration-color: currentColor; }
 .ph-say { background: var(--paper); border: 1px solid var(--rule); border-radius: 10px; padding: 10px 12px; }
 .ph-say > span { font-size: 10px; color: #2f6b3a; }
 .ph-say p { margin: 4px 0 0 !important; font-size: 15px; line-height: 1.45; color: var(--ink); }
-.ph-say .gloss { font-size: 12px; color: var(--muted); font-style: italic; }
+.ph-say .gloss { font-size: 12px; color: var(--muted); }
 .ph-note { margin: auto 0 0 !important; font: 11px/1.5 var(--mono); color: var(--muted); }
 .index { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
 .index-row a {

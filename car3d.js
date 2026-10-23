@@ -97,8 +97,6 @@ function init(root) {
     yellow: new THREE.MeshStandardMaterial({ color: 0xd2a72a, roughness: 0.5 }),
     green: new THREE.MeshStandardMaterial({ color: 0x3c8a52, roughness: 0.5 }),
     blue: new THREE.MeshStandardMaterial({ color: 0x3a62b3, roughness: 0.5 }),
-    visor: new THREE.MeshPhysicalMaterial({ color: 0x0b0d12, roughness: 0.05, metalness: 0.4, clearcoat: 1 }),
-    helmet: new THREE.MeshPhysicalMaterial({ color: 0x141416, roughness: 0.25, clearcoat: 1, clearcoatRoughness: 0.1 }),
     mirror: new THREE.MeshStandardMaterial({ color: 0xe6e8ec, roughness: 0.02, metalness: 1 }),
   };
 
@@ -319,7 +317,7 @@ function init(root) {
     add(g, rbox(0.06, 0.05, 0.62, 0.008), M.alu, [0.82, 0.16, 0]);
   }
 
-  /* 03 cockpit: seat, roll hoop, harness, mirrors, helmet */
+  /* 03 cockpit: seat, roll hoop, harness, mirrors */
   {
     const g = part("cockpit", "roll hoop, seat, harness", "driver safety cell", [-0.05, 0.42, 0],
       "the roll hoop has to clear the driver's helmet if the car flips. the seat is low and laid back so less of the driver sticks up into the wind, and the red harness keeps them in place.");
@@ -354,17 +352,6 @@ function init(root) {
       const head = add(g, rbox(0.035, 0.075, 0.12, 0.014), M.black, [0.285, base.y + 0.07, s * 0.38], [0, s * 0.2, 0]);
       add(head, new THREE.PlaneGeometry(0.085, 0.05), M.mirror, [-0.016, 0, 0], [0, -Math.PI / 2, 0], false);
     });
-    // the helmet, resting on the cowl the way it does in our race-day photo
-    const top = topAt(0.5, 0);
-    const helm = new THREE.Group();
-    helm.position.set(0.5, top.y + 0.098, 0);
-    helm.rotation.set(0, -0.35, -0.1);
-    g.add(helm);
-    // shell with a flattened chin, a smoked visor facing forward, and a vent ridge on top
-    add(helm, new THREE.SphereGeometry(0.13, 48, 32, 0, Math.PI * 2, 0, Math.PI * 0.78), M.helmet).scale.set(1.12, 1.0, 0.9);
-    add(helm, new THREE.CircleGeometry(0.103, 40), M.helmet, [0, -0.101, 0], [Math.PI / 2, 0, 0]).scale.set(1.12, 0.9, 1);
-    add(helm, new THREE.SphereGeometry(0.1315, 48, 24, -0.85, 1.7, 1.1, 0.55), M.visor, [0, 0, 0], [0, Math.PI / 2, 0]).scale.set(1.12, 1.0, 0.9);
-    add(helm, rbox(0.12, 0.012, 0.03, 0.005), M.black, [-0.01, 0.128, 0]);
   }
 
   /* 04 steering + throttle */
