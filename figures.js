@@ -33,55 +33,6 @@
     return run;
   }
 
-  /* ---------- the map: every project between engineering and markets ---------- */
-  (() => {
-    const svg = $("#map");
-    if (!svg) return;
-    const rows = $$(".index-row");
-    const pts = rows.map((r) => ({ id: r.dataset.id, name: r.dataset.short, x: +r.dataset.x, y: +r.dataset.y, row: r }));
-    let dots = {};
-    function setHot(id) {
-      rows.forEach((r) => r.classList.toggle("hot", r.dataset.id === id));
-      Object.entries(dots).forEach(([k, g]) => g.classList.toggle("hot", k === id));
-      svg.classList.toggle("has-hot", !!id);
-    }
-    responsive(svg, (w) => Math.round(Math.min(w * 0.82, 330)), (w, h) => {
-      svg.innerHTML = "";
-      dots = {};
-      const pad = { l: 14, r: 14, t: 22, b: 22 };
-      const sx = (v) => pad.l + v * (w - pad.l - pad.r);
-      const sy = (v) => h - pad.b - v * (h - pad.t - pad.b);
-      const rule = css("--rule-2"), muted = css("--muted");
-      // quadrant hairlines
-      el("line", { x1: sx(0.5), x2: sx(0.5), y1: pad.t, y2: h - pad.b, stroke: rule }, svg);
-      el("line", { x1: pad.l, x2: w - pad.r, y1: sy(0.5), y2: sy(0.5), stroke: rule }, svg);
-      const lab = (x, y, t, anchor = "start") => { el("text", { x, y, "text-anchor": anchor, class: "axis" }, svg).textContent = t; };
-      lab(pad.l, h - 6, "← engineering");
-      lab(w - pad.r, h - 6, "markets →", "end");
-      lab(sx(0.5) + 6, pad.t - 8, "shipped ↑");
-      lab(sx(0.5) + 6, h - pad.b - 6, "research ↓");
-      pts.forEach((p) => {
-        const g = el("g", { class: "dot", tabindex: -1 }, svg);
-        const cx = sx(p.x), cy = sy(p.y);
-        el("circle", { cx, cy, r: 4.5, class: "c" }, g);
-        el("circle", { cx, cy, r: 14, fill: "transparent" }, g);
-        const right = p.x < 0.72;
-        el("text", { x: cx + (right ? 9 : -9), y: cy + 4, "text-anchor": right ? "start" : "end", class: "nm" }, g).textContent = p.name;
-        g.addEventListener("pointerenter", () => setHot(p.id));
-        g.addEventListener("pointerleave", () => setHot(null));
-        g.addEventListener("click", () => document.getElementById(p.id).scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" }));
-        dots[p.id] = g;
-      });
-      void muted;
-    });
-    rows.forEach((r) => {
-      r.addEventListener("pointerenter", () => setHot(r.dataset.id));
-      r.addEventListener("pointerleave", () => setHot(null));
-      r.addEventListener("focusin", () => setHot(r.dataset.id));
-      r.addEventListener("focusout", () => setHot(null));
-    });
-  })();
-
   /* ---------- VDOT (Daniels), the same formulas athletIQ uses ---------- */
   const VD = (() => {
     const vo2 = (v) => -4.60 + 0.182258 * v + 0.000104 * v * v;
@@ -452,40 +403,6 @@
     responsive(svg, 96, (w) => { W = w; render(); });
   })();
 
-  /* ---------- Future Fellows quote check ---------- */
-  (() => {
-    const essayEl = $("#essay");
-    if (!essayEl) return;
-    const essay = "Last spring the shuttle tracker at school kept crashing, so I rebuilt it. The old version polled the city feed every minute and fell over at rush hour. I cached responses and cut the polling to when a bus was actually near. It has not crashed since March, and about forty students check it every morning.";
-    const presets = [
-      "cut the polling to when a bus was actually near",
-      "only polled the feed when buses were close by",
-      "led a team of five engineers to rebuild the app",
-    ];
-    const ta = $("#quote"), out = $("#q-result"), chips = $$("#quote-lab .chip");
-    const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-    const norm = (t) => t.toLowerCase().replace(/\s+/g, " ");
-    function check() {
-      const q = ta.value.trim();
-      chips.forEach((c) => c.setAttribute("aria-pressed", presets[+c.dataset.q] === ta.value ? "true" : "false"));
-      const idx = q.length ? essay.indexOf(q) : -1;
-      if (idx >= 0 && q.length >= 12) {
-        essayEl.innerHTML = esc(essay.slice(0, idx)) + "<mark>" + esc(q) + "</mark>" + esc(essay.slice(idx + q.length));
-        out.className = "q-result pass"; out.textContent = "accepted · appears word for word, so the score can stand";
-        return;
-      }
-      essayEl.textContent = essay;
-      out.className = "q-result fail";
-      if (!q.length) out.textContent = "rejected · no evidence, no score";
-      else if (q.length < 12) out.textContent = "rejected · too short to count as evidence";
-      else if (norm(essay).includes(norm(q))) out.textContent = "rejected · close, but the check is exact";
-      else out.textContent = "rejected · these words never appear in the application";
-    }
-    chips.forEach((b) => b.addEventListener("click", () => { ta.value = presets[+b.dataset.q]; check(); }));
-    ta.addEventListener("input", check);
-    ta.value = presets[0]; check();
-  })();
-
   /* ---------- TDX replication results ---------- */
   (() => {
     const svg = $("#tdx-svg");
@@ -498,6 +415,220 @@
       el("text", { x: 0, y: 4 + size * 1.5 + 18, class: "acc" }, svg).textContent = "19 re-ran and matched";
       el("text", { x: ok * (size + gap), y: 4 + size * 1.5 + 18 }, svg).textContent = "8 failed";
     });
+  })();
+
+  /* ---------- fig. 0: each project's track from question to use ---------- */
+  (() => {
+    const rows = $$(".index-row");
+    if (!rows.length) return;
+    const names = ["asked", "built", "paper", "in use"];
+    rows.forEach((r, k) => {
+      const st = r.dataset.stages.split("").map(Number);
+      const trk = $(".trk", r);
+      const last = st.lastIndexOf(1);
+      trk.innerHTML = st.map((on, i) =>
+        (i ? `<i class="seg${i <= last ? " on" : ""}"></i>` : "") +
+        `<i class="dot${on ? " on" : ""}${i === 3 && on ? " use" : ""}" title="${names[i]}${on ? "" : ": not yet"}"></i>`).join("");
+      trk.setAttribute("aria-label", names.filter((_, i) => st[i]).join(", "));
+      trk.style.setProperty("--d", `${k * 70}ms`);
+    });
+    if (!reduceMotion) requestAnimationFrame(() => requestAnimationFrame(() => $(".index").classList.add("drawn")));
+    else $(".index").classList.add("drawn");
+  })();
+
+  /* ---------- Pan-Out: model vs ratings (data/report_tennis.json, plus real ATP careers) ---------- */
+  (() => {
+    const svg = $("#po-svg");
+    if (!svg) return;
+    const rows = [
+      ["naia / d3", 0.794, 0.894], ["d2", 0.816, 0.914], ["d1 mid-major", 0.843, 0.942],
+      ["d1 power", 0.890, 0.967], ["pro / challenger", 0.932, 0.982], ["atp/wta top 100", 0.943, 0.974],
+    ];
+    const real = ["real atp careers", 0.841, 0.844];
+    responsive(svg, (w) => (rows.length + 1) * 30 + 64, (w, h) => {
+      svg.innerHTML = "";
+      const acc = css("--accent"), ink = css("--ink"), rule = css("--rule"), rule2 = css("--rule-2");
+      const L = w < 480 ? 104 : 132, R = w - 48, lo = 0.76, hi = 1.0;
+      const sx = (v) => L + ((v - lo) / (hi - lo)) * (R - L);
+      [0.8, 0.9, 1.0].forEach((v) => {
+        el("line", { x1: sx(v), x2: sx(v), y1: 14, y2: h - 22, stroke: rule }, svg);
+        el("text", { x: sx(v), y: h - 6, "text-anchor": "middle" }, svg).textContent = v.toFixed(1);
+      });
+      const draw = ([name, a, b], y, isReal) => {
+        el("text", { x: 0, y: y + 4, class: isReal ? "ink" : "" }, svg).textContent = name;
+        el("line", { x1: sx(a), x2: sx(b), y1: y, y2: y, stroke: isReal ? ink : rule2, "stroke-width": 2 }, svg);
+        el("circle", { cx: sx(a), cy: y, r: 4, fill: css("--paper"), stroke: ink, "stroke-width": 1.5 }, svg);
+        el("circle", { cx: sx(b), cy: y, r: 4, fill: acc }, svg);
+        el("text", { x: sx(b) + 9, y: y + 4, class: isReal ? "acc" : "" }, svg).textContent = `+${(b - a).toFixed(3)}`.replace("0.", ".");
+      };
+      el("text", { x: 0, y: 8, class: "ink" }, svg).textContent = "simulated careers";
+      rows.forEach((r, i) => draw(r, 30 + i * 28, false));
+      const yr = 30 + rows.length * 28 + 14;
+      el("line", { x1: 0, x2: w, y1: yr - 16, y2: yr - 16, stroke: rule }, svg);
+      draw(real, yr, true);
+      el("circle", { cx: w - 150, cy: 6, r: 4, fill: css("--paper"), stroke: ink, "stroke-width": 1.5 }, svg);
+      el("text", { x: w - 142, y: 10 }, svg).textContent = "ratings";
+      el("circle", { cx: w - 82, cy: 6, r: 4, fill: acc }, svg);
+      el("text", { x: w - 74, y: 10 }, svg).textContent = "pan-out";
+    });
+  })();
+
+  /* ---------- TDX: an attestation receipt you can tamper with ---------- */
+  (() => {
+    const list = $("#att-steps");
+    if (!list) return;
+    // FNV-1a, shortened. A toy stand-in for sha-384, but it really is computed from the text.
+    const h = (t) => { let x = 0x811c9dc5; for (const c of t) { x ^= c.charCodeAt(0); x = Math.imul(x, 0x01000193) >>> 0; } return x.toString(16).padStart(8, "0"); };
+    const published = "beta <- coef(lm(wage ~ training, data = d))";
+    const edited = "beta <- coef(lm(wage ~ training + tenure, data = d))";
+    const tamperBtn = $("#att-tamper"), runBtn = $("#att-run"), out = $("#att-out");
+    let tamper = false, shown = 0, timer = 0;
+    function steps() {
+      const ran = tamper ? edited : published;
+      const meas = h("tdx:" + ran), pub = h("tdx:" + published), res = h("out:" + ran);
+      return [
+        ["the journal's package", `<code>${published}</code>`, `published hash <b>${pub}</b>`],
+        ["load it into a tdx vm", `<code class="${tamper ? "bad" : ""}">${ran}</code>`, `cpu measures what it loaded: <b class="${tamper ? "bad" : ""}">${meas}</b>`],
+        ["run it", "the replication script produces the paper's tables", `output hash <b>${res}</b>`],
+        ["cpu signs a quote", "measurement + output, signed with a key only the hardware holds", `quote <b>${h(meas + res)}</b>`],
+        ["anyone checks it", `does the measurement equal the published hash?`, tamper ? `<b class="bad">${meas} ≠ ${pub} · rejected</b>` : `<b class="ok">${meas} = ${pub} · verified</b>`],
+      ];
+    }
+    function render() {
+      list.innerHTML = steps().map(([t, d, v], i) =>
+        `<li class="${i < shown ? "on" : ""}"><span class="n mono">${i + 1}</span><div><b>${t}</b><p>${d}</p><p class="mono v">${v}</p></div></li>`).join("");
+      out.innerHTML = shown < 5 ? "" : tamper
+        ? "<b>caught.</b> one changed line changes the measurement, so the signed receipt no longer matches the paper anyone can download."
+        : "<b>verified.</b> the receipt proves this exact published code produced these results, without trusting the author or the cloud.";
+    }
+    function run() {
+      clearInterval(timer); shown = 0; render();
+      if (reduceMotion) { shown = 5; render(); return; }
+      timer = setInterval(() => { shown++; render(); if (shown >= 5) clearInterval(timer); }, 420);
+    }
+    runBtn.addEventListener("click", run);
+    tamperBtn.addEventListener("click", () => { tamper = !tamper; tamperBtn.setAttribute("aria-pressed", tamper); run(); });
+    shown = 5; render();
+  })();
+
+  /* ---------- StackUp: read, score with receipts, ask ---------- */
+  (() => {
+    const body = $("#su-body");
+    if (!body) return;
+    const esc = (t) => t.replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const REPOS = {
+      bus: {
+        files: [["app.py", 182], ["poller.py", 96], ["cache.py", 41], ["static/map.js", 233], ["tests/test_poller.py", 64]],
+        lang: "python 64% · javascript 36%", commits: [2, 5, 9, 4, 0, 0, 0, 3, 7, 11, 6, 8, 2, 4, 9, 5],
+        summary: "88 commits over 4 months, one author",
+        scores: [
+          { k: "difficulty", v: 3, file: "poller.py", code: "def next_poll_delay(eta_s):\n    # poll fast only when a bus is close; back off otherwise\n    if eta_s is None:\n        return 300\n    return max(15, min(120, eta_s // 4))",
+            quote: "return max(15, min(120, eta_s // 4))", fake: "uses exponential backoff with jitter", why: "adaptive polling tied to arrival time, not a fixed timer" },
+          { k: "quality", v: 4, file: "tests/test_poller.py", code: "def test_backs_off_when_no_bus():\n    assert next_poll_delay(None) == 300\n\ndef test_never_polls_faster_than_15s():\n    assert next_poll_delay(3) == 15",
+            quote: "assert next_poll_delay(3) == 15", fake: "has full integration test coverage", why: "edge cases are pinned by tests" },
+        ],
+        qs: ["why does next_poll_delay divide the eta by 4 and not 2?",
+          "what happens to cache.py if the city feed returns a 500 at rush hour?",
+          "where did the 15-second floor come from?",
+          "map.js redraws every bus on each update. what changes at 200 buses?",
+          "your commits stop for three weeks in the middle. what were you stuck on?"],
+      },
+      chess: {
+        files: [["board.cpp", 410], ["movegen.cpp", 388], ["search.cpp", 205], ["eval.cpp", 140], ["perft_test.cpp", 90]],
+        lang: "c++ 100%", commits: [6, 9, 12, 3, 8, 14, 10, 2, 0, 5, 7, 11, 4, 6, 3, 1],
+        summary: "131 commits over 4 months, one author",
+        scores: [
+          { k: "difficulty", v: 5, file: "search.cpp", code: "int alphabeta(Board& b, int depth, int alpha, int beta) {\n    if (depth == 0) return quiesce(b, alpha, beta);\n    for (Move m : order(b.legal_moves())) {\n        b.make(m);\n        int score = -alphabeta(b, depth - 1, -beta, -alpha);",
+            quote: "int score = -alphabeta(b, depth - 1, -beta, -alpha);", fake: "implements a transposition table with zobrist hashing", why: "negamax alpha-beta with quiescence search" },
+          { k: "quality", v: 3, file: "eval.cpp", code: "// TODO: magic numbers, tune later\nint eval(const Board& b) {\n    return 100*material(b) + 7*mobility(b) - 30*doubled_pawns(b);\n}",
+            quote: "// TODO: magic numbers, tune later", fake: "evaluation weights are tuned with texel tuning", why: "hand-set weights the author flagged themselves" },
+        ],
+        qs: ["why call quiesce at depth 0 instead of eval?",
+          "how does order() sort moves, and how much faster did search get?",
+          "where do the 7 and the 30 in eval come from?",
+          "perft_test checks depth 5 from the start position. what bug did it catch?",
+          "how does movegen stop a king from castling through check?"],
+      },
+    };
+    let repo = "bus", step = 0, faked = false;
+    const repoChips = $$("#su-lab [data-repo]"), tabs = $$("#su-lab [role=tab]");
+    function render() {
+      const r = REPOS[repo];
+      if (step === 0) {
+        const max = Math.max(...r.commits), total = r.files.reduce((a, f) => a + f[1], 0);
+        body.innerHTML = `<div class="su-read">
+          <ul class="tree mono">${r.files.map(([f, n]) => `<li><span>${f}</span><i style="--w:${(n / 410) * 100}%"></i><span class="num">${n}</span></li>`).join("")}
+            <li class="tot"><span>${total} lines · ${r.lang}</span></li></ul>
+          <div><p class="q-label">commit history, by week</p><div class="spark">${r.commits.map((c) => `<i style="--h:${(c / max) * 100}%" title="${c} commits"></i>`).join("")}</div>
+          <p class="mono meta" style="margin-top:8px">${r.summary}</p></div></div>`;
+      }
+      if (step === 1) {
+        body.innerHTML = r.scores.map((sc) => {
+          const quote = faked ? sc.fake : sc.quote;
+          const found = sc.code.includes(quote);
+          const code = esc(sc.code).replace(esc(sc.quote), found ? `<mark>${esc(sc.quote)}</mark>` : esc(sc.quote));
+          return `<div class="su-score ${found ? "" : "rej"}">
+            <div class="su-k"><b>${sc.k}</b><span class="pips">${[1, 2, 3, 4, 5].map((i) => `<i class="${found && i <= sc.v ? "on" : ""}"></i>`).join("")}</span><span class="mono">${found ? `${sc.v} / 5 · ${sc.why}` : "score discarded"}</span></div>
+            <p class="mono q">evidence: "${esc(quote)}" ${found ? `<span class="ok">✓ found in ${sc.file}</span>` : `<span class="bad">✗ not in the repo</span>`}</p>
+            <pre class="mono"><span class="fn">${sc.file}</span>\n${code}</pre></div>`;
+        }).join("") + `<div class="chips" style="margin-top:12px"><button type="button" class="chip" id="su-fake" aria-pressed="${faked}">let the model invent evidence</button></div>
+          <p class="mono meta" style="margin-top:8px">two scores, side by side. stackup never adds them into one number.</p>`;
+        $("#su-fake").addEventListener("click", () => { faked = !faked; render(); });
+      }
+      if (step === 2) {
+        body.innerHTML = `<ol class="su-qs">${r.qs.map((q) => `<li>${esc(q)}</li>`).join("")}</ol>
+          <p class="mono meta">one at a time, no going back. easy if you wrote it; hard to fake if you didn't.</p>`;
+      }
+    }
+    repoChips.forEach((c) => c.addEventListener("click", () => {
+      repo = c.dataset.repo; faked = false;
+      repoChips.forEach((x) => x.setAttribute("aria-pressed", x === c));
+      render();
+    }));
+    tabs.forEach((t) => t.addEventListener("click", () => {
+      step = +t.dataset.step;
+      tabs.forEach((x) => x.setAttribute("aria-selected", x === t));
+      render();
+    }));
+    render();
+  })();
+
+  /* ---------- SafeGround: the app's own text, in its own languages ---------- */
+  (() => {
+    const screen = $("#sg-screen");
+    if (!screen) return;
+    // copied from the app's LANG_DATA (github.com/ruhankhanna/safeground)
+    const T = {
+      en: { emg: "I am being detained right now", pol: ["Police stopped you", "I am exercising my right to remain silent. I want a lawyer."], door: ["Someone is at your door", "You do NOT have to open your door. ICE cannot enter without a judicial warrant."], det: ["You are being detained", "I want to speak to a lawyer immediately."] },
+      fa: { rtl: 1, emg: "من الان بازداشت شده‌ام", pol: ["پولیس شما را متوقف کرد", "من حق سکوت خود را اعمال می‌کنم. می‌خواهم وکیل داشته باشم."], door: ["کسی دروازه‌ات را می‌زند", "شما مجبور نیستید در را باز کنید. ICE بدون حکم قضایی نمی‌تواند وارد شود."], det: ["شما بازداشت شده‌اید", "می‌خواهم فوری با وکیل صحبت کنم."] },
+      ar: { rtl: 1, emg: "أنا محتجز الآن", pol: ["أوقفتك الشرطة", "أنا أمارس حقي في التزام الصمت. أريد محامياً."], door: ["شخص على بابك", "لست مضطراً لفتح بابك. ICE لا يمكنه الدخول بدون أمر قضائي."], det: ["أنت محتجز", "أريد التحدث إلى محامٍ فوراً."] },
+      ur: { rtl: 1, emg: "مجھے ابھی حراست میں لیا جا رہا ہے", pol: ["پولیس نے آپ کو روکا", "میں اپنا خاموش رہنے کا حق استعمال کر رہا ہوں۔ میں وکیل چاہتا ہوں۔"], door: ["کوئی آپ کے دروازے پر ہے", "آپ کو دروازہ کھولنا ضروری نہیں۔ ICE جج کے وارنٹ کے بغیر داخل نہیں ہو سکتا۔"], det: ["آپ حراست میں ہیں", "میں فوری طور پر وکیل سے بات کرنا چاہتا ہوں۔"] },
+      es: { emg: "Estoy siendo detenido ahora mismo", pol: ["La policía te detuvo", "Estoy ejerciendo mi derecho a guardar silencio. Quiero un abogado."], door: ["Alguien está en tu puerta", "NO tienes que abrir tu puerta. ICE no puede entrar sin una orden firmada por un juez."], det: ["Estás siendo detenido", "Quiero hablar con un abogado inmediatamente."] },
+    };
+    const NOTE = {
+      pol: "in many countries, staying silent implies guilt. here it's a constitutional right, and the app says so in the family's own language.",
+      door: "you don't have to open the door. ask them to slide the warrant underneath.",
+      det: "stay calm, don't run, don't resist. say only these words.",
+    };
+    let sit = "pol", lang = "en";
+    function render() {
+      const t = T[lang], [title, line] = t[sit];
+      screen.dir = t.rtl ? "rtl" : "ltr";
+      screen.lang = lang === "fa" ? "prs" : lang;
+      screen.innerHTML = `<div class="ph-bar mono" dir="ltr"><span>safeground</span><span>${lang}</span></div>
+        <div class="ph-emg">${t.emg}</div>
+        <p class="ph-t">${title}</p>
+        <div class="ph-say"><span class="mono" dir="ltr">say this</span><p>“${line}”</p>${lang !== "en" ? `<p class="gloss" dir="ltr">${T.en[sit][1]}</p>` : ""}</div>
+        <p class="ph-note" dir="ltr">${NOTE[sit]}</p>`;
+    }
+    const wire = (sel, key, set) => $$(`${sel} .chip`).forEach((c) => c.addEventListener("click", () => {
+      set(c.dataset[key]);
+      $$(`${sel} .chip`).forEach((x) => x.setAttribute("aria-pressed", x === c));
+      render();
+    }));
+    wire("#sg-sit", "sit", (v) => (sit = v));
+    wire("#sg-lang", "lang", (v) => (lang = v));
+    render();
   })();
 
   /* ---------- photos open larger ---------- */
