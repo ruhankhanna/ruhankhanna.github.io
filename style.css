@@ -58,6 +58,7 @@ a:hover { text-decoration-color: currentColor; }
 
 .bio { max-width: 600px; margin: 14px 0 0; font-size: 19px; line-height: 1.5; color: var(--ink); }
 
+.bio-link { font: 13px var(--mono); color: var(--accent); text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); white-space: nowrap; margin-left: 4px; }
 .creds { margin: 12px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 18px; color: var(--muted); }
 .creds li::before { content: "↳ "; color: var(--rule-2); }
 .creds a { text-decoration-color: var(--rule-2); }
@@ -457,3 +458,5 @@ details.more > .fig:last-child { margin-bottom: 20px; }
   *, *::before, *::after { transition: none !important; animation: none !important; }
 }
 .pi[src*="fellows"] { transform: scale(1.5); }
+.orgs .o-mercatus img { height: 22px; }
+.e-role .org[src*="mercatus"] { height: 22px; }
