@@ -22,6 +22,7 @@
     <h1>ruhan khanna</h1>
     <nav class="mono" aria-label="Site">
       <a href="#work">work</a>
+      <a href="#writing">writing</a>
       <a href="https://github.com/ruhankhanna">github</a>
       <a href="#contact">contact</a>
     </nav>
@@ -66,7 +67,7 @@
       <li class="index-row" data-id="secret" data-short="race car" data-x=".07" data-y=".74"><a href="#secret"><span class="n mono">04</span><span class="t">secret</span><span class="d">reviving sidwell's electric race car team</span><span class="k mono">award</span></a></li>
       <li class="index-row" data-id="reachbot" data-short="reachbot" data-x=".73" data-y=".82"><a href="#reachbot"><span class="n mono">05</span><span class="t">reachbot</span><span class="d">cited answers from a vc firm's library</span><span class="k mono">reach</span></a></li>
       <li class="index-row" data-id="tdx" data-short="tdx" data-x=".62" data-y=".16"><a href="#tdx"><span class="n mono">06</span><span class="t">tdx</span><span class="d">can hardware prove a paper's code ran?</span><span class="k mono">gmu</span></a></li>
-      <li class="index-row" data-id="fellows" data-short="future fellows" data-x=".56" data-y=".6"><a href="#fellows"><span class="n mono">07</span><span class="t">future fellows</span><span class="d">applicant review where every score needs a quote</span><span class="k mono">#2</span></a></li>
+      <li class="index-row" data-id="fellows" data-short="stackup" data-x=".56" data-y=".6"><a href="#fellows"><span class="n mono">07</span><span class="t">stackup</span><span class="d">a 10-minute test of the code you actually wrote</span><span class="k mono">fellows</span></a></li>
       <li class="index-row" data-id="safeground" data-short="safeground" data-x=".28" data-y=".5"><a href="#safeground"><span class="n mono">08</span><span class="t">safeground</span><span class="d">know-your-rights app for refugee families</span><span class="k mono">6 langs</span></a></li>
     </ol>
     <figure class="map-fig">
@@ -216,16 +217,32 @@
       <div><dt>1st</dt><dd>"best use of 3d printing," a first for the school</dd></div>
       <div><dt>48 v</dt><dd>four lead-acid batteries, one hour, one charge</dd></div>
     </dl>
-    <p>the dc electric vehicle grand prix is simple: whoever covers the most distance in an hour on one battery wins. we rebuilt the kit car with an aluminum chassis, a new battery pack, 3d-printed wheel covers and an arduino pacing system, raised the money from sponsors, and learned a lot from umd's formula team. click any part of the car's electrical system.</p>
+    <p>the dc electric vehicle grand prix is simple: whoever covers the most distance in an hour on one battery wins. we rebuilt the nugen mobility kit car with an aluminum chassis, a new battery pack, 3d-printed wheel covers and an arduino pacing system, raised the money from sponsors, and learned a lot from umd's formula team. here it is in 3d: turn it, take it apart, click anything.</p>
+
+    <figure class="fig wide" id="car3d">
+      <div class="fig-head mono"><b>fig. 5 · the car, taken apart</b><span>drag to turn · slide to explode</span></div>
+      <div class="car-grid">
+        <div class="car-stage">
+          <canvas aria-label="Interactive 3D model of the SECRET electric race car. Drag to rotate; use the parts list to highlight each part."></canvas>
+          <img class="car-fallback" src="img/secret-team.jpg" alt="The SECRET car on race day" loading="lazy">
+          <div class="ctl car-ctl"><label for="car-explode">assembled</label><input id="car-explode" type="range" min="0" max="1" step="0.01" value="0" aria-label="Explode the car into its parts"><span>exploded</span></div>
+        </div>
+        <div>
+          <ol class="car-parts" aria-label="Parts"></ol>
+          <p class="car-info" aria-live="polite"></p>
+        </div>
+      </div>
+      <figcaption class="mono">a simplified model drawn from our photos and the kit's schematic, not a cad file. proportions are approximate.</figcaption>
+    </figure>
 
     <figure class="fig wide">
-      <div class="fig-head mono"><b>fig. 5 · how the car is wired</b><span>click a part</span></div>
+      <div class="fig-head mono"><b>fig. 6 · how the car is wired</b><span>click a part</span></div>
       <div class="wire-scroll"><svg id="wire-svg" viewBox="0 0 960 440" role="group" aria-label="Electrical system of the car. Select a part to read what it does."></svg></div>
       <div class="wire-info" id="wire-info" aria-live="polite"></div>
     </figure>
 
     <figure class="fig" id="race-lab">
-      <div class="fig-head mono"><b>fig. 6 · pacing to an energy budget</b><span>drag the speed</span></div>
+      <div class="fig-head mono"><b>fig. 7 · pacing to an energy budget</b><span>drag the speed</span></div>
       <div class="ctl">
         <label for="race-speed">driver's speed <output id="race-speed-out">31</output> mph</label>
         <input id="race-speed" type="range" min="16" max="34" step="1" value="31">
@@ -260,7 +277,7 @@
     <p>each question pulls the closest passages by vector similarity, and the model may answer only from them. the hard part wasn't retrieval. it was deciding what to do when the evidence is weak. the answer: say less, or say nothing.</p>
 
     <figure class="fig" id="rag-lab">
-      <div class="fig-head mono"><b>fig. 7 · the retrieval gate</b><span>weak evidence, shorter answer</span></div>
+      <div class="fig-head mono"><b>fig. 8 · the retrieval gate</b><span>weak evidence, shorter answer</span></div>
       <div class="ctl">
         <div class="chips">
           <button type="button" class="chip" data-sim="0.75" aria-pressed="true">on-topic</button>
@@ -289,7 +306,7 @@
       <div><dt>~2 hr</dt><dd>per run, on azure and google cloud</dd></div>
     </dl>
     <figure class="fig">
-      <div class="fig-head mono"><b>fig. 8 · every paper i tried</b><span>one bar each</span></div>
+      <div class="fig-head mono"><b>fig. 9 · every paper i tried</b><span>one bar each</span></div>
       <svg id="tdx-svg" role="img" aria-label="27 replications attempted, 19 succeeded."></svg>
       <figcaption class="mono">most failures weren't the hardware. data or software licenses were missing from the package.</figcaption>
     </figure>
@@ -303,19 +320,19 @@
   <!-- 07 future fellows -->
   <article class="entry col" id="fellows">
     <div class="e-head">
-      <h2><span class="n">07</span>future fellows</h2>
+      <h2><span class="n">07</span>stackup</h2>
       <span class="meta">2026 – now</span>
     </div>
-    <p class="e-role meta">employee #2, <a href="https://www.joinfellows.org/">future fellows</a></p>
-    <p class="dek">a fellowship that places high schoolers in paid work. i built how it reads applications: ai organizes the evidence, a person makes every decision.</p>
+    <p class="e-role meta">built it · employee #2 at <a href="https://www.joinfellows.org/">future fellows</a></p>
+    <p class="dek">a free, ten-minute assessment of the code a student has actually written. it reads the repo and its history, scores difficulty and quality separately, then asks five questions only the author could answer.</p>
     <dl class="facts">
       <div><dt>150</dt><dd>tests guarding the rules</dd></div>
       <div><dt>0</dt><dd>rankings or total scores</dd></div>
       <div><dt>3</dt><dd>passes to blind names and schools</dd></div>
     </dl>
-    <p>applicants share a code repository and then get questions only its real author could answer. any score the model proposes must quote the application word for word, or it's thrown out. try it:</p>
+    <p>future fellows places young people in paid, scoped projects with employers. i built stackup so what you've made counts for more than what you paid for: no essays to polish, no résumé lines. ai organizes the evidence and a person makes every decision. any score the model proposes has to quote the work word for word, or it's thrown out. try the check:</p>
     <figure class="fig" id="quote-lab">
-      <div class="fig-head mono"><b>fig. 9 · the quote check</b><span>a sample application</span></div>
+      <div class="fig-head mono"><b>fig. 10 · the quote check</b><span>a sample application</span></div>
       <blockquote class="essay" id="essay"></blockquote>
       <label class="q-label" for="quote">evidence the model cites</label>
       <textarea id="quote" rows="2" spellcheck="false" aria-describedby="q-result"></textarea>
@@ -326,7 +343,7 @@
       </div>
       <p class="q-result" id="q-result" role="status"></p>
     </figure>
-    <p class="src mono"><a href="https://www.joinfellows.org/">joinfellows.org</a></p>
+    <p class="src mono"><a href="https://stackup.joinfellows.org/">try stackup</a><a href="https://www.joinfellows.org/blog/stackup">introducing stackup, my post</a><a href="https://www.joinfellows.org/">joinfellows.org</a></p>
   </article>
 
   <!-- 08 safeground -->
@@ -344,7 +361,7 @@
     </dl>
     <p>families at iroc often know their rights in theory. what they lacked was the exact words, in their own language, at the moment they need them, plus the cultural context. in many countries, silence reads as guilt. here it's a constitutional right.</p>
     <figure class="fig">
-      <div class="fig-head mono"><b>fig. 10 · what the app tells you to say</b><span>english · دری</span></div>
+      <div class="fig-head mono"><b>fig. 11 · what the app tells you to say</b><span>english · دری</span></div>
       <blockquote class="essay" style="margin:0">"I am exercising my right to remain silent. I want a lawyer."<br><span dir="rtl" lang="prs" style="display:block;margin-top:8px">من حق سکوت خود را اعمال می‌کنم. می‌خواهم وکیل داشته باشم.</span></blockquote>
     </figure>
     <figure class="shot">
@@ -354,12 +371,28 @@
     <p class="src mono"><a href="https://ruhankhanna.github.io/safeground/">open the app</a><a href="https://github.com/ruhankhanna/safeground">code</a></p>
   </article>
 
+  <section class="press col" id="writing" aria-labelledby="press-h">
+    <h2 class="section-h" id="press-h">writing, press, papers</h2>
+    <ul>
+      <li><span class="k">aug 2026</span><a href="https://www.joinfellows.org/blog/stackup">introducing stackup</a><span class="w">future fellows blog · by me</span></li>
+      <li><span class="k">apr 2026</span><a href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler/">dc teen builds startup-investor matching software</a><span class="w">technical.ly</span></li>
+      <li><span class="k">jan 2026</span><a href="https://www.researchgate.net/publication/400630982_Matching_Frictions_and_Equilibrium_Dispersion_in_Venture_Capital_Markets_Evidence_from_Large-Scale_Compatibility_Rankings">matching frictions and equilibrium dispersion in venture capital markets</a><span class="w">paper, with adam tashman</span></li>
+      <li><span class="k">dec 2025</span><a href="https://ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/">a computational analysis of the indus script</a><span class="w">ijca, with louie merriam</span></li>
+      <li><span class="k">sep 2025</span><a href="https://journals.gmu.edu/jssr/article/view/5253">evaluation of intel's tdx for replicating research in management science</a><span class="w">jssr, with jiasun li</span></li>
+      <li><span class="k">mar 2025</span><a href="https://marginalrevolution.com/marginalrevolution/2025/03/emergent-ventures-winners-41st-cohort.html">emergent ventures winners, 41st cohort</a><span class="w">marginal revolution</span></li>
+      <li><span class="k">aug 2024</span><a href="https://sidwellhorizon.org/2898/past-editions-of-news/secret-wins-award-at-dc-electric-vehicle-grand-prix/">secret wins award at dc electric vehicle grand prix</a><span class="w">the horizon</span></li>
+      <li><span class="k">jun 2024</span><a href="https://www.sidwell.edu/about/news/news-detail/~board/homepage-news-panel/post/how-to-build-an-e-car-from-scratch">how to build an e-car from scratch</a><span class="w">sidwell friends</span></li>
+      <li><span class="k">jun 2023</span><a href="https://medium.com/@ruhan.khanna.2009/a-future-aerodynamic-plan-for-the-ferrari-sf-24-a1a889252a35">a future aerodynamic plan for the ferrari sf-24</a><span class="w">medium · by me, 8th grade</span></li>
+    </ul>
+  </section>
+
   <section class="also col" aria-labelledby="also-h">
     <h2 class="section-h" id="also-h">also</h2>
     <ul>
       <li><span class="k">wharton</span><span>led our team in the wharton global high school investment competition</span></li>
       <li><span class="k">john locke</span><span>essay prize finalist, economics</span></li>
       <li><span class="k">harvard ilab</span><span>a quant pipeline and synthetic etfs tracking private companies, with exeter22</span></li>
+      <li><span class="k">sim rig</span><span>built a sim-racing rig at home around a cheap pxn v9 wheel, then 3d-printed my own steering wheels for it</span></li>
       <li><span class="k">track</span><span>on sidwell's track team, which is where athletiq started</span></li>
     </ul>
   </section>
@@ -380,6 +413,8 @@
     setTimeout(() => (b.textContent = t), 1400);
   });
 </script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script src="figures.js"></script>
+<script type="module" src="car3d.js"></script>
 </body>
 </html>
