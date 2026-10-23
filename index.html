@@ -3,360 +3,378 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ruhan Khanna</title>
-<meta name="description" content="Some things Ruhan Khanna has built: athletIQ, an electric race car, investor-matching and retrieval models, and published research.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1' y='1' width='30' height='30' rx='6' fill='%23151514'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' font-weight='600' fill='%23f3f3f1' text-anchor='middle'%3ERK%3C/text%3E%3C/svg%3E">
+<title>ruhan khanna</title>
+<meta name="description" content="Ruhan Khanna builds software, hardware and models where engineering meets markets: athletIQ, investor-matching research with UVA, the Indus script, an electric race car.">
+<meta property="og:title" content="ruhan khanna">
+<meta property="og:description" content="Things I've built, where engineering meets markets.">
+<meta property="og:image" content="https://ruhankhanna.github.io/img/uva-symposium.jpg">
+<link rel="canonical" href="https://ruhankhanna.github.io/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23fff'/%3E%3Ctext x='16' y='23' font-family='Georgia,serif' font-size='20' fill='%231d1c1a' text-anchor='middle'%3Er%3C/text%3E%3Ccircle cx='24' cy='22' r='2' fill='%232448c8'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20">
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
-<body class="drawing">
+<body>
 
-<a class="skip" href="#main">Skip to content</a>
+<header class="wrap top" id="top">
+  <div class="masthead">
+    <h1>ruhan khanna</h1>
+    <nav class="mono" aria-label="Site">
+      <a href="#work">work</a>
+      <a href="https://github.com/ruhankhanna">github</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </div>
 
-<header class="nav">
-  <div class="wrap nav-inner">
-    <a class="brand" href="#top"><span class="tile" aria-hidden="true">RK</span><span class="brand-name">Ruhan Khanna</span></a>
-    <nav class="sheet-nav" aria-label="Sheets"><a href="#athletiq" aria-label="Sheet 1: athletIQ">1</a><a href="#secret" aria-label="Sheet 2: SECRET">2</a><a href="#meridian" aria-label="Sheet 3: Meridian">3</a><a href="#indus" aria-label="Sheet 4: The Indus script">4</a><a href="#reachbot" aria-label="Sheet 5: ReachBot">5</a><a href="#fellows" aria-label="Sheet 6: Future Fellows">6</a><a href="#tdx" aria-label="Sheet 7: Verifying papers on TDX">7</a><a href="#top" class="nav-index">Index</a><a href="#contact" class="nav-contact">Contact</a></nav>
+  <p class="bio">senior at sidwell friends in washington, dc. i build software, hardware and models where engineering meets markets: <em>who gets recruited, who gets funded, how far a battery lasts.</em></p>
+  <ul class="creds mono">
+    <li>founder, <a href="#athletiq">athletiq</a></li>
+    <li><a href="https://marginalrevolution.com/marginalrevolution/2025/03/emergent-ventures-winners-41st-cohort.html">emergent ventures</a> grantee</li>
+    <li>first-author research with <a href="#meridian">uva</a></li>
+    <li>in <a href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler/">technical.ly</a></li>
+  </ul>
+
+  <div class="strip" aria-label="Photos">
+    <a href="img/secret-team.jpg" data-full="img/secret-team.jpg" data-cap="race day with secret, sidwell's electric car">
+      <div class="ph"><img src="img/secret-team.jpg" width="1200" height="1600" alt="Five students behind a white electric race car on a paved track" style="object-position:50% 20%"></div>
+      <figcaption class="mono">race day, secret</figcaption>
+    </a>
+    <a href="img/reach.jpg" data-full="img/reach.jpg" data-cap="summer at reach capital, san francisco">
+      <div class="ph"><img src="img/reach.jpg" width="1200" height="1600" alt="Ruhan in sunglasses beside a door lettered Reach Capital" style="object-position:60% 40%"></div>
+      <figcaption class="mono">reach capital, sf</figcaption>
+    </a>
+    <a href="img/uva-symposium.jpg" data-full="img/uva-symposium.jpg" data-cap="uva undergraduate research symposium">
+      <div class="ph"><img src="img/uva-symposium.jpg" width="1200" height="1600" alt="Ruhan beside the UVA Undergraduate Research Symposium schedule board" style="object-position:70% 30%"></div>
+      <figcaption class="mono">uva symposium</figcaption>
+    </a>
+    <a href="img/alcaraz.jpg" data-full="img/alcaraz.jpg" data-cap="with carlos alcaraz, new york">
+      <div class="ph"><img src="img/alcaraz.jpg" width="1200" height="1600" alt="Ruhan with tennis player Carlos Alcaraz" style="object-position:50% 25%"></div>
+      <figcaption class="mono">with carlos alcaraz</figcaption>
+    </a>
+    <a href="img/assip-poster.jpg" data-full="img/assip-poster.jpg" data-cap="assip poster symposium, george mason">
+      <div class="ph"><img src="img/assip-poster.jpg" width="1600" height="1200" alt="Ruhan at the George Mason ASSIP poster symposium" style="object-position:82% 60%"></div>
+      <figcaption class="mono">gmu assip</figcaption>
+    </a>
+  </div>
+
+  <div class="overview" id="work">
+    <ol class="index" aria-label="Projects">
+      <li class="index-row" data-id="athletiq" data-short="athletiq" data-x=".42" data-y=".92"><a href="#athletiq"><span class="n mono">01</span><span class="t">athletiq</span><span class="d">recruiting software for college track coaches</span><span class="k mono">9 programs</span></a></li>
+      <li class="index-row" data-id="meridian" data-short="vc matching" data-x=".84" data-y=".4"><a href="#meridian"><span class="n mono">02</span><span class="t">meridian</span><span class="d">which investors actually fit a startup</span><span class="k mono">uva</span></a></li>
+      <li class="index-row" data-id="indus" data-short="indus script" data-x=".2" data-y=".1"><a href="#indus"><span class="n mono">03</span><span class="t">indus script</span><span class="d">finding word-signs in an undeciphered script</span><span class="k mono">ev grant</span></a></li>
+      <li class="index-row" data-id="secret" data-short="race car" data-x=".07" data-y=".74"><a href="#secret"><span class="n mono">04</span><span class="t">secret</span><span class="d">reviving sidwell's electric race car team</span><span class="k mono">award</span></a></li>
+      <li class="index-row" data-id="reachbot" data-short="reachbot" data-x=".73" data-y=".82"><a href="#reachbot"><span class="n mono">05</span><span class="t">reachbot</span><span class="d">cited answers from a vc firm's library</span><span class="k mono">reach</span></a></li>
+      <li class="index-row" data-id="tdx" data-short="tdx" data-x=".62" data-y=".16"><a href="#tdx"><span class="n mono">06</span><span class="t">tdx</span><span class="d">can hardware prove a paper's code ran?</span><span class="k mono">gmu</span></a></li>
+      <li class="index-row" data-id="fellows" data-short="future fellows" data-x=".56" data-y=".6"><a href="#fellows"><span class="n mono">07</span><span class="t">future fellows</span><span class="d">applicant review where every score needs a quote</span><span class="k mono">#2</span></a></li>
+      <li class="index-row" data-id="safeground" data-short="safeground" data-x=".28" data-y=".5"><a href="#safeground"><span class="n mono">08</span><span class="t">safeground</span><span class="d">know-your-rights app for refugee families</span><span class="k mono">6 langs</span></a></li>
+    </ol>
+    <figure class="map-fig">
+      <svg id="map" role="img" aria-label="A map placing each project between engineering and markets, and between research and shipped products."></svg>
+      <figcaption class="mono">fig. 0 · where each thing sits. hover a row.</figcaption>
+    </figure>
   </div>
 </header>
 
-<main id="main" class="wrap">
+<main class="wrap entries">
 
-  <section class="sheet cover" id="top" aria-labelledby="cover-t">
-    <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
-    <div class="cover-main">
-      <h1 id="cover-t">Here are some things I've built.</h1>
-      <p class="cover-sub">I'm Ruhan Khanna, a junior at Sidwell Friends School in Washington, DC. Each sheet opens to show how the thing works.</p>
+  <!-- 01 athletiq -->
+  <article class="entry col" id="athletiq">
+    <div class="e-head">
+      <h2><span class="n">01</span>athletiq</h2>
+      <span class="meta">2023 – now</span>
     </div>
-    <table class="bom">
-      <caption>Bill of materials</caption>
-      <thead><tr><th scope="col">Item</th><th scope="col">Part</th><th scope="col">Description</th><th scope="col">Year</th></tr></thead>
-      <tbody><tr><td class="num">1</td><th scope="row"><a href="#athletiq">athletIQ</a></th><td>Recruiting platform for college track coaches</td><td class="num">2023</td></tr><tr><td class="num">2</td><th scope="row"><a href="#secret">SECRET</a></th><td>48-volt electric race car, wiring and pacing system</td><td class="num">2023</td></tr><tr><td class="num">3</td><th scope="row"><a href="#meridian">Meridian</a></th><td>Model ranking which investors fit a startup</td><td class="num">2025</td></tr><tr><td class="num">4</td><th scope="row"><a href="#indus">The Indus script</a></th><td>Sign-function analysis of an undeciphered script</td><td class="num">2023</td></tr><tr><td class="num">5</td><th scope="row"><a href="#reachbot">ReachBot</a></th><td>Cited answers from a venture firm library</td><td class="num">2026</td></tr><tr><td class="num">6</td><th scope="row"><a href="#fellows">Future Fellows</a></th><td>Evidence-first applicant review for a fellowship</td><td class="num">2026</td></tr><tr><td class="num">7</td><th scope="row"><a href="#tdx">Verifying papers on TDX</a></th><td>Re-running economics papers in confidential VMs</td><td class="num">2025</td></tr></tbody>
-    </table>
-    <dl class="title-block">
-      <div><dt>Title</dt><dd>Things I've built</dd></div>
-      <div><dt>School</dt><dd>Sidwell Friends</dd></div>
-      <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
-      <div><dt>Sheets</dt><dd class="num">7</dd></div>
+    <p class="e-role meta">founder · started freshman year</p>
+    <p class="dek">a recruiting platform college track coaches use to find, compare and keep track of recruits.</p>
+    <dl class="facts">
+      <div><dt>9</dt><dd>programs piloted it, incl. stanford, harvard, unc</dd></div>
+      <div><dt>$8k</dt><dd>cloud backing from microsoft and aws</dd></div>
+      <div><dt>2023</dt><dd>first version, built as a runner</dd></div>
     </dl>
+    <p>i run track, and recruiting looked broken from both sides: coaches scroll through athletic.net by hand, and good runners at small schools never get seen. athletiq scrapes the rankings, puts every race on one scale, forecasts where an athlete is heading, and lets a coach manage a whole recruiting class in one place. coaches at georgetown, haverford, connecticut college and berry use it.</p>
+
+    <figure class="fig" id="vdot-lab">
+      <div class="fig-head mono"><b>fig. 1 · one scale for every event</b><span>try your own time</span></div>
+      <div class="vdot">
+        <div>
+          <div class="vdot-in">
+            <select id="v-event" aria-label="Event">
+              <option value="800">800m</option><option value="1500">1500m</option><option value="1609.34" selected>mile</option><option value="3200">3200m</option><option value="5000">5k</option>
+            </select>
+            <input id="v-time" type="text" value="4:35.0" inputmode="decimal" autocomplete="off" spellcheck="false" aria-label="Time" aria-describedby="v-msg">
+          </div>
+          <p class="vdot-big"><span class="num" id="v-out">65.5</span><span class="meta">vdot</span></p>
+          <p class="vdot-msg" id="v-msg" role="status"></p>
+        </div>
+        <dl class="equiv" id="v-equiv" aria-label="Equivalent times"></dl>
+      </div>
+      <figcaption class="mono">every mark converts to vdot (jack daniels' oxygen-cost model), so an 800m runner and a miler can be ranked side by side. same formulas the product runs.</figcaption>
+    </figure>
+
+    <figure class="fig">
+      <div class="fig-head mono"><b>fig. 2 · benchmark before you ship</b><span>42,798 athlete-weeks</span></div>
+      <svg id="inj-svg" role="img" aria-label="Injury model AUC: logistic regression 0.619, XGBoost 0.576, workload ratio 0.544"></svg>
+      <figcaption class="mono">i tested three injury-risk models on an open dataset of 74 elite runners over seven years, split by athlete so no one is in both train and test. the simplest model won, so that's the one that shipped.</figcaption>
+    </figure>
+
+    <figure class="shot">
+      <img src="img/aiq-recruit.jpg" width="1425" height="900" loading="lazy" alt="athletIQ's recruit search: filters for season, gender, state and grade, with a plain-English search box">
+      <figcaption class="mono">the coach app: search the rankings in plain english, filtered by your program's standards.</figcaption>
+    </figure>
+
+    <p>the same engine became <b>pan-out</b>, which prices junior tennis, chess, baseball and hockey prospects. on simulated data it beat plain ratings easily (auc 0.94 vs 0.84). on real atp careers the edge nearly vanished (0.844 vs 0.841), which taught me more than the first number did.</p>
+    <p class="src mono"><a href="https://athletiq.run">athletiq.run</a><a href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler/">technical.ly</a></p>
+  </article>
+
+  <!-- 02 meridian -->
+  <article class="entry col" id="meridian">
+    <div class="e-head">
+      <h2><span class="n">02</span>meridian</h2>
+      <span class="meta">2025 – now</span>
+    </div>
+    <p class="e-role meta">first author, with prof. adam tashman, uva school of data science</p>
+    <p class="dek">venture capital is a matching market, and it matches badly. i trained a model to rank which investors fit a startup, then measured how far real deals land from the best fit.</p>
+    <dl class="facts">
+      <div><dt>60.3%</dt><dd>of real investors were in the model's top 10, out of sample</dd></div>
+      <div><dt>6</dt><dd>median rank of the investor who actually wrote the check</dd></div>
+      <div><dt>~48k</dt><dd>investors ranked for every startup</dd></div>
+    </dl>
+    <p>a lightgbm lambdarank model learns from about 62,000 startups and 150,000+ funding events on crunchbase: stage, check size, geography, and how similar a startup is to each investor's past portfolio. the rank of the investor who really invested is the <b>mismatch distance</b>. it's usually small, but the tail is long, and it isn't random. it varies by region, stage and who the founder is. 434, an accelerator in charlottesville, uses it with its founders.</p>
+
+    <figure class="fig" id="rank-lab">
+      <div class="fig-head mono"><b>fig. 3 · rank investors for a startup</b><span>pick one</span></div>
+      <div class="chips" style="margin-bottom:14px">
+        <button type="button" class="chip" data-s="k12">k-12 tutoring · seed · nairobi</button>
+        <button type="button" class="chip" data-s="pay">payments api · series a · austin</button>
+        <button type="button" class="chip" data-s="clim">battery hardware · pre-seed · detroit</button>
+      </div>
+      <ol class="rank" id="rank-list" aria-live="polite"></ol>
+      <div class="legend"><span><i class="s-portfolio"></i>portfolio similarity</span><span><i class="s-stage"></i>stage fit</span><span><i class="s-check"></i>check size</span><span><i class="s-geo"></i>geography</span></div>
+      <figcaption class="mono">illustrative: six made-up investors and hand-set weights so the idea fits on screen. the real model learns its weights from data and ranks every investor in the dataset.</figcaption>
+    </figure>
+
+    <div class="photos" style="--n:2;--ar:1/1">
+      <a href="img/meridian-talk.jpg" data-full="img/meridian-talk.jpg" data-cap="presenting the paper"><div class="ph"><img src="img/meridian-talk.jpg" width="958" height="1600" loading="lazy" alt="Presenting the venture capital matching paper" style="object-position:50% 12%"></div><figcaption class="mono">presenting the paper</figcaption></a>
+      <a href="img/uva-symposium.jpg" data-full="img/uva-symposium.jpg" data-cap="uva undergraduate research symposium, april 2026"><div class="ph"><img src="img/uva-symposium.jpg" width="1200" height="1600" loading="lazy" alt="At the UVA Undergraduate Research Symposium"></div><figcaption class="mono">uva research symposium, apr 2026</figcaption></a>
+    </div>
+    <p class="src mono"><a href="https://www.researchgate.net/publication/400630982_Matching_Frictions_and_Equilibrium_Dispersion_in_Venture_Capital_Markets_Evidence_from_Large-Scale_Compatibility_Rankings">paper</a><a href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler/">technical.ly feature</a></p>
+  </article>
+
+  <!-- 03 indus -->
+  <article class="entry col" id="indus">
+    <div class="e-head">
+      <h2><span class="n">03</span>the indus script</h2>
+      <span class="meta">2023 – now</span>
+    </div>
+    <p class="e-role meta">with louie merriam · funded by emergent ventures</p>
+    <p class="dek">nobody can read the writing of the indus valley civilization, 4,500 years on. we built a method that sorts its signs into ones that stand for words and ones that stand for sounds.</p>
+    <dl class="facts">
+      <div><dt>ev</dt><dd>emergent ventures grant, 41st cohort</dd></div>
+      <div><dt>2025</dt><dd>published, int'l journal of computer applications</dd></div>
+      <div><dt>0</dt><dd>known translations to check against</dd></div>
+    </dl>
+    <p>with no bilingual text to lean on, all you have is the distribution of signs. the idea is to let the corpus vote: what a sign does is visible in where it shows up. step through it on a toy corpus below.</p>
+
+    <figure class="fig" id="indus-lab">
+      <div class="fig-head mono"><b>fig. 4 · the method, step by step</b><span>toy corpus</span></div>
+      <div class="tabs" role="tablist" aria-label="Method steps">
+        <button role="tab" id="tab-0" aria-selected="true" aria-controls="indus-panel" tabindex="0" data-step="0">1 corpus</button>
+        <button role="tab" id="tab-1" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="1">2 singletons</button>
+        <button role="tab" id="tab-2" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="2">3 expand by context</button>
+        <button role="tab" id="tab-3" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="3">4 exclusive pairs</button>
+      </div>
+      <div class="indus-body" id="indus-panel" role="tabpanel" aria-labelledby="tab-0">
+        <div class="corpus" id="corpus"></div>
+        <div class="indus-note">
+          <p id="step-text" aria-live="polite"></p>
+          <div id="excl-ctl" class="ctl" hidden>
+            <label for="excl">exclusivity <output id="excl-out">0.75</output></label>
+            <input id="excl" type="range" min="0.45" max="1" step="0.05" value="0.75">
+          </div>
+          <ul class="pair-list" id="pair-list" hidden></ul>
+        </div>
+      </div>
+    </figure>
+
+    <figure class="shot">
+      <img src="img/proof-ijca.jpg" width="660" height="505" loading="lazy" alt="The published paper's page in the International Journal of Computer Applications, by Ruhan Khanna and Louie Merriam">
+      <figcaption class="mono">ijca vol. 187, no. 64 · doi 10.5120/ijca2025926075</figcaption>
+    </figure>
+    <p class="src mono"><a href="https://ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/">paper</a><a href="https://marginalrevolution.com/marginalrevolution/2025/03/emergent-ventures-winners-41st-cohort.html">emergent ventures announcement</a><a href="https://github.com/ruhankhanna/ComputationalAnalysisIndusScript">code</a></p>
+  </article>
+
+  <!-- 04 secret -->
+  <article class="entry col" id="secret">
+    <div class="e-head">
+      <h2><span class="n">04</span>secret</h2>
+      <span class="meta">2023 – now</span>
+    </div>
+    <p class="e-role meta">revived the team · build lead</p>
+    <p class="dek">sidwell electric car race engineering team. i found it listed on the school website, dead since 2016, recruited friends and advisers, and we started racing again.</p>
+    <dl class="facts">
+      <div><dt>2016</dt><dd>the last time sidwell had raced, before us</dd></div>
+      <div><dt>1st</dt><dd>"best use of 3d printing," a first for the school</dd></div>
+      <div><dt>48 v</dt><dd>four lead-acid batteries, one hour, one charge</dd></div>
+    </dl>
+    <p>the dc electric vehicle grand prix is simple: whoever covers the most distance in an hour on one battery wins. we rebuilt the kit car with an aluminum chassis, a new battery pack, 3d-printed wheel covers and an arduino pacing system, raised the money from sponsors, and learned a lot from umd's formula team. click any part of the car's electrical system.</p>
+
+    <figure class="fig wide">
+      <div class="fig-head mono"><b>fig. 5 · how the car is wired</b><span>click a part</span></div>
+      <div class="wire-scroll"><svg id="wire-svg" viewBox="0 0 960 440" role="group" aria-label="Electrical system of the car. Select a part to read what it does."></svg></div>
+      <div class="wire-info" id="wire-info" aria-live="polite"></div>
+    </figure>
+
+    <figure class="fig" id="race-lab">
+      <div class="fig-head mono"><b>fig. 6 · pacing to an energy budget</b><span>drag the speed</span></div>
+      <div class="ctl">
+        <label for="race-speed">driver's speed <output id="race-speed-out">31</output> mph</label>
+        <input id="race-speed" type="range" min="16" max="34" step="1" value="31">
+        <button type="button" class="chip" id="race-run">run the hour</button>
+      </div>
+      <svg id="race-svg" role="img" aria-label="Battery remaining over the hour, for a driver at constant speed and with the pacing system."></svg>
+      <p class="out" id="race-out" role="status"></p>
+      <figcaption class="mono">each lap the arduino spreads the remaining battery over the laps left and tells the driver to speed up or back off. modeled car with assumed drag and battery values, not measured from ours.</figcaption>
+    </figure>
+
+    <div class="photos" style="--n:3;--ar:3/4">
+      <a href="img/secret-car.jpg" data-full="img/secret-car.jpg" data-cap="mid-build, wiring on the garage floor"><div class="ph"><img src="img/secret-car.jpg" width="1600" height="1200" loading="lazy" alt="The car mid-build in a parking garage with breadboard electronics on the floor"></div><figcaption class="mono">mid-build</figcaption></a>
+      <a href="img/secret-van.jpg" data-full="img/secret-van.jpg" data-cap="loading out for race day"><div class="ph"><img src="img/secret-van.jpg" width="1200" height="1600" loading="lazy" alt="Two students beside a van with the race car loaded in the back"></div><figcaption class="mono">loading out</figcaption></a>
+      <a href="img/umd-fsae.jpg" data-full="img/umd-fsae.jpg" data-cap="with umd's formula team in their shop"><div class="ph"><img src="img/umd-fsae.jpg" width="1600" height="1200" loading="lazy" alt="Students in front of the University of Maryland formula car in their shop" style="object-position:70% 50%"></div><figcaption class="mono">umd formula shop</figcaption></a>
+    </div>
+    <p class="src mono"><a href="https://www.sidwell.edu/about/news/news-detail/~board/homepage-news-panel/post/how-to-build-an-e-car-from-scratch">sidwell news</a><a href="https://sidwellhorizon.org/2898/past-editions-of-news/secret-wins-award-at-dc-electric-vehicle-grand-prix/">the horizon</a></p>
+  </article>
+
+  <!-- 05 reachbot -->
+  <article class="entry col" id="reachbot">
+    <div class="e-head">
+      <h2><span class="n">05</span>reachbot</h2>
+      <span class="meta">summer 2026</span>
+    </div>
+    <p class="e-role meta">summer associate, <a href="https://www.reachcapital.com">reach capital</a></p>
+    <p class="dek">an assistant that answers reach founders' questions from the firm's own library of talks and memos, citing the exact page or recording.</p>
+    <dl class="facts">
+      <div><dt>696</dt><dd>sources indexed</dd></div>
+      <div><dt>137</dt><dd>recorded sessions transcribed</dd></div>
+      <div><dt>$0.005</dt><dd>cost per answer</dd></div>
+    </dl>
+    <p>each question pulls the closest passages by vector similarity, and the model may answer only from them. the hard part wasn't retrieval. it was deciding what to do when the evidence is weak. the answer: say less, or say nothing.</p>
+
+    <figure class="fig" id="rag-lab">
+      <div class="fig-head mono"><b>fig. 7 · the retrieval gate</b><span>weak evidence, shorter answer</span></div>
+      <div class="ctl">
+        <div class="chips">
+          <button type="button" class="chip" data-sim="0.75" aria-pressed="true">on-topic</button>
+          <button type="button" class="chip" data-sim="0.66" aria-pressed="false">adjacent</button>
+          <button type="button" class="chip" data-sim="0.54" aria-pressed="false">off-topic</button>
+        </div>
+        <label for="rag-sim">best match <output id="rag-out">0.75</output></label>
+        <input id="rag-sim" type="range" min="0.40" max="0.90" step="0.01" value="0.75">
+      </div>
+      <svg id="rag-svg" role="img" aria-label="Similarity scale with three zones: not covered below 0.60, cautious from 0.60 to 0.70, full answer above 0.70."></svg>
+      <p class="out" id="rag-mode" role="status"></p>
+    </figure>
+  </article>
+
+  <!-- 06 tdx -->
+  <article class="entry col" id="tdx">
+    <div class="e-head">
+      <h2><span class="n">06</span>can hardware prove a paper ran?</h2>
+      <span class="meta">summer 2025</span>
+    </div>
+    <p class="e-role meta">gmu assip · with prof. jiasun li, costello college of business</p>
+    <p class="dek">journals ask for replication code, but nothing proves the code produced the results. i re-ran published management science papers inside intel tdx confidential machines, which can attest to exactly what ran.</p>
+    <dl class="facts">
+      <div><dt>19 / 27</dt><dd>replications ran and matched</dd></div>
+      <div><dt>$1.33</dt><dd>in cloud credits per paper</dd></div>
+      <div><dt>~2 hr</dt><dd>per run, on azure and google cloud</dd></div>
+    </dl>
+    <figure class="fig">
+      <div class="fig-head mono"><b>fig. 8 · every paper i tried</b><span>one bar each</span></div>
+      <svg id="tdx-svg" role="img" aria-label="27 replications attempted, 19 succeeded."></svg>
+      <figcaption class="mono">most failures weren't the hardware. data or software licenses were missing from the package.</figcaption>
+    </figure>
+    <div class="photos" style="--n:2;--ar:4/3">
+      <a href="img/assip-poster.jpg" data-full="img/assip-poster.jpg" data-cap="assip poster symposium, george mason"><div class="ph"><img src="img/assip-poster.jpg" width="1600" height="1200" loading="lazy" alt="Ruhan at the ASSIP poster symposium at George Mason" style="object-position:80% 50%"></div><figcaption class="mono">assip symposium</figcaption></a>
+      <figure class="shot" style="margin:0"><img src="img/proof-jssr.jpg" width="840" height="490" loading="lazy" alt="Published abstract: Evaluation of Intel's Trust Domain Extensions for Replicating and Validating Research in Management Science, by Ruhan Khanna and Jiasun Li"><figcaption class="mono">jssr vol. 7, 2025</figcaption></figure>
+    </div>
+    <p class="src mono"><a href="https://journals.gmu.edu/jssr/article/view/5253">abstract</a></p>
+  </article>
+
+  <!-- 07 future fellows -->
+  <article class="entry col" id="fellows">
+    <div class="e-head">
+      <h2><span class="n">07</span>future fellows</h2>
+      <span class="meta">2026 – now</span>
+    </div>
+    <p class="e-role meta">employee #2</p>
+    <p class="dek">a fellowship that places high schoolers in paid work. i built how it reads applications: ai organizes the evidence, a person makes every decision.</p>
+    <dl class="facts">
+      <div><dt>150</dt><dd>tests guarding the rules</dd></div>
+      <div><dt>0</dt><dd>rankings or total scores</dd></div>
+      <div><dt>3</dt><dd>passes to blind names and schools</dd></div>
+    </dl>
+    <p>applicants share a code repository and then get questions only its real author could answer. any score the model proposes must quote the application word for word, or it's thrown out. try it:</p>
+    <figure class="fig" id="quote-lab">
+      <div class="fig-head mono"><b>fig. 9 · the quote check</b><span>a sample application</span></div>
+      <blockquote class="essay" id="essay"></blockquote>
+      <label class="q-label" for="quote">evidence the model cites</label>
+      <textarea id="quote" rows="2" spellcheck="false" aria-describedby="q-result"></textarea>
+      <div class="chips">
+        <button type="button" class="chip" data-q="0" aria-pressed="true">real quote</button>
+        <button type="button" class="chip" data-q="1" aria-pressed="false">paraphrase</button>
+        <button type="button" class="chip" data-q="2" aria-pressed="false">invented</button>
+      </div>
+      <p class="q-result" id="q-result" role="status"></p>
+    </figure>
+  </article>
+
+  <!-- 08 safeground -->
+  <article class="entry col" id="safeground">
+    <div class="e-head">
+      <h2><span class="n">08</span>safeground</h2>
+      <span class="meta">2026</span>
+    </div>
+    <p class="e-role meta">for the <a href="https://irocenter.org">immigrant &amp; refugee outreach center</a>, where i volunteer</p>
+    <p class="dek">a know-your-rights app for refugee families in dc, maryland and virginia: what to say, and what not to say, when police stop you or someone knocks at the door.</p>
+    <dl class="facts">
+      <div><dt>6</dt><dd>languages: dari, arabic, urdu, spanish, french, english</dd></div>
+      <div><dt>1 tap</dt><dd>"i am being detained right now"</dd></div>
+      <div><dt>6</dt><dd>situations, from traffic stops to school</dd></div>
+    </dl>
+    <p>families at iroc often know their rights in theory. what they lacked was the exact words, in their own language, at the moment they need them, plus the cultural context. in many countries, silence reads as guilt. here it's a constitutional right.</p>
+    <figure class="fig">
+      <div class="fig-head mono"><b>fig. 10 · what the app tells you to say</b><span>english · دری</span></div>
+      <blockquote class="essay" style="margin:0">"I am exercising my right to remain silent. I want a lawyer."<br><span dir="rtl" lang="prs" style="display:block;margin-top:8px">من حق سکوت خود را اعمال می‌کنم. می‌خواهم وکیل داشته باشم.</span></blockquote>
+    </figure>
+    <p class="src mono"><a href="https://ruhankhanna.github.io/safeground/">open the app</a><a href="https://github.com/ruhankhanna/safeground">code</a></p>
+  </article>
+
+  <section class="also col" aria-labelledby="also-h">
+    <h2 class="section-h" id="also-h">also</h2>
+    <ul>
+      <li><span class="k">wharton</span><span>led our team in the wharton global high school investment competition</span></li>
+      <li><span class="k">john locke</span><span>essay prize finalist, economics</span></li>
+      <li><span class="k">harvard ilab</span><span>a quant pipeline and synthetic etfs tracking private companies, with exeter22</span></li>
+      <li><span class="k">track</span><span>on sidwell's track team, which is where athletiq started</span></li>
+    </ul>
   </section>
 
-    <article class="sheet" id="athletiq" aria-labelledby="athletiq-t">
-      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
-      <div class="sheet-main">
-        <div class="sheet-head">
-          <h2 id="athletiq-t">athletIQ</h2>
-          <p class="sheet-line">A recruiting platform college track coaches use to find, compare and track recruits.</p>
-          <div class="dim" aria-label="2023 to now"><span>2023</span><i></i><span>NOW</span></div>
-          <p class="sheet-link"><a class="link" href="https://athletiq.run" target="_blank" rel="noopener">athletiq.run<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
-        </div>
-        <ul class="callouts"><li><b>Stanford, UNC</b><span>among programs under contract</span></li><li><b>$8K</b><span>backing from Microsoft and AWS</span></li><li><b>314</b><span>commits since the 2025 rebuild</span></li></ul>
-      </div>
-      <details class="detail-a">
-        <summary><span class="tag">Detail A</span>How it works</summary>
-        <div class="detail">
-          <div class="arch-wrap"><svg id="arch" role="img" aria-label="System diagram: Athletic.net pages are fetched by a separate scraper service, passed to the Flask app's background jobs, scored by the analytics layer, stored in SQLite, and shown in the coach app."></svg></div>
-
-          <div class="lab-row">
-            <div class="lab-copy">
-              <h3>One scale for every event</h3>
-              <p>Every race converts to VDOT, Jack Daniels' oxygen-cost model, so an 800m runner and a miler can be compared.</p>
-            </div>
-            <div class="lab" id="vdot-lab">
-              <div class="lab-head"><strong>VDOT converter</strong><span>The same formulas the product uses.</span></div>
-              <div class="vdot-in">
-                <label for="v-event">Event</label>
-                <select id="v-event">
-                  <option value="800">800m</option><option value="1500">1500m</option><option value="1609.34" selected>Mile</option><option value="3200">3200m</option><option value="5000">5000m</option>
-                </select>
-                <label for="v-time">Time</label>
-                <input id="v-time" type="text" value="4:35.0" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="v-msg">
-              </div>
-              <p class="vdot-big"><span class="num" id="v-out">65.5</span><span>VDOT</span></p>
-              <p class="v-msg" id="v-msg" role="status"></p>
-              <dl class="equiv" id="v-equiv"></dl>
-            </div>
-          </div>
-
-          <div class="lab-row lab-row-flip">
-            <div class="lab-copy">
-              <h3>Forecasts from training</h3>
-              <p>A Banister fitness-fatigue model fit to each athlete, with 4,000 sampled parameter sets for an honest range.</p>
-            </div>
-            <div class="lab" id="ban-lab">
-              <div class="lab-head"><strong>Fitness-fatigue model</strong><span>Drag the weekly mileage bars.</span></div>
-              <svg id="ban-svg" role="group" aria-label="Weekly training load bars you can adjust, with the resulting fitness, fatigue and predicted mile time over 16 weeks"></svg>
-              <div class="lab-actions" role="group" aria-label="Training plans">
-                <button type="button" class="chip" data-plan="steady" aria-pressed="false">Steady</button>
-                <button type="button" class="chip" data-plan="taper" aria-pressed="true">Build, then taper</button>
-                <button type="button" class="chip" data-plan="over" aria-pressed="false">Overreach</button>
-              </div>
-              <p class="guard" id="ban-out" role="status"></p>
-            </div>
-          </div>
-
-          <div class="study">
-            <div>
-              <h3>Benchmark before you ship</h3>
-              <p>Three injury-risk models on 42,798 athlete-weeks, split by athlete. The simplest one won.</p>
-            </div>
-            <svg id="inj-svg" role="img" aria-label="Injury model AUC: logistic regression 0.619, XGBoost 0.576, workload ratio 0.544, chance 0.5"></svg>
-          </div>
-
-          <div class="po">
-            <div>
-              <h3>Pan-Out, for other sports</h3>
-              <p>An athletIQ product that prices junior tennis, chess, baseball and hockey prospects with stacked gradient-boosted models. It beat ratings on simulated data (AUC 0.94 vs 0.84); on real ATP careers the edge nearly vanished (0.844 vs 0.841).</p>
-            </div>
-          </div>
-        </div>
-      </details>
-      <dl class="title-block">
-        <div><dt>Title</dt><dd>athletIQ</dd></div>
-        <div><dt>Role</dt><dd>Founder</dd></div>
-        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
-        <div><dt>Sheet</dt><dd class="num">1 of 7</dd></div>
-      </dl>
-    </article>
-    <article class="sheet" id="secret" aria-labelledby="secret-t">
-      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
-      <div class="sheet-main">
-        <div class="sheet-head">
-          <h2 id="secret-t">SECRET</h2>
-          <p class="sheet-line">My school's 48-volt electric car for the one-hour Electric Vehicle Grand Prix. I founded the team and lead the build.</p>
-          <div class="dim" aria-label="2023 to now"><span>2023</span><i></i><span>NOW</span></div>
-          
-        </div>
-        <ul class="callouts"><li><b>3</b><span>DC Grand Prix raced</span></li><li><b>Top prize</b><span>for 3D printing</span></li><li><b>Dubai</b><span>invited, 2027</span></li></ul>
-      </div>
-      <details class="detail-a">
-        <summary><span class="tag">Detail B</span>How it works</summary>
-        <div class="detail">
-          <div class="car-intro">
-            <p class="lede">Most distance in one hour on one battery wins. We rebuilt the kit car with an aluminum chassis, a new battery pack, 3D-printed wheel covers and an Arduino pacing system. We raised $7K and work alongside UMD's Formula SAE team.</p>
-          </div>
-          <div class="wire-wrap">
-            <div class="wire-scroll"><svg id="wire-svg" viewBox="0 0 960 440" role="group" aria-label="Electrical system of the car. Select a part to read what it does."></svg></div>
-            <div class="wire-info" id="wire-info" aria-live="polite"></div>
-          </div>
-          <div class="lab-row">
-            <div class="lab-copy">
-              <h3>Pacing to an energy budget</h3>
-              <p>Each lap, the Arduino spreads the remaining battery over the laps left and tells the driver to speed up or back off.</p>
-            </div>
-            <div class="lab" id="race-lab">
-              <div class="lab-head"><strong>One-hour race simulator</strong><span>A driver's speed, with and without pacing.</span></div>
-              <div class="lab-controls">
-                <label for="race-speed">Driver's speed <output id="race-speed-out" class="num">31</output> mph</label>
-                <input id="race-speed" type="range" min="16" max="34" step="1" value="31">
-              </div>
-              <svg id="race-svg" role="img" aria-label="Battery remaining over the hour for a driver at constant speed and with the pacing system."></svg>
-              <dl class="readout" id="race-readout"></dl>
-              <p class="guard" id="race-out" role="status"></p>
-              <div class="lab-actions"><button type="button" class="chip" id="race-run">Run the race</button></div>
-              <p class="small">Modeled car with assumed values, not measured from ours.</p>
-            </div>
-          </div>
-        </div>
-      </details>
-      <dl class="title-block">
-        <div><dt>Title</dt><dd>SECRET</dd></div>
-        <div><dt>Role</dt><dd>Founder, build lead</dd></div>
-        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
-        <div><dt>Sheet</dt><dd class="num">2 of 7</dd></div>
-      </dl>
-    </article>
-    <article class="sheet" id="meridian" aria-labelledby="meridian-t">
-      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
-      <div class="sheet-main">
-        <div class="sheet-head">
-          <h2 id="meridian-t">Meridian</h2>
-          <p class="sheet-line">A model that ranks which investors fit a startup, built in UVA research with Prof. Adam Tashman to help underserved founders.</p>
-          <div class="dim" aria-label="2025 to now"><span>2025</span><i></i><span>NOW</span></div>
-          <p class="sheet-link"><a class="link" href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler" target="_blank" rel="noopener">Featured in Technical.ly<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
-        </div>
-        <ul class="callouts"><li><b>907K</b><span>startup-investor pairs</span></li><li><b>48,046</b><span>investors ranked</span></li><li><b>20,000+</b><span>founders served</span></li></ul>
-      </div>
-      <details class="detail-a">
-        <summary><span class="tag">Detail C</span>How it works</summary>
-        <div class="detail mer">
-          <p>A LightGBM LambdaRank model scores 16 features for every startup-investor pair, including text similarity between the startup and the investor's past portfolio. The split is by startup so no company leaks into testing. Presented at the UVA research symposium and ICMBF 2026; paper in review.</p>
-          <svg id="mer-svg" role="img" aria-label="Meridian pipeline: startup and investor portfolios are embedded, 16 pair features are built, LambdaRank orders 48,046 investors."></svg>
-        </div>
-      </details>
-      <dl class="title-block">
-        <div><dt>Title</dt><dd>Meridian</dd></div>
-        <div><dt>Role</dt><dd>Researcher, UVA</dd></div>
-        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
-        <div><dt>Sheet</dt><dd class="num">3 of 7</dd></div>
-      </dl>
-    </article>
-    <article class="sheet" id="indus" aria-labelledby="indus-t">
-      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
-      <div class="sheet-main">
-        <div class="sheet-head">
-          <h2 id="indus-t">The Indus script</h2>
-          <p class="sheet-line">A computational method that separates signs standing for words from signs standing for sounds in an undeciphered 4,500-year-old script.</p>
-          <div class="dim" aria-label="2023 to now"><span>2023</span><i></i><span>NOW</span></div>
-          <p class="sheet-link"><a class="link" href="https://www.ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/" target="_blank" rel="noopener">Read the paper<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
-        </div>
-        <ul class="callouts"><li><b>Published</b><span>peer-reviewed, IJCA 2025</span></li><li><b>$5K</b><span>Emergent Ventures grant</span></li><li><b>2023</b><span>to now, with Louie Merriam</span></li></ul>
-      </div>
-      <details class="detail-a">
-        <summary><span class="tag">Detail D</span>How it works</summary>
-        <div class="detail">
-          <div class="method" id="indus-lab">
-            <div class="method-steps" role="tablist" aria-label="Method steps">
-              <button role="tab" id="tab-0" aria-selected="true" aria-controls="indus-panel" tabindex="0" data-step="0">Corpus</button>
-              <button role="tab" id="tab-1" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="1">Singletons</button>
-              <button role="tab" id="tab-2" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="2">Context expansion</button>
-              <button role="tab" id="tab-3" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="3">Exclusive pairs</button>
-            </div>
-            <div class="method-body" id="indus-panel" role="tabpanel" aria-labelledby="tab-0">
-              <div class="corpus" id="corpus"></div>
-              <div class="method-note">
-                <p id="step-text" aria-live="polite"></p>
-                <div id="excl-ctl" class="lab-controls" hidden>
-                  <label for="excl">Exclusivity threshold <output id="excl-out" class="num">0.75</output></label>
-                  <input id="excl" type="range" min="0.45" max="1" step="0.05" value="0.75">
-                </div>
-                <ul class="pair-list" id="pair-list" hidden></ul>
-                <p class="small">A toy corpus so the method fits on screen.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </details>
-      <dl class="title-block">
-        <div><dt>Title</dt><dd>The Indus script</dd></div>
-        <div><dt>Role</dt><dd>Researcher</dd></div>
-        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
-        <div><dt>Sheet</dt><dd class="num">4 of 7</dd></div>
-      </dl>
-    </article>
-    <article class="sheet" id="reachbot" aria-labelledby="reachbot-t">
-      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
-      <div class="sheet-main">
-        <div class="sheet-head">
-          <h2 id="reachbot-t">ReachBot</h2>
-          <p class="sheet-line">An AI assistant that answers Reach Capital founders' questions from the firm's library, citing the exact page or recording.</p>
-          <div class="dim" aria-label="2026"><span>2026</span><i></i><span>2026</span></div>
-          
-        </div>
-        <ul class="callouts"><li><b>696</b><span>sources indexed</span></li><li><b>137</b><span>sessions transcribed</span></li><li><b>$0.005</b><span>per answer</span></li></ul>
-      </div>
-      <details class="detail-a">
-        <summary><span class="tag">Detail E</span>How it works</summary>
-        <div class="detail rb">
-          <p>Retrieval-augmented generation: each question pulls the closest passages by vector similarity, and the model answers only from them. When the evidence is weak, it says so instead of guessing.</p>
-          <div class="lab" id="rag-lab">
-            <div class="lab-head"><strong>The retrieval gate</strong><span>Weak evidence means a shorter answer, or none.</span></div>
-            <div class="q-presets" role="group" aria-label="Example questions">
-              <button type="button" class="chip" data-sim="0.75" aria-pressed="true">On-topic</button>
-              <button type="button" class="chip" data-sim="0.66" aria-pressed="false">Adjacent</button>
-              <button type="button" class="chip" data-sim="0.54" aria-pressed="false">Off-topic</button>
-            </div>
-            <div class="lab-controls">
-              <label for="rag-sim">Best-match similarity <output id="rag-out" class="num">0.75</output></label>
-              <input id="rag-sim" type="range" min="0.40" max="0.90" step="0.01" value="0.75">
-            </div>
-            <svg id="rag-svg" role="img" aria-label="Similarity scale with three zones: not covered below 0.60, cautious from 0.60 to 0.70, full answer above 0.70."></svg>
-            <p class="guard" id="rag-mode" role="status"></p>
-          </div>
-        </div>
-      </details>
-      <dl class="title-block">
-        <div><dt>Title</dt><dd>ReachBot</dd></div>
-        <div><dt>Role</dt><dd>Summer associate, Reach Capital</dd></div>
-        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
-        <div><dt>Sheet</dt><dd class="num">5 of 7</dd></div>
-      </dl>
-    </article>
-    <article class="sheet" id="fellows" aria-labelledby="fellows-t">
-      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
-      <div class="sheet-main">
-        <div class="sheet-head">
-          <h2 id="fellows-t">Future Fellows</h2>
-          <p class="sheet-line">The applicant evaluation system for a fellowship placing high schoolers in paid work. AI organizes evidence; a person makes every decision.</p>
-          <div class="dim" aria-label="2026 to now"><span>2026</span><i></i><span>NOW</span></div>
-          
-        </div>
-        <ul class="callouts"><li><b>150</b><span>tests guarding the rules</span></li><li><b>0</b><span>rankings or total scores</span></li><li><b>3-pass</b><span>blinding of names and schools</span></li></ul>
-      </div>
-      <details class="detail-a">
-        <summary><span class="tag">Detail F</span>How it works</summary>
-        <div class="detail ff">
-          <p>Applicants share a code repository and get questions only the real author could answer. Every score must quote the application word for word.</p>
-          <div class="lab" id="quote-lab">
-            <div class="lab-head"><strong>The quote check</strong><span>A sample application. Paraphrases fail.</span></div>
-            <blockquote class="essay" id="essay"></blockquote>
-            <label class="q-label" for="quote">Quote the model gives as evidence</label>
-            <textarea id="quote" rows="2" spellcheck="false" aria-describedby="q-result"></textarea>
-            <div class="q-presets" role="group" aria-label="Example quotes">
-              <button type="button" class="chip" data-q="0" aria-pressed="true">Real quote</button>
-              <button type="button" class="chip" data-q="1" aria-pressed="false">Paraphrase</button>
-              <button type="button" class="chip" data-q="2" aria-pressed="false">Invented</button>
-            </div>
-            <p class="q-result" id="q-result" role="status"></p>
-          </div>
-        </div>
-      </details>
-      <dl class="title-block">
-        <div><dt>Title</dt><dd>Future Fellows</dd></div>
-        <div><dt>Role</dt><dd>Employee #2</dd></div>
-        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
-        <div><dt>Sheet</dt><dd class="num">6 of 7</dd></div>
-      </dl>
-    </article>
-    <article class="sheet" id="tdx" aria-labelledby="tdx-t">
-      <div class="zones" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span></div>
-      <div class="sheet-main">
-        <div class="sheet-head">
-          <h2 id="tdx-t">Verifying papers on TDX</h2>
-          <p class="sheet-line">Re-ran published business and economics papers inside Intel TDX confidential VMs, with Prof. Jiasun Li.</p>
-          <div class="dim" aria-label="2025"><span>2025</span><i></i><span>2025</span></div>
-          <p class="sheet-link"><a class="link" href="https://journals.gmu.edu/jssr/article/view/5253" target="_blank" rel="noopener">Read the abstract<svg class="ico" aria-hidden="true" viewBox="0 0 16 16"><path d="M5 11 11 5M6.5 5H11v4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
-        </div>
-        <ul class="callouts"><li><b>19 of 27</b><span>replications succeeded</span></li><li><b>$1.33</b><span>per paper</span></li><li><b>2</b><span>clouds tested</span></li></ul>
-      </div>
-      <details class="detail-a">
-        <summary><span class="tag">Detail G</span>How it works</summary>
-        <div class="detail">
-          <p>Journals require replication packages, but nothing proves the code ran as claimed. TDX VMs isolate memory from the host and can attest to exactly what ran. We ran each paper on Azure and Google Cloud; most failures came from code missing from the package.</p>
-          <svg id="gmu-svg" role="img" aria-label="27 replications attempted, 19 succeeded."></svg>
-        </div>
-      </details>
-      <dl class="title-block">
-        <div><dt>Title</dt><dd>Verifying papers on TDX</dd></div>
-        <div><dt>Role</dt><dd>Researcher, GMU ASSIP</dd></div>
-        <div><dt>Drawn by</dt><dd>R. Khanna</dd></div>
-        <div><dt>Sheet</dt><dd class="num">7 of 7</dd></div>
-      </dl>
-    </article>
-
-  <section class="notes" aria-labelledby="notes-t">
-    <h2 id="notes-t">General notes</h2>
-    <ol>
-      <li><b>Quant pipeline</b> and synthetic ETFs tracking private companies, Exeter22 at Harvard iLab.</li>
-      <li><b>Safeground</b>, a know-your-rights app for a refugee outreach center where I volunteer.</li>
-      <li><b>Wharton</b> investment competition team lead.</li>
-      <li><b>John Locke</b> essay prize finalist in economics.</li>
-    </ol>
-  </section>
-
+  <footer class="foot mono" id="contact">
+    <span>happy to walk through any of this · <button class="copy" type="button" data-email="ruhan.khanna.2009@gmail.com">ruhan.khanna.2009@gmail.com</button></span>
+    <span><a href="https://github.com/ruhankhanna">github</a> · <a href="https://www.linkedin.com/in/ruhan-khanna-rk18/">linkedin</a> · <a href="#top">top ↑</a></span>
+  </footer>
 </main>
 
-<footer id="contact" class="foot">
-  <div class="wrap">
-    <p class="foot-big">Happy to walk through any of this.</p>
-    <div class="foot-links">
-      <a href="mailto:ruhan.khanna.2009@gmail.com">ruhan.khanna.2009@gmail.com</a>
-    </div>
-  </div>
-</footer>
+<dialog id="lightbox" aria-label="Photo"><figure style="margin:0"><img src="" alt=""><figcaption class="mono"></figcaption></figure></dialog>
 
-<script src="main.js?v=20"></script>
+<script>
+  document.querySelector(".copy").addEventListener("click", async (e) => {
+    const b = e.currentTarget, t = b.textContent;
+    try { await navigator.clipboard.writeText(b.dataset.email); b.textContent = "copied"; }
+    catch { location.href = "mailto:" + b.dataset.email; }
+    setTimeout(() => (b.textContent = t), 1400);
+  });
+</script>
+<script src="figures.js"></script>
 </body>
 </html>
