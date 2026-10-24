@@ -502,7 +502,7 @@
   (() => {
     const screen = $("#sg-screen");
     if (!screen) return;
-    // copied from the app's LANG_DATA (github.com/ruhankhanna/safeground)
+    // copied from the app's own translation table
     const T = {
       en: { emg: "I am being detained right now", pol: ["Police stopped you", "I am exercising my right to remain silent. I want a lawyer."], door: ["Someone is at your door", "You do NOT have to open your door. ICE cannot enter without a judicial warrant."], det: ["You are being detained", "I want to speak to a lawyer immediately."] },
       fa: { rtl: 1, emg: "من الان بازداشت شده‌ام", pol: ["پولیس شما را متوقف کرد", "من حق سکوت خود را اعمال می‌کنم. می‌خواهم وکیل داشته باشم."], door: ["کسی دروازه‌ات را می‌زند", "شما مجبور نیستید در را باز کنید. ICE بدون حکم قضایی نمی‌تواند وارد شود."], det: ["شما بازداشت شده‌اید", "می‌خواهم فوری با وکیل صحبت کنم."] },
