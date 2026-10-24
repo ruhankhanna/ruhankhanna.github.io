@@ -345,19 +345,16 @@
   (() => {
     const svg = $("#po-svg");
     if (!svg) return;
-    // simulated: the d1 mid-major tier from data/report_tennis.json; real: atp careers
-    const groups = [
-      ["simulated junior players", 0.843, 0.942],
-      ["real atp careers", 0.841, 0.844],
-    ];
-    responsive(svg, 196, (w) => {
+    // the d1 mid-major tier from pan-out's data/report_tennis.json
+    const groups = [["simulated junior players", 0.843, 0.942]];
+    responsive(svg, 112, (w) => {
       svg.innerHTML = "";
       const acc = css("--accent"), ink = css("--ink"), rule = css("--rule"), muted = css("--muted");
       const L = w < 480 ? 92 : 104, R = w - 52;
       const sx = (v) => L + ((v - 0.5) / 0.5) * (R - L); // 50% is a coin flip, so bars start there
-      el("line", { x1: L, x2: L, y1: 18, y2: 176, stroke: rule }, svg);
-      el("text", { x: L, y: 192, "text-anchor": "middle" }, svg).textContent = "50% · coin flip";
-      el("text", { x: R, y: 192, "text-anchor": "end" }, svg).textContent = "100%";
+      el("line", { x1: L, x2: L, y1: 18, y2: 92, stroke: rule }, svg);
+      el("text", { x: L, y: 108, "text-anchor": "middle" }, svg).textContent = "50% · coin flip";
+      el("text", { x: R, y: 108, "text-anchor": "end" }, svg).textContent = "100%";
       groups.forEach(([name, ratings, model], g) => {
         const y = 22 + g * 84;
         el("text", { x: 0, y: y + 4, class: "ink" }, svg).textContent = name;
