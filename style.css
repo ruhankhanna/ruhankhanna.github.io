@@ -485,3 +485,6 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 .orgs-wrap { row-gap: 12px; }
 .orgs .o-citiopen img { height: 26px; }
 .orgs .o-desmos img { height: 16px; }
+.orgs .o-salesforce img { height: 24px; }
+.orgs .o-a16z img { height: 18px; }
+.logo-row.partners li.wide img[src*="salesforce"] { height: 34px; }
