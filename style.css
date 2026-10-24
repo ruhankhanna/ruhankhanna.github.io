@@ -475,3 +475,4 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 #athletiq .logo-row:not(.sponsors) { gap: 14px 12px; }
 #athletiq .logo-row li.more span { font-size: 11px; }
 .facts.two { grid-template-columns: repeat(2, 1fr); }
+.step-h { margin: 30px 0 -6px !important; font-size: 12px; color: var(--accent); letter-spacing: .01em; }

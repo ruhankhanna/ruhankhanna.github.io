@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=30">
+<link rel="stylesheet" href="style.css?v=31">
 </head>
 <body>
 
@@ -37,7 +37,7 @@
   </ul>
   <div class="orgs-wrap">
     <p class="mono meta">worked with and backed by</p>
-    <ul class="orgs" aria-label="Organizations I've worked with or been backed by"><li class="o-uva"><img src="img/logos/uva.svg" alt="University of Virginia"><span>uva</span></li><li class="o-gmu"><img src="img/logos/gmu.svg" alt="George Mason University"></li><li class="o-reach"><img src="img/logos/reach.svg" alt="Reach Capital"></li><li class="o-microsoft"><img src="img/logos/microsoft.svg?v=30" alt="Microsoft"></li><li class="o-aws"><img src="img/logos/aws.svg?v=30" alt="Amazon Web Services"></li><li class="o-iroc"><img src="img/logos/iroc.png" alt="Immigrant and Refugee Outreach Center"></li><li class="o-mercatus"><img src="img/logos/mercatus.svg" alt="Mercatus Center at George Mason University"><span>emergent ventures</span></li></ul>
+    <ul class="orgs" aria-label="Organizations I've worked with or been backed by"><li class="o-uva"><img src="img/logos/uva.svg" alt="University of Virginia"><span>uva</span></li><li class="o-gmu"><img src="img/logos/gmu.svg" alt="George Mason University"></li><li class="o-reach"><img src="img/logos/reach.svg" alt="Reach Capital"></li><li class="o-microsoft"><img src="img/logos/microsoft.svg?v=31" alt="Microsoft"></li><li class="o-aws"><img src="img/logos/aws.svg?v=31" alt="Amazon Web Services"></li><li class="o-iroc"><img src="img/logos/iroc.png" alt="Immigrant and Refugee Outreach Center"></li><li class="o-mercatus"><img src="img/logos/mercatus.svg" alt="Mercatus Center at George Mason University"><span>emergent ventures</span></li></ul>
     <p class="mono meta">my research is used by</p>
     <ul class="orgs" aria-label="Accelerators whose founders use my investor-matching model"><li class="o-yc"><img src="img/logos/yc.svg" alt="Y Combinator"><span>yc france</span></li><li class="o-bgv"><img src="img/icons/bgv.png" alt=""><span>black girl ventures</span></li><li class="o-startout"><img src="img/logos/startout.svg" alt="StartOut"></li><li class="o-astia"><img src="img/logos/astia.png" alt="Astia"></li><li class="o-somos"><img src="img/logos/somos.svg" alt="SOMOS VC"></li><li><span>434 · and more</span></li></ul>
   </div>
@@ -95,7 +95,7 @@
       <p class="mono meta">deployed at</p>
       <ul class="logo-row"><li class="big"><img src="img/logos/stanford.svg" alt="" loading="lazy"><span>stanford</span></li><li class="big"><img src="img/logos/harvard.png" alt="" loading="lazy"><span>harvard</span></li><li class="big"><img src="img/logos/unc.png" alt="" loading="lazy"><span>unc</span></li><li><img src="img/logos/georgetown.png" alt="" loading="lazy"><span>georgetown</span></li><li><img src="img/logos/texas.png" alt="" loading="lazy"><span>texas</span></li><li><img src="img/logos/haverford.png" alt="" loading="lazy"><span>haverford</span></li><li><img src="img/logos/conncollege.png" alt="" loading="lazy"><span>conn college</span></li><li><img src="img/logos/berry.png" alt="" loading="lazy"><span>berry</span></li><li><img src="img/logos/lakeland.png" alt="" loading="lazy"><span>lakeland</span></li><li class="more"><span>and more</span></li></ul>
       <p class="mono meta">backed by</p>
-      <ul class="logo-row sponsors"><li><img src="img/logos/microsoft.svg?v=30" alt="Microsoft" loading="lazy"></li><li><img src="img/logos/aws.svg?v=30" alt="Amazon Web Services" loading="lazy"></li><li class="txt">and angel investors</li></ul>
+      <ul class="logo-row sponsors"><li><img src="img/logos/microsoft.svg?v=31" alt="Microsoft" loading="lazy"></li><li><img src="img/logos/aws.svg?v=31" alt="Amazon Web Services" loading="lazy"></li><li class="txt">and angel investors</li></ul>
     </div>
     <dl class="facts">
       <div><dt>9</dt><dd>ncaa programs with signed contracts</dd></div>
@@ -146,13 +146,17 @@
       <span class="meta">2025 – now</span>
     </div>
     <p class="e-role meta has-org"><img class="org" src="img/logos/uva.svg" alt="University of Virginia"><span>first author, with prof. adam tashman, uva school of data science</span></p>
-    <p class="dek">a model that ranks which investors fit a startup, and a paper on how far real deals land from that ranking.</p>
+    <p class="dek">a model that predicts which investors fit a startup, a paper on where it goes wrong, and the matching software i built from it for founders venture capital tends to overlook.</p>
     <dl class="facts">
       <div><dt>20,000+</dt><dd>founders worldwide use it</dd></div>
       <div><dt>60.3%</dt><dd>of real investors were in the model's top 10</dd></div>
       <div><dt>6</dt><dd>median rank of the investor who actually invested</dd></div>
     </dl>
-    <p>it learned from about 62,000 startups and 150,000 funding rounds on crunchbase. most real investors show up near the top of its list, and the misses cluster by region, stage and founder background. more than 20,000 founders now use it, most of them from backgrounds venture capital tends to overlook, through the accelerators below. i presented the paper at uva's undergraduate research symposium and at the 10th international conference on advanced research in management, business and finance (icmbf).</p>
+    <p class="step-h mono">1 · the research</p>
+    <p>with prof. tashman, i trained a ranking model on crunchbase data covering about 62,000 startups, 48,000 investors and 150,000 funding rounds. for each startup it ranks every investor by how likely they are to invest, using 16 features such as stage, check size, location and how close the startup is to what the investor has backed before.</p>
+    <p>then we studied where the model was wrong. for each real deal, we looked at how far down the list the investor who actually invested sat, and called that gap the mismatch distance. most deals land close. the real investor was in the model's top 10 in 60.3% of deals, with a median rank of 6. the misses aren't random, though. mismatch runs higher at later stages and changes with region and with who the founder is. founders in the middle east and north africa saw the most of it, and founders in southeast asia the least. i presented the paper at uva's undergraduate research symposium and at the 10th international conference on advanced research in management, business and finance (icmbf).</p>
+    <p class="step-h mono">2 · the software</p>
+    <p>i wanted to close that gap, so i turned the model into meridian, a matching tool. a founder enters their startup, and meridian runs it through the same model to surface the investors who fit best and, based on the same features, are most likely to invest. i gave it to accelerators and organizations that work with underrepresented founders, and more than 20,000 founders now use it.</p>
     <div class="logos">
       <p class="mono meta">used by founders in</p>
       <ul class="logo-row partners"><li class="big"><img src="img/logos/yc.svg" alt="" loading="lazy"><span>y combinator france</span></li><li><span class="word">434</span><span>434 accelerator</span></li><li><img src="img/icons/bgv.png" alt="" loading="lazy"><span>black girl ventures</span></li><li><span class="word">bea</span><span>black entrepreneurship alliance</span></li><li class="wide"><img src="img/logos/somos.svg" alt="" loading="lazy"><span>somos vc</span></li><li class="wide"><img src="img/logos/startout.svg" alt="" loading="lazy"><span>startout lgbtq accelerator</span></li><li class="wide"><img src="img/logos/astia.png" alt="" loading="lazy"><span>astia</span></li><li class="more"><span>and more</span></li></ul>
@@ -164,7 +168,7 @@
     <details class="more">
       <summary class="mono">how it works <span>1 figure</span></summary>
       <figure class="fig" id="rank-lab">
-        <div class="fig-head mono"><b>fig. 3 · rank investors for a startup</b><span>pick one</span></div>
+        <div class="fig-head mono"><b>fig. 3 · how meridian ranks investors for a startup</b><span>pick one</span></div>
         <div class="chips" style="margin-bottom:14px">
           <button type="button" class="chip" data-s="k12">k-12 tutoring · seed · nairobi</button>
           <button type="button" class="chip" data-s="pay">payments api · series a · austin</button>
@@ -471,7 +475,7 @@
   });
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<script src="figures.js?v=30"></script>
-<script type="module" src="car3d.js?v=30"></script>
+<script src="figures.js?v=31"></script>
+<script type="module" src="car3d.js?v=31"></script>
 </body>
 </html>
