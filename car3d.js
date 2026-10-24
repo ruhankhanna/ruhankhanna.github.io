@@ -304,6 +304,26 @@ function init(root) {
       c.fill();
     });
     sticker(g, shield, 0.07, 0.088, 1.17, Math.PI / 2 - 0.15, false).rotateZ(Math.PI / 2);
+    // school wordmark on both flanks: "Sidwell" set in serif, "Friends" in script
+    const sidwell = canvasTex(800, 160, (c, w, h) => {
+      c.fillStyle = "#8e1537"; c.textBaseline = "alphabetic";
+      c.font = "600 82px Georgia, 'Times New Roman', serif"; c.fillText("Sidwell", 18, 104);
+      const sw = c.measureText("Sidwell").width;
+      c.font = "92px 'Segoe Script', 'Brush Script MT', 'Snell Roundhand', cursive"; c.fillText("Friends", 18 + sw + 22, 108);
+    });
+    sticker(g, sidwell, 0.4, 0.08, 0.36, 0.12, false);
+    sticker(g, sidwell, 0.4, 0.08, 0.36, Math.PI - 0.12, true);
+    // sponsor: citi open, on the tail on both sides
+    const citi = canvasTex(520, 180, (c) => {
+      c.fillStyle = "#003b70"; c.font = "700 104px 'Helvetica Neue', Arial, sans-serif"; c.textBaseline = "alphabetic";
+      c.fillText("citi", 20, 130);
+      const cw = c.measureText("citi").width;
+      c.strokeStyle = "#d2232a"; c.lineWidth = 11; c.beginPath();
+      c.arc(20 + cw * 0.62, 112, cw * 0.36, Math.PI * 1.12, Math.PI * 1.88); c.stroke();
+      c.font = "400 92px 'Helvetica Neue', Arial, sans-serif"; c.fillText("open", 20 + cw + 22, 130);
+    });
+    sticker(g, citi, 0.28, 0.097, -0.9, 0.06, false);
+    sticker(g, citi, 0.28, 0.097, -0.9, Math.PI - 0.06, true);
   }
 
   /* 02 chassis + floor */
@@ -356,8 +376,8 @@ function init(root) {
 
   /* 04 steering + throttle */
   {
-    const g = part("steer", "steering yoke + thumb throttle", "regen on 0–20%", [0.22, 0.3, 0],
-      "a small yoke instead of a round wheel, because the cockpit is narrow. the throttle is under the driver's right thumb, and the first 20% of it is regenerative braking, so easing off puts a little energy back in the battery.");
+    const g = part("steer", "steering yoke + thumb throttle", "3d-printed yoke, regen on 0–20%", [0.22, 0.3, 0],
+      "we designed and 3d-printed this yoke ourselves, small instead of round because the cockpit is narrow. the throttle is under the driver's right thumb, and the first 20% of it is regenerative braking, so easing off puts a little energy back in the battery.");
     add(g, tubeAlong([[0.6, 0.2, 0], [0.4, 0.34, 0], [0.22, 0.45, 0]], 0.012, 20), M.steel);
     const yoke = new THREE.Group();
     yoke.position.set(0.19, 0.47, 0);
