@@ -496,3 +496,8 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 .orgs-wrap .meta { padding-top: 6px; }
 .orgs .word.marchay { font: 500 13px 'Helvetica Neue', Arial, sans-serif; letter-spacing: .18em; }
 .orgs .o-wjustice img { height: 30px; }
+/* status tags replace the dot tracks */
+.trk { display: flex; gap: 6px; align-items: center; height: auto; }
+.trk i { font: 10.5px var(--mono); font-style: normal; padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+.trk .tag-use { color: var(--accent); background: var(--accent-wash); }
+.trk .tag-pub { color: #2f6b3a; background: #e9f2ea; }

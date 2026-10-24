@@ -322,23 +322,17 @@
     responsive(svg, 96, (w) => { W = w; render(); });
   })();
 
-  /* ---------- fig. 0: each project's track from question to use ---------- */
+  /* ---------- contents list: a status tag per project ---------- */
   (() => {
-    const rows = $$(".index-row");
-    if (!rows.length) return;
-    const names = ["asked", "built", "paper", "in use"];
-    rows.forEach((r, k) => {
-      const st = r.dataset.stages.split("").map(Number);
+    $$(".index-row").forEach((r) => {
+      const st = r.dataset.stages.split("").map(Number); // asked, built, paper, in use
+      const tags = [];
+      if (st[3]) tags.push('<i class="tag-use">in use</i>');
+      if (st[2]) tags.push('<i class="tag-pub">published</i>');
       const trk = $(".trk", r);
-      const last = st.lastIndexOf(1);
-      trk.innerHTML = st.map((on, i) =>
-        (i ? `<i class="seg${i <= last ? " on" : ""}"></i>` : "") +
-        `<i class="dot${on ? " on" : ""}${i === 3 && on ? " use" : ""}" title="${names[i]}${on ? "" : ": not yet"}"></i>`).join("");
-      trk.setAttribute("aria-label", names.filter((_, i) => st[i]).join(", "));
-      trk.style.setProperty("--d", `${k * 70}ms`);
+      trk.innerHTML = tags.join("");
+      trk.removeAttribute("role");
     });
-    if (!reduceMotion) requestAnimationFrame(() => requestAnimationFrame(() => $(".index").classList.add("drawn")));
-    else $(".index").classList.add("drawn");
   })();
 
   /* ---------- Pan-Out: model vs ratings (data/report_tennis.json, plus real ATP careers) ---------- */
