@@ -16,7 +16,7 @@
 <script>
   // browsers can hold an old copy of this page; if the site has a newer build, load it once
   (function () {
-    var BUILD = "37";
+    var BUILD = "38";
     try {
       fetch("version.txt?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : ""; }).then(function (v) {
         v = (v || "").trim();
@@ -28,7 +28,7 @@
     } catch (e) {}
   })();
 </script>
-<link rel="stylesheet" href="style.css?v=37">
+<link rel="stylesheet" href="style.css?v=38">
 </head>
 <body>
 
@@ -52,7 +52,7 @@
   </ul>
   <div class="orgs-wrap">
     <p class="mono meta">backed by</p>
-    <ul class="orgs" aria-label="Backed by"><li class="o-microsoft"><img src="img/logos/microsoft.svg?v=37" alt="Microsoft"></li><li class="o-aws"><img src="img/logos/aws.svg?v=37" alt="Amazon Web Services"></li><li class="o-mercatus"><img src="img/logos/mercatus.svg" alt="Mercatus Center"><span>emergent ventures</span></li><li class="o-citiopen"><img src="img/logos/citiopen.svg" alt="Citi Open"><span>citi open</span></li></ul>
+    <ul class="orgs" aria-label="Backed by"><li class="o-microsoft"><img src="img/logos/microsoft.svg?v=38" alt="Microsoft"></li><li class="o-aws"><img src="img/logos/aws.svg?v=38" alt="Amazon Web Services"></li><li class="o-mercatus"><img src="img/logos/mercatus.svg" alt="Mercatus Center"><span>emergent ventures</span></li><li class="o-citiopen"><img src="img/logos/citiopen.svg" alt="Citi Open"><span>citi open</span></li></ul>
     <p class="mono meta">work with</p>
     <ul class="orgs" aria-label="Organizations I work with"><li class="o-uva"><img src="img/logos/uva.svg" alt="University of Virginia"><span>uva</span></li><li class="o-gmu"><img src="img/logos/gmu.svg" alt="George Mason University"></li><li class="o-reach"><img src="img/logos/reach.svg" alt="Reach Capital"></li><li class="o-word"><span class="word">ays sports</span></li><li class="o-iroc"><img src="img/logos/iroc.png" alt="Immigrant and Refugee Outreach Center"></li><li class="o-col"><img src="img/logos/stanford.svg" alt="Stanford" title="Stanford"></li><li class="o-col"><img src="img/logos/harvard.png" alt="Harvard" title="Harvard"></li><li class="o-col"><img src="img/logos/unc.png" alt="UNC" title="UNC"></li><li class="o-col"><img src="img/logos/georgetown.png" alt="Georgetown" title="Georgetown"></li><li class="o-col"><img src="img/logos/texas.png" alt="Texas" title="Texas"></li><li class="o-col"><img src="img/logos/haverford.png" alt="Haverford" title="Haverford"></li><li class="o-col"><img src="img/logos/conncollege.png" alt="Connecticut College" title="Connecticut College"></li><li class="o-col"><img src="img/logos/berry.png" alt="Berry" title="Berry"></li><li class="o-col"><img src="img/logos/lakeland.png" alt="Lakeland" title="Lakeland"></li><li class="o-yc"><img src="img/logos/yc.svg" alt="Y Combinator"><span>yc france</span></li><li class="o-bgv"><img src="img/icons/bgv.png" alt=""><span>black girl ventures</span></li><li class="o-startout"><img src="img/logos/startout.svg" alt="StartOut"></li><li class="o-astia"><img src="img/logos/astia.png" alt="Astia"></li><li class="o-somos"><img src="img/logos/somos.svg" alt="SOMOS VC"></li><li class="o-desmos"><img src="img/logos/desmos.svg" alt="Desmos"></li><li class="o-gptzero"><img src="img/icons/gptzero.png" alt=""><span>gptzero</span></li><li class="o-replit"><img src="img/icons/replit.png" alt=""><span>replit</span></li><li class="o-salesforce"><img src="img/logos/salesforce.svg" alt="Salesforce"></li><li class="o-a16z"><img src="img/logos/a16z.svg" alt="Andreessen Horowitz"></li><li class="o-more"><span>and more</span></li></ul>
   </div>
@@ -85,9 +85,9 @@
     <ol class="index" aria-label="Projects">
       <li class="index-head mono" aria-hidden="true"><span></span><span></span><span></span><span class="trk-h"><i>asked</i><i>built</i><i>paper</i><i>in use</i></span><span></span></li>
       <li class="index-row" data-id="athletiq" data-stages="1101"><a href="#athletiq"><span class="n mono">01</span><span class="t">athletiq</span><span class="d">recruiting software for college coaches</span><span class="trk" role="img"></span><span class="u mono">stanford, harvard, unc +6</span></a></li>
-      <li class="index-row" data-id="meridian" data-stages="1111"><a href="#meridian"><span class="n mono">02</span><span class="t">uva research</span><span class="d">meridian, which investors actually fit a startup</span><span class="trk" role="img"></span><span class="u mono">20,000+ founders</span></a></li>
-      <li class="index-row" data-id="indus" data-stages="1110"><a href="#indus"><span class="n mono">03</span><span class="t">indus script</span><span class="d">finding word-signs in an undeciphered script</span><span class="trk" role="img"></span><span class="u mono">paper + open code</span></a></li>
-      <li class="index-row" data-id="secret" data-stages="1101"><a href="#secret"><span class="n mono">04</span><span class="t">secret</span><span class="d">the electric race car team i started at school</span><span class="trk" role="img"></span><span class="u mono">raced, won an award</span></a></li>
+      <li class="index-row" data-id="secret" data-stages="1101"><a href="#secret"><span class="n mono">02</span><span class="t">ev race car</span><span class="d">secret, the electric race car team i started at school</span><span class="trk" role="img"></span><span class="u mono">raced, won an award</span></a></li>
+      <li class="index-row" data-id="meridian" data-stages="1111"><a href="#meridian"><span class="n mono">03</span><span class="t">uva research</span><span class="d">meridian, which investors actually fit a startup</span><span class="trk" role="img"></span><span class="u mono">20,000+ founders</span></a></li>
+      <li class="index-row" data-id="indus" data-stages="1110"><a href="#indus"><span class="n mono">04</span><span class="t">indus script</span><span class="d">finding word-signs in an undeciphered script</span><span class="trk" role="img"></span><span class="u mono">paper + open code</span></a></li>
       <li class="index-row" data-id="reachbot" data-stages="1101"><a href="#reachbot"><span class="n mono">05</span><span class="t">reachbot</span><span class="d">cited answers from a vc firm's library</span><span class="trk" role="img"></span><span class="u mono">150–200 founders</span></a></li>
       <li class="index-row" data-id="tdx" data-stages="1110"><a href="#tdx"><span class="n mono">06</span><span class="t">gmu research</span><span class="d">can hardware prove a paper's code ran?</span><span class="trk" role="img"></span><span class="u mono">paper</span></a></li>
       <li class="index-row" data-id="fellows" data-stages="1101"><a href="#fellows"><span class="n mono">07</span><span class="t">future fellows</span><span class="d">a 10-minute test of the code you actually wrote</span><span class="trk" role="img"></span><span class="u mono">live, free</span></a></li>
@@ -111,7 +111,7 @@
       <p class="mono meta">deployed at</p>
       <ul class="logo-row"><li class="big"><img src="img/logos/stanford.svg" alt="" loading="lazy"><span>stanford</span></li><li class="big"><img src="img/logos/harvard.png" alt="" loading="lazy"><span>harvard</span></li><li class="big"><img src="img/logos/unc.png" alt="" loading="lazy"><span>unc</span></li><li><img src="img/logos/georgetown.png" alt="" loading="lazy"><span>georgetown</span></li><li><img src="img/logos/texas.png" alt="" loading="lazy"><span>texas</span></li><li><img src="img/logos/haverford.png" alt="" loading="lazy"><span>haverford</span></li><li><img src="img/logos/conncollege.png" alt="" loading="lazy"><span>conn college</span></li><li><img src="img/logos/berry.png" alt="" loading="lazy"><span>berry</span></li><li><img src="img/logos/lakeland.png" alt="" loading="lazy"><span>lakeland</span></li><li class="more"><span>and more</span></li></ul>
       <p class="mono meta">backed by</p>
-      <ul class="logo-row sponsors"><li><img src="img/logos/microsoft.svg?v=37" alt="Microsoft" loading="lazy"></li><li><img src="img/logos/aws.svg?v=37" alt="Amazon Web Services" loading="lazy"></li><li class="txt">and angel investors</li></ul>
+      <ul class="logo-row sponsors"><li><img src="img/logos/microsoft.svg?v=38" alt="Microsoft" loading="lazy"></li><li><img src="img/logos/aws.svg?v=38" alt="Amazon Web Services" loading="lazy"></li><li class="txt">and angel investors</li></ul>
     </div>
     <dl class="facts">
       <div><dt>9</dt><dd>ncaa programs with signed contracts</dd></div>
@@ -155,10 +155,70 @@
     <p class="src mono"><a href="https://athletiq.run">athletiq.run</a><a href="https://technical.ly/entrepreneurship/startup-investor-matching-software-built-by-dc-high-schooler/">technical.ly</a></p>
   </article>
 
+  <!-- 04 secret -->
+  <article class="entry col" id="secret">
+    <div class="e-head">
+      <h2><span class="n">02</span>ev race car · secret</h2>
+      <span class="meta">2023 – now</span>
+    </div>
+    <p class="e-role meta has-org"><img class="org" src="img/logos/sidwell.svg" alt="Sidwell Friends School"><span>started the team · build lead</span></p>
+    <p class="dek">secret is the sidwell electric car race engineering team, which i started at school. i found an old club listing on the school website, talked a few friends and two teachers into it, and we built a car and raced it.</p>
+    <dl class="facts">
+      <div><dt>$7k</dt><dd>raised from sponsors</dd></div>
+      <div><dt>1st</dt><dd>"best use of 3d printing," a first for the school</dd></div>
+      <div><dt>48 v</dt><dd>four lead-acid batteries, one hour, one charge</dd></div>
+    </dl>
+    <p>the dc electric vehicle grand prix goes to whoever drives farthest in an hour on one battery. we rebuilt our kit car with an aluminum chassis, a new battery pack, 3d-printed wheel covers and an arduino that tells the driver how hard to push.</p>
+
+    <figure class="shot">
+      <a href="img/secret-award.jpg" data-full="img/secret-award.jpg" data-cap="secret's award at the dc electric vehicle grand prix"><img src="img/secret-award.jpg" width="1280" height="1280" loading="lazy" alt="The SECRET team lined up under the checkered tent at the DC Electric Vehicle Grand Prix, holding the award" style="border:0;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:50% 80%"></a>
+      <figcaption class="mono">the team with our award at the dc electric vehicle grand prix</figcaption>
+    </figure>
+    <div class="photos" style="--n:4;--ar:3/4">
+      <a href="img/secret-team.jpg" data-full="img/secret-team.jpg" data-cap="race day"><div class="ph"><img src="img/secret-team.jpg" width="1200" height="1600" loading="lazy" alt="Five students behind the white electric race car on race day" style="object-position:50% 30%"></div><figcaption class="mono">race day</figcaption></a>
+      <a href="img/secret-car.jpg" data-full="img/secret-car.jpg" data-cap="mid-build"><div class="ph"><img src="img/secret-car.jpg" width="1600" height="1200" loading="lazy" alt="The car mid-build in a parking garage with electronics on the floor" style="object-position:50% 50%"></div><figcaption class="mono">mid-build</figcaption></a>
+      <a href="img/secret-van.jpg" data-full="img/secret-van.jpg" data-cap="loading out"><div class="ph"><img src="img/secret-van.jpg" width="1200" height="1600" loading="lazy" alt="Two students beside a van with the race car loaded in the back" style="object-position:50% 50%"></div><figcaption class="mono">loading out</figcaption></a>
+      <a href="img/umd-fsae.jpg" data-full="img/umd-fsae.jpg" data-cap="umd's formula shop"><div class="ph"><img src="img/umd-fsae.jpg" width="1600" height="1200" loading="lazy" alt="Students in front of the University of Maryland formula car in their shop" style="object-position:70% 50%"></div><figcaption class="mono">umd's formula shop</figcaption></a>
+    </div>
+
+    <figure class="fig wide" id="car3d">
+      <div class="fig-head mono"><b>fig. 3 · the car, taken apart</b><span>drag to turn · slide to explode</span></div>
+      <div class="car-grid">
+        <div class="car-stage">
+          <canvas aria-label="Interactive 3D model of the SECRET electric race car. Drag to rotate; use the parts list to highlight each part."></canvas>
+          <div class="car-callout mono" hidden></div>
+          <img class="car-fallback" src="img/secret-team.jpg" alt="The SECRET car on race day" loading="lazy">
+          <div class="ctl car-ctl"><label for="car-explode">assembled</label><input id="car-explode" type="range" min="0" max="1" step="0.01" value="0" aria-label="Explode the car into its parts"><span>exploded</span><button type="button" class="chip" id="car-xray" aria-pressed="false">see inside</button></div>
+        </div>
+        <div>
+          <ol class="car-parts" aria-label="Parts"></ol>
+          <p class="car-info" aria-live="polite"></p>
+        </div>
+      </div>
+      <figcaption class="mono">i modeled this by hand from our photos, so it's close but not exact.</figcaption>
+    </figure>
+
+    <details class="more">
+      <summary class="mono">how the pacing works <span>1 figure</span></summary>
+      <figure class="fig" id="race-lab">
+        <div class="fig-head mono"><b>fig. 4 · pacing to an energy budget</b><span>drag the speed</span></div>
+        <div class="ctl">
+          <label for="race-speed">driver's speed <output id="race-speed-out">31</output> mph</label>
+          <input id="race-speed" type="range" min="16" max="34" step="1" value="31">
+          <button type="button" class="chip" id="race-run">run the hour</button>
+        </div>
+        <svg id="race-svg" role="img" aria-label="Battery remaining over the hour, for a driver at constant speed and with the pacing system."></svg>
+        <p class="out" id="race-out" role="status"></p>
+        <figcaption class="mono">each lap, the arduino divides the remaining battery by the laps left and tells the driver to speed up or back off. the car in this simulation uses estimated numbers, not measurements from ours.</figcaption>
+      </figure>
+    </details>
+    <p class="src mono"><a href="https://www.sidwell.edu/about/news/news-detail/~board/homepage-news-panel/post/how-to-build-an-e-car-from-scratch">sidwell news</a><a href="https://sidwellhorizon.org/2898/past-editions-of-news/secret-wins-award-at-dc-electric-vehicle-grand-prix/">the horizon</a></p>
+  </article>
+
   <!-- 02 meridian -->
   <article class="entry col" id="meridian">
     <div class="e-head">
-      <h2><span class="n">02</span>uva research · meridian</h2>
+      <h2><span class="n">03</span>uva research · meridian</h2>
       <span class="meta">2025 – now</span>
     </div>
     <p class="e-role meta has-org"><img class="org" src="img/logos/uva.svg" alt="University of Virginia"><span>first author, with prof. adam tashman, uva school of data science</span></p>
@@ -184,7 +244,7 @@
     <details class="more">
       <summary class="mono">how it works <span>1 figure</span></summary>
       <figure class="fig" id="rank-lab">
-        <div class="fig-head mono"><b>fig. 3 · how meridian ranks investors for a startup</b><span>pick one</span></div>
+        <div class="fig-head mono"><b>fig. 5 · how meridian ranks investors for a startup</b><span>pick one</span></div>
         <div class="chips" style="margin-bottom:14px">
           <button type="button" class="chip" data-s="k12">k-12 tutoring · seed · nairobi</button>
           <button type="button" class="chip" data-s="pay">payments api · series a · austin</button>
@@ -201,7 +261,7 @@
   <!-- 03 indus -->
   <article class="entry col" id="indus">
     <div class="e-head">
-      <h2><span class="n">03</span>the indus script</h2>
+      <h2><span class="n">04</span>the indus script</h2>
       <span class="meta">2023 – now</span>
     </div>
     <p class="e-role meta has-org"><img class="org" src="img/logos/mercatus.svg" alt="Mercatus Center, which runs Emergent Ventures"><span>with louie merriam · funded by emergent ventures</span></p>
@@ -218,7 +278,7 @@
     <details class="more">
       <summary class="mono">how it works <span>1 figure</span></summary>
       <figure class="fig" id="indus-lab">
-        <div class="fig-head mono"><b>fig. 4 · the method, step by step</b><span>toy corpus</span></div>
+        <div class="fig-head mono"><b>fig. 6 · the method, step by step</b><span>toy corpus</span></div>
         <div class="tabs" role="tablist" aria-label="Method steps">
           <button role="tab" id="tab-0" aria-selected="true" aria-controls="indus-panel" tabindex="0" data-step="0">1 corpus</button>
           <button role="tab" id="tab-1" aria-selected="false" aria-controls="indus-panel" tabindex="-1" data-step="1">2 singletons</button>
@@ -239,66 +299,6 @@
       </figure>
     </details>
     <p class="src mono"><a href="https://ijcaonline.org/archives/volume187/number64/a-computational-analysis-of-the-indus-script-identifying-sign-functions-in-logo-syllabic-writing-systems/">paper</a><a href="https://marginalrevolution.com/marginalrevolution/2025/03/emergent-ventures-winners-41st-cohort.html">emergent ventures announcement</a><a href="https://github.com/ruhankhanna/ComputationalAnalysisIndusScript">code</a></p>
-  </article>
-
-  <!-- 04 secret -->
-  <article class="entry col" id="secret">
-    <div class="e-head">
-      <h2><span class="n">04</span>secret</h2>
-      <span class="meta">2023 – now</span>
-    </div>
-    <p class="e-role meta has-org"><img class="org" src="img/logos/sidwell.svg" alt="Sidwell Friends School"><span>started the team · build lead</span></p>
-    <p class="dek">i started an electric race car team at sidwell. i found an old club listing on the school website, talked a few friends and two teachers into it, and we built a car and raced it.</p>
-    <dl class="facts">
-      <div><dt>$7k</dt><dd>raised from sponsors</dd></div>
-      <div><dt>1st</dt><dd>"best use of 3d printing," a first for the school</dd></div>
-      <div><dt>48 v</dt><dd>four lead-acid batteries, one hour, one charge</dd></div>
-    </dl>
-    <p>the dc electric vehicle grand prix goes to whoever drives farthest in an hour on one battery. we rebuilt our kit car with an aluminum chassis, a new battery pack, 3d-printed wheel covers and an arduino that tells the driver how hard to push.</p>
-
-    <figure class="shot">
-      <a href="img/secret-award.jpg" data-full="img/secret-award.jpg" data-cap="secret's award at the dc electric vehicle grand prix"><img src="img/secret-award.jpg" width="1280" height="1280" loading="lazy" alt="The SECRET team lined up under the checkered tent at the DC Electric Vehicle Grand Prix, holding the award" style="border:0;width:100%;aspect-ratio:16/9;object-fit:cover;object-position:50% 80%"></a>
-      <figcaption class="mono">the team with our award at the dc electric vehicle grand prix</figcaption>
-    </figure>
-    <div class="photos" style="--n:4;--ar:3/4">
-      <a href="img/secret-team.jpg" data-full="img/secret-team.jpg" data-cap="race day"><div class="ph"><img src="img/secret-team.jpg" width="1200" height="1600" loading="lazy" alt="Five students behind the white electric race car on race day" style="object-position:50% 30%"></div><figcaption class="mono">race day</figcaption></a>
-      <a href="img/secret-car.jpg" data-full="img/secret-car.jpg" data-cap="mid-build"><div class="ph"><img src="img/secret-car.jpg" width="1600" height="1200" loading="lazy" alt="The car mid-build in a parking garage with electronics on the floor" style="object-position:50% 50%"></div><figcaption class="mono">mid-build</figcaption></a>
-      <a href="img/secret-van.jpg" data-full="img/secret-van.jpg" data-cap="loading out"><div class="ph"><img src="img/secret-van.jpg" width="1200" height="1600" loading="lazy" alt="Two students beside a van with the race car loaded in the back" style="object-position:50% 50%"></div><figcaption class="mono">loading out</figcaption></a>
-      <a href="img/umd-fsae.jpg" data-full="img/umd-fsae.jpg" data-cap="umd's formula shop"><div class="ph"><img src="img/umd-fsae.jpg" width="1600" height="1200" loading="lazy" alt="Students in front of the University of Maryland formula car in their shop" style="object-position:70% 50%"></div><figcaption class="mono">umd's formula shop</figcaption></a>
-    </div>
-
-    <figure class="fig wide" id="car3d">
-      <div class="fig-head mono"><b>fig. 5 · the car, taken apart</b><span>drag to turn · slide to explode</span></div>
-      <div class="car-grid">
-        <div class="car-stage">
-          <canvas aria-label="Interactive 3D model of the SECRET electric race car. Drag to rotate; use the parts list to highlight each part."></canvas>
-          <div class="car-callout mono" hidden></div>
-          <img class="car-fallback" src="img/secret-team.jpg" alt="The SECRET car on race day" loading="lazy">
-          <div class="ctl car-ctl"><label for="car-explode">assembled</label><input id="car-explode" type="range" min="0" max="1" step="0.01" value="0" aria-label="Explode the car into its parts"><span>exploded</span><button type="button" class="chip" id="car-xray" aria-pressed="false">see inside</button></div>
-        </div>
-        <div>
-          <ol class="car-parts" aria-label="Parts"></ol>
-          <p class="car-info" aria-live="polite"></p>
-        </div>
-      </div>
-      <figcaption class="mono">i modeled this by hand from our photos, so it's close but not exact.</figcaption>
-    </figure>
-
-    <details class="more">
-      <summary class="mono">how the pacing works <span>1 figure</span></summary>
-      <figure class="fig" id="race-lab">
-        <div class="fig-head mono"><b>fig. 6 · pacing to an energy budget</b><span>drag the speed</span></div>
-        <div class="ctl">
-          <label for="race-speed">driver's speed <output id="race-speed-out">31</output> mph</label>
-          <input id="race-speed" type="range" min="16" max="34" step="1" value="31">
-          <button type="button" class="chip" id="race-run">run the hour</button>
-        </div>
-        <svg id="race-svg" role="img" aria-label="Battery remaining over the hour, for a driver at constant speed and with the pacing system."></svg>
-        <p class="out" id="race-out" role="status"></p>
-        <figcaption class="mono">each lap, the arduino divides the remaining battery by the laps left and tells the driver to speed up or back off. the car in this simulation uses estimated numbers, not measurements from ours.</figcaption>
-      </figure>
-    </details>
-    <p class="src mono"><a href="https://www.sidwell.edu/about/news/news-detail/~board/homepage-news-panel/post/how-to-build-an-e-car-from-scratch">sidwell news</a><a href="https://sidwellhorizon.org/2898/past-editions-of-news/secret-wins-award-at-dc-electric-vehicle-grand-prix/">the horizon</a></p>
   </article>
 
   <!-- 05 reachbot -->
@@ -495,7 +495,7 @@
   });
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<script src="figures.js?v=37"></script>
-<script type="module" src="car3d.js?v=37"></script>
+<script src="figures.js?v=38"></script>
+<script type="module" src="car3d.js?v=38"></script>
 </body>
 </html>
