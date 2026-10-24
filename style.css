@@ -492,3 +492,5 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 .guide b { display: block; font-weight: 500; color: var(--accent); margin-bottom: 2px; }
 .guide-btn { color: var(--ink); white-space: nowrap; border-bottom: 1px solid var(--rule-2); }
 .overview .guide { margin: 0 0 18px; max-width: none; }
+.orgs-wrap { align-items: start; }
+.orgs-wrap .meta { padding-top: 6px; }
