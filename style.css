@@ -460,3 +460,17 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 .pi[src*="fellows"] { transform: scale(1.5); }
 .orgs .o-mercatus img { height: 22px; }
 .e-role .org[src*="mercatus"] { height: 22px; }
+/* accelerators and companies using the work */
+.orgs .o-yc img { height: 22px; }
+.orgs .o-bgv img { height: 24px; }
+.orgs .o-startout img { height: 15px; }
+.orgs .o-astia img { height: 18px; }
+.orgs .o-somos img { height: 15px; }
+.logo-row.partners { align-items: flex-end; gap: 16px 22px; }
+.logo-row.partners img { height: 30px; max-width: 60px; }
+.logo-row.partners li.big img { height: 40px; }
+.logo-row.partners li.wide img { height: 22px; max-width: 120px; margin-bottom: 4px; }
+.logo-row .word { font: 600 20px/30px var(--serif); color: var(--ink); letter-spacing: -.01em; }
+.logo-row li.more span { font: 12px var(--mono); color: var(--muted); padding-bottom: 2px; }
+#athletiq .logo-row:not(.sponsors) { gap: 14px 12px; }
+#athletiq .logo-row li.more span { font-size: 11px; }
