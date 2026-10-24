@@ -345,36 +345,30 @@
   (() => {
     const svg = $("#po-svg");
     if (!svg) return;
-    const rows = [
-      ["naia / d3", 0.794, 0.894], ["d2", 0.816, 0.914], ["d1 mid-major", 0.843, 0.942],
-      ["d1 power", 0.890, 0.967], ["pro / challenger", 0.932, 0.982], ["atp/wta top 100", 0.943, 0.974],
+    // simulated: the d1 mid-major tier from data/report_tennis.json; real: atp careers
+    const groups = [
+      ["simulated junior players", 0.843, 0.942],
+      ["real atp careers", 0.841, 0.844],
     ];
-    const real = ["real atp careers", 0.841, 0.844];
-    responsive(svg, (w) => (rows.length + 1) * 30 + 64, (w, h) => {
+    responsive(svg, 196, (w) => {
       svg.innerHTML = "";
-      const acc = css("--accent"), ink = css("--ink"), rule = css("--rule"), rule2 = css("--rule-2");
-      const L = w < 480 ? 104 : 132, R = w - 48, lo = 0.76, hi = 1.0;
-      const sx = (v) => L + ((v - lo) / (hi - lo)) * (R - L);
-      [0.8, 0.9, 1.0].forEach((v) => {
-        el("line", { x1: sx(v), x2: sx(v), y1: 14, y2: h - 22, stroke: rule }, svg);
-        el("text", { x: sx(v), y: h - 6, "text-anchor": "middle" }, svg).textContent = v.toFixed(1);
+      const acc = css("--accent"), ink = css("--ink"), rule = css("--rule"), muted = css("--muted");
+      const L = w < 480 ? 92 : 104, R = w - 52;
+      const sx = (v) => L + ((v - 0.5) / 0.5) * (R - L); // 50% is a coin flip, so bars start there
+      el("line", { x1: L, x2: L, y1: 18, y2: 176, stroke: rule }, svg);
+      el("text", { x: L, y: 192, "text-anchor": "middle" }, svg).textContent = "50% · coin flip";
+      el("text", { x: R, y: 192, "text-anchor": "end" }, svg).textContent = "100%";
+      groups.forEach(([name, ratings, model], g) => {
+        const y = 22 + g * 84;
+        el("text", { x: 0, y: y + 4, class: "ink" }, svg).textContent = name;
+        [["ratings", ratings, false], ["pan-out", model, true]].forEach(([lab, v, hot], k) => {
+          const by = y + 16 + k * 24;
+          el("text", { x: L - 10, y: by + 11, "text-anchor": "end", class: hot ? "acc" : "" }, svg).textContent = lab;
+          el("rect", { x: L, y: by, width: sx(v) - L, height: 16, rx: 2, fill: hot ? acc : ink, "fill-opacity": hot ? 1 : 0.16 }, svg);
+          el("text", { x: sx(v) + 6, y: by + 12, class: hot ? "acc" : "ink" }, svg).textContent = `${(v * 100).toFixed(1)}%`;
+        });
       });
-      const draw = ([name, a, b], y, isReal) => {
-        el("text", { x: 0, y: y + 4, class: isReal ? "ink" : "" }, svg).textContent = name;
-        el("line", { x1: sx(a), x2: sx(b), y1: y, y2: y, stroke: isReal ? ink : rule2, "stroke-width": 2 }, svg);
-        el("circle", { cx: sx(a), cy: y, r: 4, fill: css("--paper"), stroke: ink, "stroke-width": 1.5 }, svg);
-        el("circle", { cx: sx(b), cy: y, r: 4, fill: acc }, svg);
-        el("text", { x: sx(b) + 9, y: y + 4, class: isReal ? "acc" : "" }, svg).textContent = `+${(b - a).toFixed(3)}`.replace("0.", ".");
-      };
-      el("text", { x: 0, y: 8, class: "ink" }, svg).textContent = "simulated careers";
-      rows.forEach((r, i) => draw(r, 30 + i * 28, false));
-      const yr = 30 + rows.length * 28 + 14;
-      el("line", { x1: 0, x2: w, y1: yr - 16, y2: yr - 16, stroke: rule }, svg);
-      draw(real, yr, true);
-      el("circle", { cx: w - 150, cy: 6, r: 4, fill: css("--paper"), stroke: ink, "stroke-width": 1.5 }, svg);
-      el("text", { x: w - 142, y: 10 }, svg).textContent = "ratings";
-      el("circle", { cx: w - 82, cy: 6, r: 4, fill: acc }, svg);
-      el("text", { x: w - 74, y: 10 }, svg).textContent = "pan-out";
+      void muted;
     });
   })();
 
