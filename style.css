@@ -494,3 +494,4 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 .overview .guide { margin: 0 0 18px; max-width: none; }
 .orgs-wrap { align-items: start; }
 .orgs-wrap .meta { padding-top: 6px; }
+.orgs .word.marchay { font: 500 13px 'Helvetica Neue', Arial, sans-serif; letter-spacing: .18em; }
