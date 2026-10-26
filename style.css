@@ -507,3 +507,5 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 .orgs-wrap { margin-top: 26px; }
 .strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
 @media (max-width: 640px) { .strip { grid-template-columns: repeat(5, 62%); } .strip .ph { height: auto; aspect-ratio: 4 / 5; } }
+.strip .ph { height: 290px; }
+@media (max-width: 640px) { .strip .ph { height: auto; } }
