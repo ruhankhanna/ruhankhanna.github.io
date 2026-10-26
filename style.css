@@ -501,3 +501,9 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 .trk i { font: 10.5px var(--mono); font-style: normal; padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
 .trk .tag-use { color: var(--accent); background: var(--accent-wash); }
 .trk .tag-pub { color: #2f6b3a; background: #e9f2ea; }
+/* photos sit above the logos, and larger */
+.strip { margin-top: 22px; gap: 10px; }
+.strip .ph { height: 230px; }
+.orgs-wrap { margin-top: 26px; }
+.strip { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+@media (max-width: 640px) { .strip { grid-template-columns: repeat(5, 62%); } .strip .ph { height: auto; aspect-ratio: 4 / 5; } }
