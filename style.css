@@ -509,3 +509,6 @@ details.more > .fig:last-child { margin-bottom: 20px; }
 @media (max-width: 640px) { .strip { grid-template-columns: repeat(5, 62%); } .strip .ph { height: auto; aspect-ratio: 4 / 5; } }
 .strip .ph { height: 290px; }
 @media (max-width: 640px) { .strip .ph { height: auto; } }
+.news { display: inline-flex; align-items: center; gap: 10px; margin: 14px 0 0; padding: 7px 12px; border: 1px solid var(--rule-2); border-radius: 4px; font-size: 12px; color: var(--ink); text-decoration: none; transition: border-color .15s, background-color .15s; }
+.news:hover { border-color: var(--accent); background: var(--accent-wash); }
+.news-tag { background: var(--accent); color: #fff; padding: 1px 7px; border-radius: 3px; font-size: 10.5px; }
