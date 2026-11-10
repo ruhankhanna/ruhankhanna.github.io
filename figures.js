@@ -185,9 +185,9 @@
       el("text", { x: W - M.r, y: M.t + 31, "text-anchor": "end", class: "halo" }, svg).textContent = "driver alone";
       const gain = b.laps - a.laps;
       msg.innerHTML = a.dead
-        ? `at ${speed} mph the battery dies <b>${(60 - a.dead).toFixed(0)} minutes early</b>. with pacing the driver backs off and ends up <b>${gain.toFixed(1)} laps ahead</b>.`
+        ? `at ${speed} mph the battery dies <b>${(60 - a.dead).toFixed(0)} minutes early</b>. with pacing, the driver slows down a little and finishes <b>${gain.toFixed(1)} laps ahead</b>.`
         : a.left > 5
-          ? `at ${speed} mph the driver finishes with <b>${a.left.toFixed(0)}% of the battery left over</b>. pacing uses it up and gets <b>${gain.toFixed(1)} more laps</b>.`
+          ? `at ${speed} mph the driver finishes with <b>${a.left.toFixed(0)}% of the battery unused</b>. pacing spends it on <b>${gain.toFixed(1)} more laps</b>.`
           : `${speed} mph is about the best steady speed for this car. pacing gets there without the driver having to know that.`;
     }
     function play() {
@@ -245,13 +245,13 @@
     function paint() {
       signs.forEach((n) => { n.className = "sign"; });
       exclCtl.hidden = pairList.hidden = step !== 3;
-      if (step === 0) stepText.innerHTML = `each row is one inscription, read as a sequence of signs. <b>${corpus.length}</b> inscriptions, <b>${count.size}</b> distinct signs, nothing labelled yet.`;
+      if (step === 0) stepText.innerHTML = `each row is one inscription, a string of signs. this toy set has <b>${corpus.length}</b> inscriptions and <b>${count.size}</b> different signs, none labelled yet.`;
       if (step === 1 || step === 2) signs.forEach((n) => { if (singletons.has(+n.dataset.s)) n.classList.add("logo"); });
-      if (step === 1) stepText.innerHTML = `a sign that appears completely alone has to carry a whole meaning by itself. those <b>singletons</b> are the first word-sign candidates: <b>${list([...singletons])}</b>.`;
+      if (step === 1) stepText.innerHTML = `a sign that shows up completely alone has to carry a whole meaning on its own. those <b>singletons</b> are the first guesses for word-signs: <b>${list([...singletons])}</b>.`;
       if (step === 2) {
         signs.forEach((n) => { if (expanded.has(+n.dataset.s)) n.classList.add("expand"); });
         const e = [...expanded].map(([s, k]) => `${s} (shares slots with ${k})`);
-        stepText.innerHTML = `a sign that keeps filling the same slots as the candidates is probably doing the same job. expanding by shared neighbours adds <b>${list(e)}</b>.`;
+        stepText.innerHTML = `a sign that keeps showing up in the same spots as those guesses is probably doing the same job. checking shared neighbours adds <b>${list(e)}</b>.`;
       }
       if (step === 3) {
         const th = +excl.value; exclOut.textContent = th.toFixed(2);
@@ -263,7 +263,7 @@
           });
         });
         signs.forEach((n) => { if (!n.classList.contains("pair")) n.classList.add("dim"); });
-        stepText.innerHTML = "some pairs almost never appear apart. if a is nearly always followed by b, and b nearly always preceded by a, they behave like syllables spelling one word. lower the threshold to admit weaker pairs.";
+        stepText.innerHTML = "some pairs almost never appear apart. if a is nearly always followed by b, and b nearly always comes after a, they probably spell one word together, syllable by syllable. lower the threshold to let in weaker pairs.";
         pairList.innerHTML = allPairs.map((p) => `<li class="${p.ex >= th - 1e-9 ? "on" : ""}"><span>${p.a} + ${p.b}</span><span class="num">${p.ex.toFixed(2)}</span></li>`).join("");
       }
     }
@@ -312,9 +312,9 @@
       for (let i = 0; i < 25; i++) el("rect", { x: i * (size + 3), y: 76, width: size, height: size, rx: 1.5, fill: i < n ? acc : "none", stroke: i < n ? acc : rule }, svg);
       chips.forEach((c) => c.setAttribute("aria-pressed", Math.abs(+c.dataset.sim - sim) < 0.005 ? "true" : "false"));
       mode.innerHTML = sim < 0.6
-        ? "<b>not covered.</b> nothing in the library is close enough, so it says so instead of making something up."
+        ? "<b>not covered.</b> nothing in the library is close enough, so it tells the founder it doesn't know."
         : sim < 0.7
-          ? "<b>careful.</b> it only gets 5 passages, plus a note that the evidence is thin."
+          ? "<b>careful.</b> it gets only 5 passages, with a note that the evidence is thin."
           : `<b>answer.</b> it gets ${n} passages, more when the match is stronger, and cites every claim.`;
     }
     input.addEventListener("input", render);
@@ -389,7 +389,7 @@
         `<li class="${i < shown ? "on" : ""}"><span class="n mono">${i + 1}</span><div><b>${t}</b><p>${d}</p><p class="mono v">${v}</p></div></li>`).join("");
       out.innerHTML = shown < 5 ? "" : tamper
         ? "<b>caught.</b> one edited line changes the measurement, so the signed record no longer matches the code anyone can download."
-        : "<b>verified.</b> the record shows this exact published code made these results, and you don't have to take the author's or the cloud's word for it.";
+        : "<b>verified.</b> the signed record shows this exact published code produced these results, so nobody has to take the author's word for it.";
     }
     function run() {
       clearInterval(timer); shown = 0; render();
@@ -462,12 +462,12 @@
             <p class="mono q">evidence: "${esc(quote)}" ${found ? `<span class="ok">✓ found in ${sc.file}</span>` : `<span class="bad">✗ not in the repo</span>`}</p>
             <pre class="mono"><span class="fn">${sc.file}</span>\n${code}</pre></div>`;
         }).join("") + `<div class="chips" style="margin-top:12px"><button type="button" class="chip" id="su-fake" aria-pressed="${faked}">let the model invent evidence</button></div>
-          <p class="mono meta" style="margin-top:8px">two scores side by side. stackup never adds them up into one number.</p>`;
+          <p class="mono meta" style="margin-top:8px">difficulty and quality get separate scores, and stackup never adds them into one number.</p>`;
         $("#su-fake").addEventListener("click", () => { faked = !faked; render(); });
       }
       if (step === 2) {
         body.innerHTML = `<ol class="su-qs">${r.qs.map((q) => `<li>${esc(q)}</li>`).join("")}</ol>
-          <p class="mono meta">they come one at a time and you can't go back. easy if you wrote it, hard to fake if you didn't.</p>`;
+          <p class="mono meta">they come one at a time, with no going back. if you wrote the code, they're easy.</p>`;
       }
     }
     repoChips.forEach((c) => c.addEventListener("click", () => {

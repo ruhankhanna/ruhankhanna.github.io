@@ -268,7 +268,7 @@ function init(root) {
   /* 01 body shell */
   {
     const g = part("shell", "body shell", "the white fairing", [0, 0.8, 0],
-      "the white shell over everything. at race speed most of the battery goes into pushing air out of the way, so the shape matters more for range than almost anything else.");
+      "the white shell over the whole car. at race speed most of the battery goes into pushing air out of the way, so the shape affects range more than almost anything else.");
     add(g, shellGeometry(), M.shell);
     // black rubber trim around the cockpit opening
     const rim = [];
@@ -453,7 +453,7 @@ function init(root) {
   /* 08 battery pack */
   {
     const g = part("batt", "battery pack", "4 × 12 V lead-acid = 48 V", [-0.05, 0.62, 0],
-      "four 12 v lead-acid batteries in a row, 48 v total. lead-acid gives you less total energy when you pull hard, so a driver who starts too fast doesn't just run out sooner, they get less out of the pack overall. that's the whole reason pacing matters.");
+      "four 12 v lead-acid batteries in a row, 48 v total. lead-acid gives less total energy when you pull hard, so a driver who starts too fast gets less out of the pack and runs out sooner. that's why we built the pacing system.");
     const label = canvasTex(128, 64, (c) => { c.fillStyle = "#2b2d30"; c.fillRect(0, 0, 128, 64); c.fillStyle = "#e9e9e9"; c.font = "bold 22px Arial"; c.fillText("12V SLA", 14, 40); });
     [[-0.5, -0.095], [-0.5, 0.095], [-0.69, -0.095], [-0.69, 0.095]].forEach(([x, z]) => {
       add(g, rbox(0.17, 0.165, 0.175, 0.01), M.batt, [x, 0.23, z]);
@@ -526,7 +526,7 @@ function init(root) {
     const g = parts.find((p) => p.userData.id === selected);
     info.innerHTML = g
       ? `<b>${g.userData.name}</b>${g.userData.desc}`
-      : "<b>drag to turn it, slide to take it apart.</b>pick a part to see what it does. everything on the car comes back to one goal, which is going as far as possible in an hour on one charge.";
+      : "<b>drag to turn it, slide to take it apart.</b>pick a part to see what it does. the whole car is built to go as far as possible in an hour on one charge.";
     callout.hidden = !g;
     if (g) callout.textContent = g.userData.name;
     needsRender = true;
