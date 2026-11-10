@@ -352,7 +352,7 @@
       groups.forEach(([name, ratings, model], g) => {
         const y = 22 + g * 84;
         el("text", { x: 0, y: y + 4, class: "ink" }, svg).textContent = name;
-        [["ratings", ratings, false], ["pan-out", model, true]].forEach(([lab, v, hot], k) => {
+        [["utr rating", ratings, false], ["pan-out", model, true]].forEach(([lab, v, hot], k) => {
           const by = y + 16 + k * 24;
           el("text", { x: L - 10, y: by + 11, "text-anchor": "end", class: hot ? "acc" : "" }, svg).textContent = lab;
           el("rect", { x: L, y: by, width: sx(v) - L, height: 16, rx: 2, fill: hot ? acc : ink, "fill-opacity": hot ? 1 : 0.16 }, svg);
